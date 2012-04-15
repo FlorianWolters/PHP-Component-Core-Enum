@@ -1,0 +1,3 @@
+[submodule "vendor/PHPUnit-configuration"]
+    path = vendor/PHPUnit-configuration
+    url = git@github.com:FlorianWolters/PHPUnit-configuration.git
