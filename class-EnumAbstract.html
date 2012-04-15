@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.6.1" />
+
+	<title>Class EnumAbstract | Enum</title>
+
+	<script type="text/javascript" src="resources/combined.js?144019575"></script>
+	<script type="text/javascript" src="elementlist.js?3665433848"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1532301413" />
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', "UA-30900797-1"]);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Packages</h3>
+			<ul>
+				<li class="active"><a href="package-Core.html">Core<span></span></a>
+						<ul>
+				<li class="active"><a href="package-Core.Enum.html">Enum</a>
+						</li>
+							</ul></li>
+				<li><a href="package-PHP.html">PHP</a>
+						</li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li class="active"><a href="class-EnumAbstract.html">EnumAbstract</a></li>
+				<li><a href="class-EnumUtils.html">EnumUtils</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="package-Core.Enum.html" title="Summary of Core\Enum"><span>Package</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+			<li>
+				<a href="deprecated.html" title="List of deprecated elements"><span>Deprecated</span></a>
+			</li>
+			<li>
+				<a href="todo.html" title="Todo list"><span>Todo</span></a>
+			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="enum-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
+			</li>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class EnumAbstract</h1>
+
+
+	<div class="description">
+	
+<p>The <code><a href="class-EnumAbstract.html">EnumAbstract</a></code> class is the abstract base class of all PHP language
+type-safe enumerations.</p>
+
+<p>One feature of the C programming language lacking in PHP is enumerations.
+Using an implementation based on integers is poor and open to abuse. This class
+implements the <em><a href="http://java.sun.com/developer/Books/shiftintojava/page1.html#replaceenums">Typesafe Enum</a></em> pattern. The pattern has been adapted and abstracted for
+PHP.</p>
+
+<p><strong>Simple enumerations</strong></p>
+
+<p>To use this class, it must be subclassed. For example:</p>
+
+<pre>
+<span class="php-keyword1">final</span> <span
+class="php-keyword1">class</span> ColorEnum <span
+class="php-keyword1">extends</span> fw\Component\Core\Enum\EnumAbstract {
+    <span
+class="php-comment">/** @return ColorEnum */</span>
+    <span
+class="php-keyword1">public</span> <span
+class="php-keyword1">static</span> <span class="php-keyword1">final</span> <span
+class="php-keyword1">function</span> RED() { <span
+class="php-keyword1">return</span> self::getConstant(); }
+    <span
+class="php-comment">/** @return ColorEnum */</span>
+    <span
+class="php-keyword1">public</span> <span
+class="php-keyword1">static</span> <span class="php-keyword1">final</span> <span
+class="php-keyword1">function</span> GREEN() { <span
+class="php-keyword1">return</span> self::getConstant(); }
+    <span
+class="php-comment">/** @return ColorEnum */</span>
+    <span
+class="php-keyword1">public</span> <span
+class="php-keyword1">static</span> <span class="php-keyword1">final</span> <span
+class="php-keyword1">function</span> BLUE() { <span
+class="php-keyword1">return</span> self::getConstant(); }
+}
+</pre>
+
+<p>Each enumeration constant has a name and an ordinal. These can be accessed
+using the <code><a href="class-EnumAbstract.html#_getName">EnumAbstract::getName()</a></code>, respectively the <code><a href="class-EnumAbstract.html#_getOrdinal">EnumAbstract::getOrdinal()</a></code> method.</p>
+
+<p>The <code><a href="class-EnumAbstract.html#_valueOf">EnumAbstract::valueOf()</a></code> and <code><a href="class-EnumAbstract.html#_values">EnumAbstract::values()</a></code> methods can be used to access the
+enumeration constants dynamically.</p>
+
+<p><strong>Subclassed enumerations</strong></p>
+
+<p>A hierarchy of enumeration classes can be built. In this case, the superclass
+is unaffected by the addition of subclasses (as per normal PHP). The query
+methods on the subclass will return all of the enumeration constants from the
+superclass and the subclass.</p>
+
+<pre>
+<span
+class="php-comment">// NOTE: The class ColorEnum declared above is final, change that to get this</span>
+<span
+class="php-comment">// example to compile.</span>
+<span
+class="php-keyword1">final</span> <span
+class="php-keyword1">class</span> ExtraColorEnum <span
+class="php-keyword1">extends</span> ColorEnum {
+    <span
+class="php-comment">/** @return ExtraColorEnum */</span>
+    <span
+class="php-keyword1">public</span> <span
+class="php-keyword1">static</span> <span class="php-keyword1">final</span> <span
+class="php-keyword1">function</span> YELLOW() { <span
+class="php-keyword1">return</span> self::getConstant(); }
+}
+</pre>
+
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		<b>Abstract</b><br />
+		
+		
+		<b>Package:</b> <a href="package-Core.html">Core</a>\<a href="package-Core.Enum.html">Enum</a><br />
+
+				<b>Category:</b>
+				Component<br />
+				<b>Copyright:</b>
+				2011-2012 Florian Wolters<br />
+				<b>License:</b>
+				<a href="http://gnu.org/licenses/lgpl.txt">GNU Lesser General Public License</a><br />
+				<b>Author:</b>
+				Florian Wolters &lt;<a
+href="mailto:florian.wolters.85&#64;googlemail.com">florian.wolters.85&#64;<!---->googlemail.com</a>&gt;<br />
+				<b>Version:</b>
+				Release: @package_version@<br />
+				<b>Since:</b>
+				Class available since Release 0.1.0<br />
+				<b>Link:</b>
+				<a href="http://github.com/FlorianWolters/PHP-Component-Core-Enum">http://github.com/FlorianWolters/PHP-Component-Core-Enum</a><br />
+				<b>Todo:</b>
+				Change array syntax to PHP 5.4 in version 1.0.0<br />
+		<b>Located at</b> <a href="source-class-EnumAbstract.html#49" title="Go to source code">fw/Component/Core/Enum/EnumAbstract.php</a><br />
+	</div>
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="names" id="_names">
+
+		<td class="attributes"><code>
+			 public static
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_names">#</a>
+		<code><a href="source-class-EnumAbstract.html#179" title="Go to source code">names</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns an array containing the names of the enumeration constants of this
+enumeration type, in the order they are declared.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns an array containing the names of the enumeration constants of this
+enumeration type, in the order they are declared.</p>
+
+<p>This method may be used to iterate over the names of the enumerated constants
+as follows:</p>
+
+<pre>
+<span class="php-keyword1">foreach</span> (ConcreteEnum::names() <span
+class="php-keyword1">as</span> <span class="php-var">$name</span>) {
+    <span
+class="php-keyword1">echo</span> <span
+class="php-var">$name</span>, \PHP_EOL;
+}
+</pre>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br>An array containing the names of the constants of this enumeration type, in the
+order they are declared.<br />
+				</div>
+
+
+				<h4>Todo</h4>
+				<div class="list">
+						Calls a lot of native PHP functions.<br />
+						BUG: Does not work with functional enumeration. Has to be changed to use the
+Reflection API.<br />
+				</div>
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="values" id="_values">
+
+		<td class="attributes"><code>
+			 public static
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_values">#</a>
+		<code><a href="source-class-EnumAbstract.html#217" title="Go to source code">values</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns an array containing the enumeration constants of this enumeration
+type, in the order they are declared.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns an array containing the enumeration constants of this enumeration
+type, in the order they are declared.</p>
+
+<p>This method may be used to iterate over the enumeration constants as
+follows:</p>
+
+<pre>
+<span class="php-keyword1">foreach</span> (ConcreteEnum::values() <span
+class="php-keyword1">as</span> <span
+class="php-var">$constant</span>) {
+    <span
+class="php-keyword1">echo</span> <span
+class="php-var">$constant</span>, \PHP_EOL;
+}
+</pre>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br>An array containing the enumeration constants of this enumeration type, in the
+order they are declared.<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="valueOf" id="_valueOf">
+
+		<td class="attributes"><code>
+			 public static
+			<code><a href="class-EnumAbstract.html">EnumAbstract</a></code>|null
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_valueOf">#</a>
+		<code><a href="source-class-EnumAbstract.html#244" title="Go to source code">valueOf</a>( <span>string <var>$name</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns the enumeration constant with the specified name from this
+enumeration type.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the enumeration constant with the specified name from this
+enumeration type.</p>
+
+<p>The string must match exactly an identifier used to declare an enumeration
+constant in this enumeration type. (Extraneous whitespace characters are not
+permitted.)</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br> The name of the enumeration constant to return.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-EnumAbstract.html">EnumAbstract</a></code>|null</code><br>The enumeration constant with the specified name on success; <code>null</code>
+on failure.<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getConstant" id="_getConstant">
+
+		<td class="attributes"><code>
+			final protected static
+			<code><a href="class-EnumAbstract.html">EnumAbstract</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getConstant">#</a>
+		<code><a href="source-class-EnumAbstract.html#276" title="Go to source code">getConstant</a>( <span>string <var>$enumType</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$name</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Creates and returns an enumeration constant for the specified enumeration
+type with the specified name.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Creates and returns an enumeration constant for the specified enumeration
+type with the specified name.</p>
+
+<p>This method implements the <em>Lazy Load</em> implementation pattern.</p>
+
+<p>Use this method as follows in a subclass of this class:</p>
+
+<pre>
+<span class="php-keyword1">final</span> <span
+class="php-keyword1">class</span> ConcreteEnum <span
+class="php-keyword1">extends</span> fw\Component\Core\Enum\EnumAbstract {
+    <span
+class="php-keyword1">public</span> <span
+class="php-keyword1">static</span> <span class="php-keyword1">final</span> <span
+class="php-keyword1">function</span> <span
+class="php-keyword2">CONSTANT</span>() { <span
+class="php-keyword1">return</span> self::getConstant(); }
+}
+</pre>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$enumType</var></dt>
+					<dd><code>string</code><br> The name of the enumeration type.</dd>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br> The name of the enumeration constant, which is the identifier used to declare
+it.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-EnumAbstract.html">EnumAbstract</a></code></code><br>The enumeration constant of the specified enumeration type with the specified
+name.<br />
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code></code><br>If the specified enumeration type has no enumeration constant with the specified
+name, or the specified class name does not represent an enumeration type.<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__callStatic" id="___callStatic">
+
+		<td class="attributes"><code>
+			final public static
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___callStatic">#</a>
+		<code><a href="source-class-EnumAbstract.html#414" title="Go to source code">__callStatic</a>( <span>string <var>$name</var></span>, <span>array <var>$args</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Throws an \UnexpectedValueException.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Throws an \UnexpectedValueException.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$name</var></dt>
+					<dd><code>string</code><br> The name of the enumeration constant, which is the identifier used to declare
+it.</dd>
+					<dt><var>$args</var></dt>
+					<dd><code>array</code><br> Not used.</dd>
+				</dl></div>
+
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-UnexpectedValueException.html">UnexpectedValueException</a></code></code><br>If this method is called.<br />
+				</div>
+
+				<h4>SuppressWarnings(PHPMD.UnusedFormalParameter)</h4>
+				<div class="list">
+				</div>
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__invoke" id="___invoke">
+
+		<td class="attributes"><code>
+			final public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___invoke">#</a>
+		<code><a href="source-class-EnumAbstract.html#435" title="Go to source code">__invoke</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the value of this enumeration constant.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the value of this enumeration constant.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br>the value of this enumeration constant.<br />
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-EnumAbstract.html#_getOrdinal">EnumAbstract::getOrdinal()</a></code></code><br />
+						<a
+href="http://php.net/language.oop5.magic#language.oop5.magic.invoke">http://php.net/language.oop5.magic#language.oop5.magic.invoke</a><br />
+				</div>
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__toString" id="___toString">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___toString">#</a>
+		<code><a href="source-class-EnumAbstract.html#447" title="Go to source code">__toString</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the name of this enumeration constant, in the format
+<tt>&lt;enumeration type&gt;[&lt;enumeration constant name&gt;]</tt>.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the name of this enumeration constant, in the format
+<tt>&lt;enumeration type&gt;[&lt;enumeration constant name&gt;]</tt>.</p>
+
+<p>This method may be overridden, though it typically isn't necessary or
+desirable. An enumeration type should override this method when a more
+"programmer-friendly" string form exists.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>The name of this enumeration constant.<br />
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						<a
+href="http://php.net/language.oop5.magic#language.oop5.magic.tostring">http://php.net/language.oop5.magic#language.oop5.magic.tostring</a><br />
+				</div>
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getName" id="_getName">
+
+		<td class="attributes"><code>
+			final public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getName">#</a>
+		<code><a href="source-class-EnumAbstract.html#482" title="Go to source code">getName</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the name of this enumeration constant, exactly as declared in its
+enum declaration.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the name of this enumeration constant, exactly as declared in its
+enum declaration.</p>
+
+<p><strong>Most programmers should use the <code><a href="class-EnumAbstract.html#___toString">EnumAbstract::__toString()</a></code> method in
+preference to this one, as the <code><a href="class-EnumAbstract.html#___toString">EnumAbstract::__toString()</a></code> method may return a more
+user-friendly name.</strong> This method is designed primarily for use in
+specialized situations where correctness depends on getting the exact name which
+will not vary from release to release.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>The name of this enumeration constant.<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getOrdinal" id="_getOrdinal">
+
+		<td class="attributes"><code>
+			final public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getOrdinal">#</a>
+		<code><a href="source-class-EnumAbstract.html#499" title="Go to source code">getOrdinal</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns the ordinal of this enumeration constant (its position in its enum
+declaration, where the initial constant is assigned an ordinal of zero).</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns the ordinal of this enumeration constant (its position in its enum
+declaration, where the initial constant is assigned an ordinal of zero).</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br>The ordinal of this enumeration constant.<br />
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-EnumAbstract.html#___invoke">EnumAbstract::__invoke()</a></code></code><br />
+				</div>
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="compareTo" id="_compareTo">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_compareTo">#</a>
+		<code><a href="source-class-EnumAbstract.html#511" title="Go to source code">compareTo</a>( <span><code><a href="class-EnumAbstract.html">EnumAbstract</a></code> <var>$other</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Compares this enumeration constant with the specified enumeration constant
+for order.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Compares this enumeration constant with the specified enumeration constant
+for order.<br />
+Enumeration constants are only comparable to other enumeration constants of the
+same enumeration type. The natural order implemented by this method is the order
+in which the enumeration constants are declared.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$other</var></dt>
+					<dd><code><code><a href="class-EnumAbstract.html">EnumAbstract</a></code></code><br> The other enumeration constant to compare this enumeration constant to.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br>A negative integer, zero, or a positive integer as this enumeration constant is
+less than, equal to, or greater than the specified enumeration constant.<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="compare" id="_compare">
+
+		<td class="attributes"><code>
+			final public static
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_compare">#</a>
+		<code><a href="source-class-EnumAbstract.html#531" title="Go to source code">compare</a>( <span><code><a href="class-EnumAbstract.html">EnumAbstract</a></code> <var>$first</var></span>, <span><code><a href="class-EnumAbstract.html">EnumAbstract</a></code> <var>$second</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Compares an enumeration constant with another enumeration constant for
+order.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Compares an enumeration constant with another enumeration constant for
+order.<br />
+Enumeration constants are only comparable to other enumeration constants of the
+same enumeration type. The natural order implemented by this method is the order
+in which the enumeration constants are declared.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$first</var></dt>
+					<dd><code><code><a href="class-EnumAbstract.html">EnumAbstract</a></code></code><br> The first enumeration constant to compare.</dd>
+					<dt><var>$second</var></dt>
+					<dd><code><code><a href="class-EnumAbstract.html">EnumAbstract</a></code></code><br> The second enumeration constant to compare.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br>A negative integer, zero, or a positive integer as the first enumeration
+constant is less than, equal to, or greater than the second enumeration
+constant.<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="equals" id="_equals">
+
+		<td class="attributes"><code>
+			final public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_equals">#</a>
+		<code><a href="source-class-EnumAbstract.html#550" title="Go to source code">equals</a>( <span><code><a href="class-EnumAbstract.html">EnumAbstract</a></code> <var>$other</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Determines whether this enumeration constants is equal to the specified
+enumeration constants.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Determines whether this enumeration constants is equal to the specified
+enumeration constants.</p>
+
+<p>Two enumeration constants are considered equal if they have the same class
+names, the same names and the same ordinals.</p>
+
+<p><strong>Most programmers should use the <em>identical comparison
+operator</em> <code>===</code> in preference to this method, as the comparison
+operator is faster.</strong></p>
+
+<pre>
+ConcreteEnum::FIRST_CONSTANT() === ConcreteEnum::SECOND_CONSTANT()
+</pre>
+
+
+				<h4>Deprecated</h4>
+				<div class="list">
+						Use the <em>identical comparison operator</em> <code>===</code> instead.<br />
+				</div>
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$other</var></dt>
+					<dd><code><code><a href="class-EnumAbstract.html">EnumAbstract</a></code></code><br> The enumeration constant to compare with this enumeration constant.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><code>true</code> if this enumeration constant is equal to the specified
+enumeration constant; <code>false</code> otherwise.<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isEqual" id="_isEqual">
+
+		<td class="attributes"><code>
+			final public static
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isEqual">#</a>
+		<code><a href="source-class-EnumAbstract.html#576" title="Go to source code">isEqual</a>( <span><code><a href="class-EnumAbstract.html">EnumAbstract</a></code> <var>$first</var></span>, <span><code><a href="class-EnumAbstract.html">EnumAbstract</a></code> <var>$second</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Determines whether the specified enumeration constants are equal.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Determines whether the specified enumeration constants are equal.</p>
+
+<p>Two enumeration constants are considered equal if they have the same class
+names, the same names and the same ordinals.</p>
+
+<p><strong>Most programmers should use the <em>identical comparison
+operator</em> <code>===</code> in preference to this method, as the comparison
+operator is faster.</strong></p>
+
+<pre>
+ConcreteEnum::FIRST_CONSTANT() === ConcreteEnum::SECOND_CONSTANT()
+</pre>
+
+
+				<h4>Deprecated</h4>
+				<div class="list">
+						Use the <em>identical comparison operator</em> <code>===</code> instead.<br />
+				</div>
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$first</var></dt>
+					<dd><code><code><a href="class-EnumAbstract.html">EnumAbstract</a></code></code><br> The first enumeration constant to compare.</dd>
+					<dt><var>$second</var></dt>
+					<dd><code><code><a href="class-EnumAbstract.html">EnumAbstract</a></code></code><br> The second enumeration constant to compare.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br><code>true</code> if the enumeration constants are equal; <code>false</code>
+otherwise.<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="hashCode" id="_hashCode">
+
+		<td class="attributes"><code>
+			final public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_hashCode">#</a>
+		<code><a href="source-class-EnumAbstract.html#603" title="Go to source code">hashCode</a>( )</code>
+
+		<div class="description short">
+			
+<p>Returns a hash code for this enumeration constant.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns a hash code for this enumeration constant.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>The hash code.<br />
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		Enum API documentation generated by <a href="http://apigen.org">ApiGen 2.6.1</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

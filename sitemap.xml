@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Core-Enum/index.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Core-Enum/package-Core.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Core-Enum/package-Core.Enum.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Core-Enum/package-PHP.html</loc>
+</url>
+
+
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Core-Enum/class-EnumAbstract.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Core-Enum/class-EnumUtils.html</loc>
+</url>
+</urlset>
