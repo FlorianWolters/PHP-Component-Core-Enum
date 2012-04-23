@@ -39,7 +39,7 @@
     <property name="apigen.download"         value="yes" />
     <property name="apigen.source.code"      value="yes" />
     <property name="apigen.tree"             value="yes" />
-    <property name="apigen.todo"             value="yes" />
+    <property name="apigen.todo"             value="no" />
 
     <property name="apigen.colors"           value="yes" />
     <property name="apigen.debug"            value="yes" />

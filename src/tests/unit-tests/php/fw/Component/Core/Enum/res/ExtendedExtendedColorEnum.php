@@ -1,6 +1,6 @@
 <?php
 /**
- * `UsageExampleEnum.php`
+ * `ExtendedExtendedColorEnum.php`
  *
  * This file is part of fwComponents.
  *
@@ -26,18 +26,20 @@
  * @license    http://gnu.org/licenses/lgpl.txt GNU Lesser General Public License
  * @version    GIT: $Id$
  * @link       http://github.com/FlorianWolters/PHP-Component-Core-Enum
- * @since      File available since Release 0.1.0
+ * @since      File available since Release 0.2.0
  */
 
 declare(encoding = 'UTF-8');
 
 namespace fw\Component\Core\Enum;
 
+require_once 'ExtendedColorEnum.php';
+
 /**
- * The {@link SingletonEnum} enumeration demonstrates the following usage of
- * **fw\Component\Core\Enum**:
+ * The {@link ExtendedExtendedColorEnum} enumeration demonstrates the following usage
+ * of **fw\Component\Core\Enum**:
  *
- * * Simple valid and invalid usage.
+ * * Subclassed (two-times) enumeration *with* performance mode enabled.
  *
  * @category   Test
  * @package    Core
@@ -47,59 +49,28 @@ namespace fw\Component\Core\Enum;
  * @license    http://gnu.org/licenses/lgpl.txt GNU Lesser General Public License
  * @version    Release: @package_version@
  * @link       http://github.com/FlorianWolters/PHP-Component-Core-Enum
- * @since      Class available since Release 0.1.0
+ * @since      Class available since Release 0.2.0
  */
-final class UsageExampleEnum extends EnumAbstract
+final class ExtendedExtendedColorEnum extends ExtendedColorEnum
 {
     // @codingStandardsIgnoreStart
 
     /**
-     * Invalid usage of the first and second parameter of {@link
-     * EnumAbstract::getConstant}.
+     * The color black.
      *
-     * @return UsageExampleEnum The enumeration constant.
+     * @return ExtendedExtendedColorEnum The color black.
      */
-    final public static function INVALID()
+    final public static function BLACK()
     {
-        return self::getConstant('INVALID', 'INVALID');
+        return self::getConstant(__CLASS__, __FUNCTION__);
     }
 
     /**
-     * Invalid usage of the first parameter of {@link EnumAbstract::getConstant}.
+     * The color white.
      *
-     * @return UsageExampleEnum The enumeration constant.
+     * @return ExtendedExtendedColorEnum The color black.
      */
-    final public static function INVALID_TYPE()
-    {
-        return self::getConstant('WRONG', __FUNCTION__);
-    }
-
-    /**
-     * Invalid usage of the second parameter of {@link EnumAbstract::getConstant}.
-     *
-     * @return UsageExampleEnum The enumeration constant.
-     */
-    final public static function INVALID_NAME()
-    {
-        return self::getConstant(__CLASS__, 'WRONG');
-    }
-
-    /**
-     * Correct usage of {@link EnumAbstract::getConstant}.
-     *
-     * @return UsageExampleEnum The enumeration constant.
-     */
-    final public static function CORRECT_USAGE()
-    {
-        return self::getConstant();
-    }
-
-    /**
-     * Correct usage of {@link EnumAbstract::getConstant}.
-     *
-     * @return UsageExampleEnum The enumeration constant.
-     */
-    final public static function CORRECT_USAGE_2()
+    final public static function WHITE()
     {
         return self::getConstant(__CLASS__, __FUNCTION__);
     }

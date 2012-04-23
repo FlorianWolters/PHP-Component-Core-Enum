@@ -64,15 +64,15 @@
      !-->
     <filter>
         <blacklist>
-            <directory suffix=".php">../../vendor</directory>
-            <directory suffix=".php">../../src/tests</directory>
+            <directory suffix=".php">vendor</directory>
+            <directory suffix=".php">src/tests</directory>
         </blacklist>
         <whitelist addUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">../../src/bin</directory>
-            <directory suffix=".php">../../src/php</directory>
+            <directory suffix=".php">src/bin</directory>
+            <directory suffix=".php">src/php</directory>
             <exclude>
-                <directory suffix="Exception.php">../../src/php</directory>
-                <directory suffix="Interface.php">../../src/php</directory>
+                <directory suffix="Exception.php">src/php</directory>
+                <directory suffix="Interface.php">src/php</directory>
             </exclude>
         </whitelist>
     </filter>
@@ -83,9 +83,9 @@
      !-->
     <logging>
         <!--<log type="coverage-text" target="php://stdout" showUncoveredFiles="true" />-->
-        <log type="coverage-clover" target="../../review/phpcov/coverage.xml" />
+        <log type="coverage-clover" target="review/phpcov/coverage.xml" />
         <log type="coverage-html"
-             target="../../review/phpcov/coverage"
+             target="review/phpcov/coverage"
              showUncoveredFiles="true"
              charset="UTF-8"
              yui="true"
@@ -93,18 +93,18 @@
              lowUpperBound="35"
              highLowerBound="70" />
         <log type="coverage-php"
-             target="../../review/phpcov/coverage.serialized"
+             target="review/phpcov/coverage.serialized"
              showUncoveredFiles="true" />
         <log type="coverage-text"
-             target="../../review/phpcov/coverage.txt"
+             target="review/phpcov/coverage.txt"
              showUncoveredFiles="true" />
-        <log type="json" target="../../review/phpunit/phpunit.json" />
+        <log type="json" target="review/phpunit/phpunit.json" />
         <log type="junit"
-             target="../../review/phpunit/junit.xml"
+             target="review/phpunit/junit.xml"
              logIncompleteSkipped="true" />
-        <log type="tap" target="../../review/phpunit/phpunit.tap" />
-        <log type="testdox-html" target="../../review/phpunit/testdox.html" />
-        <log type="testdox-text" target="../../review/phpunit/testdox.txt" />
+        <log type="tap" target="review/phpunit/phpunit.tap" />
+        <log type="testdox-html" target="review/phpunit/testdox.html" />
+        <log type="testdox-text" target="review/phpunit/testdox.txt" />
     </logging>
 
     <!--

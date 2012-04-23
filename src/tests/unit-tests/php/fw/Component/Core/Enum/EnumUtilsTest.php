@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License along
  * with fwComponents.  If not, see http://gnu.org/licenses/lgpl.txt.
  *
- * PHP version 5.3
+ * PHP version 5.4
  *
  * @category   Component
  * @package    Core
@@ -29,7 +29,7 @@
  * @since      File available since Release 0.1.0
  */
 
-declare(encoding = 'utf-8');
+declare(encoding = 'UTF-8');
 
 namespace fw\Component\Core\Enum;
 
@@ -47,9 +47,6 @@ require_once 'EnumTestUtils.php';
  * @version    Release: @package_version@
  * @link       http://github.com/FlorianWolters/PHP-Component-Core-Enum
  * @since      Class available since Release 0.1.0
- * @todo       Merge data providers with the data providers of class {@link
- *             EnumAbstractTest} and place them in a static class called
- *             `EnumTestDataProvider`.
  *
  * @covers fw\Component\Core\Enum\EnumUtils
  */
@@ -57,12 +54,12 @@ class EnumUtilsTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * Tests the definition of the class (@link EnumAbstract).
+     * Tests the definition of the class (@link EnumUtils).
      *
      * @return void
      *
      * @group specification
-     * @testdox The definition of the class EnumAbstract is correct.
+     * @testdox The definition of the class EnumUtils is correct.
      */
     public function testClassDefinition()
     {
@@ -91,11 +88,12 @@ class EnumUtilsTest extends \PHPUnit_Framework_TestCase
      * @return void
      *
      * @covers fw\Component\Core\Enum\EnumUtils::names
+     * @test
      */
     public function testNames()
     {
-        $expected = array('FEMALE', 'MALE', 'MIXED');
-        $actual = EnumUtils::names(__NAMESPACE__ . '\ExtraGenderEnum');
+        $expected = ['FEMALE', 'MALE', 'HYBRID'];
+        $actual = EnumUtils::names(__NAMESPACE__ . '\ExtendedGenderEnum');
 
         $this->assertEquals($expected, $actual);
     }
@@ -108,6 +106,7 @@ class EnumUtilsTest extends \PHPUnit_Framework_TestCase
      *
      * @covers fw\Component\Core\Enum\EnumUtils::names
      * @expectedException \InvalidArgumentException
+     * @test
      */
     public function testNamesThrowsInvalidArgumentException()
     {
@@ -120,15 +119,16 @@ class EnumUtilsTest extends \PHPUnit_Framework_TestCase
      * @return void
      *
      * @covers fw\Component\Core\Enum\EnumUtils::values
+     * @test
      */
     public function testValues()
     {
-        $expected = array(
-            ExtraGenderEnum::FEMALE(),
-            ExtraGenderEnum::MALE(),
-            ExtraGenderEnum::MIXED()
-        );
-        $actual = EnumUtils::values(__NAMESPACE__ . '\ExtraGenderEnum');
+        $expected = [
+            ExtendedGenderEnum::FEMALE(),
+            ExtendedGenderEnum::MALE(),
+            ExtendedGenderEnum::HYBRID()
+        ];
+        $actual = EnumUtils::values(__NAMESPACE__ . '\ExtendedGenderEnum');
 
         $this->assertEquals($expected, $actual);
     }
@@ -141,6 +141,7 @@ class EnumUtilsTest extends \PHPUnit_Framework_TestCase
      *
      * @covers fw\Component\Core\Enum\EnumUtils::values
      * @expectedException \InvalidArgumentException
+     * @test
      */
     public function testValuesThrowsInvalidArgumentException()
     {
@@ -153,11 +154,14 @@ class EnumUtilsTest extends \PHPUnit_Framework_TestCase
      * @return void
      *
      * @covers fw\Component\Core\Enum\EnumUtils::isEnumType
+     * @test
      */
     public function testIsEnumType()
     {
         $this->assertTrue(EnumUtils::isEnumType(__NAMESPACE__ . '\GenderEnum'));
-        $this->assertTrue(EnumUtils::isEnumType(__NAMESPACE__ . '\ExtraGenderEnum'));
+        $this->assertTrue(
+            EnumUtils::isEnumType(__NAMESPACE__ . '\ExtendedGenderEnum')
+        );
         $this->assertFalse(EnumUtils::isEnumType('UnknownEnum'));
     }
 
@@ -167,11 +171,14 @@ class EnumUtilsTest extends \PHPUnit_Framework_TestCase
      * @return void
      *
      * @covers fw\Component\Core\Enum\EnumUtils::valueOf
+     * @test
      */
     public function testValueOf()
     {
-        $expected = ExtraGenderEnum::MIXED();
-        $actual = EnumUtils::valueOf(__NAMESPACE__ . '\ExtraGenderEnum', 'MIXED');
+        $expected = ExtendedGenderEnum::HYBRID();
+        $actual = EnumUtils::valueOf(
+            __NAMESPACE__ . '\ExtendedGenderEnum', 'HYBRID'
+        );
 
         $this->assertEquals($expected, $actual);
     }
@@ -184,6 +191,7 @@ class EnumUtilsTest extends \PHPUnit_Framework_TestCase
      *
      * @covers fw\Component\Core\Enum\EnumUtils::valueOf
      * @expectedException \InvalidArgumentException
+     * @test
      */
     public function testValueOfThrowsInvalidArgumentException()
     {
@@ -197,18 +205,18 @@ class EnumUtilsTest extends \PHPUnit_Framework_TestCase
      */
     public static function providerGetNameForOrdinal()
     {
-        return array(
+        return [
             // Equivalence class: Positive result.
-            array('FEMALE', 'GenderEnum', 0),
-            array('MALE', 'GenderEnum', 1),
-            array('FEMALE', 'ExtraGenderEnum', 0),
-            array('MALE', 'ExtraGenderEnum', 1),
-            array('MIXED', 'ExtraGenderEnum', 2),
+            ['FEMALE', 'GenderEnum', 0],
+            ['MALE', 'GenderEnum', 1],
+            ['FEMALE', 'ExtendedGenderEnum', 0],
+            ['MALE', 'ExtendedGenderEnum', 1],
+            ['HYBRID', 'ExtendedGenderEnum', 2],
             // Equivalence class: Negative result.
-            array(null, 'GenderEnum', 2),
-            array(null, 'ExtraGenderEnum', -1),
-            array(null, 'ExtraGenderEnum', 3)
-        );
+            [null, 'GenderEnum', 2],
+            [null, 'ExtendedGenderEnum', -1],
+            [null, 'ExtendedGenderEnum', 3]
+        ];
     }
 
     /**
@@ -223,6 +231,7 @@ class EnumUtilsTest extends \PHPUnit_Framework_TestCase
      *
      * @covers fw\Component\Core\Enum\EnumUtils::getNameForOrdinal
      * @dataProvider providerGetNameForOrdinal
+     * @test
      */
     public function testGetNameForOrdinal($expected, $enumType, $ordinal)
     {
@@ -238,17 +247,17 @@ class EnumUtilsTest extends \PHPUnit_Framework_TestCase
      */
     public static function providerGetOrdinalForName()
     {
-        return array(
+        return [
             // Equivalence class: Positive result.
-            array(0, 'GenderEnum', 'FEMALE'),
-            array(1, 'GenderEnum', 'MALE'),
-            array(0, 'ExtraGenderEnum', 'FEMALE'),
-            array(1, 'ExtraGenderEnum', 'MALE'),
-            array(2, 'ExtraGenderEnum', 'MIXED'),
+            [0, 'GenderEnum', 'FEMALE'],
+            [1, 'GenderEnum', 'MALE'],
+            [0, 'ExtendedGenderEnum', 'FEMALE'],
+            [1, 'ExtendedGenderEnum', 'MALE'],
+            [2, 'ExtendedGenderEnum', 'HYBRID'],
             // Equivalence class: Negative result.
-            array(null, 'GenderEnum', 'MIXED'),
-            array(null, 'ExtraGenderEnum', 'UNKNOWN')
-        );
+            [null, 'GenderEnum', 'HYBRID'],
+            [null, 'ExtendedGenderEnum', 'UNKNOWN']
+        ];
     }
 
     /**
@@ -263,6 +272,7 @@ class EnumUtilsTest extends \PHPUnit_Framework_TestCase
      *
      * @covers fw\Component\Core\Enum\EnumUtils::getOrdinalForName
      * @dataProvider providerGetOrdinalForName
+     * @test
      */
     public function testGetOrdinalForName($expected, $enumType, $name)
     {
@@ -278,17 +288,17 @@ class EnumUtilsTest extends \PHPUnit_Framework_TestCase
      */
     public static function providerIsDefinedName()
     {
-        return array(
+        return [
             // Equivalence class: Positive result.
-            array(true, 'GenderEnum', 'FEMALE'),
-            array(true, 'GenderEnum', 'MALE'),
-            array(true, 'ExtraGenderEnum', 'FEMALE'),
-            array(true, 'ExtraGenderEnum', 'MALE'),
-            array(true, 'ExtraGenderEnum', 'MIXED'),
+            [true, 'GenderEnum', 'FEMALE'],
+            [true, 'GenderEnum', 'MALE'],
+            [true, 'ExtendedGenderEnum', 'FEMALE'],
+            [true, 'ExtendedGenderEnum', 'MALE'],
+            [true, 'ExtendedGenderEnum', 'HYBRID'],
             // Equivalence class: Negative result.
-            array(false, 'GenderEnum', 'MIXED'),
-            array(false, 'ExtraGenderEnum', 'UNKNOWN')
-        );
+            [false, 'GenderEnum', 'HYBRID'],
+            [false, 'ExtendedGenderEnum', 'UNKNOWN']
+        ];
     }
 
     /**
@@ -302,6 +312,7 @@ class EnumUtilsTest extends \PHPUnit_Framework_TestCase
      *
      * @covers fw\Component\Core\Enum\EnumUtils::isDefinedName
      * @dataProvider providerIsDefinedName
+     * @test
      */
     public function testIsDefinedName($expected, $enumType, $name)
     {
@@ -317,18 +328,18 @@ class EnumUtilsTest extends \PHPUnit_Framework_TestCase
      */
     public static function providerIsDefinedOrdinal()
     {
-        return array(
+        return [
             // Equivalence class: Positive result.
-            array(true, 'GenderEnum', 0),
-            array(true, 'GenderEnum', 1),
-            array(true, 'ExtraGenderEnum', 0),
-            array(true, 'ExtraGenderEnum', 1),
-            array(true, 'ExtraGenderEnum', 2),
+            [true, 'GenderEnum', 0],
+            [true, 'GenderEnum', 1],
+            [true, 'ExtendedGenderEnum', 0],
+            [true, 'ExtendedGenderEnum', 1],
+            [true, 'ExtendedGenderEnum', 2],
             // Equivalence class: Negative result.
-            array(false, 'GenderEnum', 2),
-            array(false, 'ExtraGenderEnum', -1),
-            array(false, 'ExtraGenderEnum', 3)
-        );
+            [false, 'GenderEnum', 2],
+            [false, 'ExtendedGenderEnum', -1],
+            [false, 'ExtendedGenderEnum', 3]
+        ];
     }
 
     /**
@@ -342,6 +353,7 @@ class EnumUtilsTest extends \PHPUnit_Framework_TestCase
      *
      * @covers fw\Component\Core\Enum\EnumUtils::isDefinedOrdinal
      * @dataProvider providerIsDefinedOrdinal
+     * @test
      */
     public function testIsDefinedOrdinal($expected, $enumType, $ordinal)
     {

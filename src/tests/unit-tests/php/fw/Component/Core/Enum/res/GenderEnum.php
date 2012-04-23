@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License along
  * with fwComponents.  If not, see http://gnu.org/licenses/lgpl.txt.
  *
- * PHP version 5.3
+ * PHP version 5.4
  *
  * @category   Test
  * @package    Core
@@ -29,12 +29,15 @@
  * @since      File available since Release 0.1.0
  */
 
-declare(encoding = 'utf-8');
+declare(encoding = 'UTF-8');
 
 namespace fw\Component\Core\Enum;
 
 /**
- * A simple enumeration type for the unit tests of package `fw\Component\Core\Enum`.
+ * The {@link GenderEnum} enumeration demonstrates the following usage of
+ * **fw\Component\Core\Enum**:
+ *
+ * * Simple enumeration *with* magic mode enabled.
  *
  * @category   Test
  * @package    Core
@@ -48,13 +51,14 @@ namespace fw\Component\Core\Enum;
  */
 class GenderEnum extends EnumAbstract
 {
+    // @codingStandardsIgnoreStart
 
     /**
      * The female gender.
      *
-     * @return GenderEnum
+     * @return GenderEnum The female gender.
      */
-    public static final function FEMALE()
+    final public static function FEMALE()
     {
         return self::getConstant();
     }
@@ -62,11 +66,12 @@ class GenderEnum extends EnumAbstract
     /**
      * The male gender.
      *
-     * @return GenderEnum
+     * @return GenderEnum The male gender.
      */
-    public static final function MALE()
+    final public static function MALE()
     {
         return self::getConstant();
     }
 
+    // @codingStandardsIgnoreEnd
 }

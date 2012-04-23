@@ -1,6 +1,6 @@
 <?php
 /**
- * `ExtraExtraColorEnum.php`
+ * `ExtendedGenderEnum.php`
  *
  * This file is part of fwComponents.
  *
@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License along
  * with fwComponents.  If not, see http://gnu.org/licenses/lgpl.txt.
  *
- * PHP version 5.3
+ * PHP version 5.4
  *
  * @category   Test
  * @package    Core
@@ -26,18 +26,20 @@
  * @license    http://gnu.org/licenses/lgpl.txt GNU Lesser General Public License
  * @version    GIT: $Id$
  * @link       http://github.com/FlorianWolters/PHP-Component-Core-Enum
- * @since      File available since Release 0.1.0
+ * @since      File available since Release 0.2.0
  */
 
-declare(encoding = 'utf-8');
+declare(encoding = 'UTF-8');
 
 namespace fw\Component\Core\Enum;
 
-require_once 'ExtraColorEnum.php';
+require_once 'GenderEnum.php';
 
 /**
- * A subclassed enumeration type for the unit tests of namespace
- * `fw\Component\Core\Enum`.
+ * The {@link ExtendedGenderEnum} enumeration demonstrates the following usage of
+ * **fw\Component\Core\Enum**:
+ *
+ * * Subclassed enumeration *with* magic mode enabled.
  *
  * @category   Test
  * @package    Core
@@ -47,29 +49,21 @@ require_once 'ExtraColorEnum.php';
  * @license    http://gnu.org/licenses/lgpl.txt GNU Lesser General Public License
  * @version    Release: @package_version@
  * @link       http://github.com/FlorianWolters/PHP-Component-Core-Enum
- * @since      Class available since Release 0.1.0
+ * @since      Class available since Release 0.2.0
  */
-final class ExtraExtraColorEnum extends ExtraColorEnum
+final class ExtendedGenderEnum extends GenderEnum
 {
+    // @codingStandardsIgnoreStart
 
     /**
-     * The color black.
+     * The hybrid gender.
      *
-     * @return ExtraExtraColorEnum
+     * @return ExtendedGenderEnum The hybrid gender.
      */
-    public static final function BLACK()
+    final public static function HYBRID()
     {
-        return self::getConstant(__CLASS__, __FUNCTION__);
+        return self::getConstant();
     }
 
-    /**
-     * The color white.
-     *
-     * @return ExtraExtraColorEnum
-     */
-    public static final function WHITE()
-    {
-        return self::getConstant(__CLASS__, __FUNCTION__);
-    }
-
+    // @codingStandardsIgnoreEnd
 }

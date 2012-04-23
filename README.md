@@ -1,14 +1,12 @@
-fw\Component\Core\Enum
-======================
+# fw\Component\Core\Enum
 
-*fw\Component\Core\Enum* is a simple-to-use PHP component that provides type-safe enumerations in the PHP scripting language.
+**fw\Component\Core\Enum** is a simple-to-use PHP component that provides type-safe enumerations in the PHP scripting language.
 
-The current version is *0.1.0-beta*, which means the API may change until version *1.0.0-stable*.
+The current version is *0.2.0-beta*, which means the API may change until version *1.0.0-stable*.
 
-Although the current version tag is *0.1.0-beta*, the function of this component an be considered as stable. (Hint: The component has a code coverage via unit tests of 100%.)
+Although the current version tag is *0.2.0-beta*, the function of this component an be considered as stable. (Hint: The component has a code coverage via unit tests of 100%.)
 
-Introduction
-------------
+## Introduction
 
 The [PHP][4] scripting language is missing one important data type: **The enumerated type.**
 
@@ -34,24 +32,23 @@ One can use the *`int` Enum* pattern to represent an enumerated type in PHP:
 > It is possible to get around these problems by using the *Typesafe Enum* pattern (see [Effective Java][5] Item 21).
 > This pattern has its own problems: It is quite verbose, hence error prone, and its enum constants cannot be used in `switch` statements.
 
-(cf. [Oracle. Enums, 2004][1])
+(cf. [1])
 
-Motivation
-----------
+## Motivation
 
 Since there is no *enumerated type* in PHP, I decided to create my own implementation (see **Comparison** below for reasons why I don't use an already existing implementation).
 
-My solution implements the *[Typesafe Enum][6]* pattern. The pattern has been adapted and abstracted for PHP. Because of that my implementation doesn't have the problems of the *Typesafe Enum* pattern (see **Introduction** above):
+My solution implements the *[Typesafe Enum][6]* pattern. The pattern has been adapted and abstracted for PHP. Because of that my implementation doesn't have the problems of the original *Typesafe Enum* pattern (see **Introduction** above):
 
 * The enumeration constants can be used in `switch` statements (this is not possible in Java 1.5).
 * It is not as verbose as the original implementation (see **Usage** below), hence less error prone.
 
-Features
---------
+## Features
 
 * The abstract enumeration base class implements the *Typesafe Enum* (see [Effective Java][5] Item 21) pattern.
 * An enumeration class can be placed in a [namespace][7], hence naming collisions can be avoided.
 * An enumeration class can [extend][8] another enumeration class, hence an enumeration hierarchy can be built.
+* Functional enumerations are supported. This means that one can use operations (method calls) on enumeration constants.
 * The enumeration constants can be used in `switch` statement.
 * Th enumeration constants can be serialized/unserialized via the functions [`\serialize()`](http://php.net/serialize) and [`\unserialize()`](http://php.net/unserialize).
 * Each enumeration constant is an object which is both a *Singleton* (see Design Patterns. Elements of Reusable Object-Oriented Software Item 3) and a [*ValueObject*](http://martinfowler.com/bliki/ValueObject.html). This means that each enumeration constant is represented by only one instance and the comparison is based on the value of the enumeration constant.
@@ -69,44 +66,29 @@ The implementation **does not** (and **will not**) feature the following:
 * Generation of enumeration classes.
 * Support for PHP versions older than 5.3.
 
-[1]: http://docs.oracle.com/javase/1.5.0/docs/guide/language/enums.html "Oracle. Enums, 2004."
-[2]: http://docs.oracle.com/javase/tutorial/java/javaOO/enum.html
-[3]: http://docs.oracle.com/javase/7/docs/api/java/lang/Enum.html
-[4]: http://php.net "The PHP Group. PHP: Hypertext Preprocessor, 2001-2012."
-[5]: http://java.sun.com/docs/books/effective
-[6]: http://java.sun.com/developer/Books/shiftintojava/page1.html#replaceenums
-[7]: http://php.net/language.namespaces "The PHP Group. PHP: Namespaces, 2001-2012."
-[8]: http://php.net/language.oop5.inheritance "The PHP Group. PHP: Object Inheritcance, 2001-2012."
-
-Roadmap/Notes
--------------
+## Roadmap/Notes
 
 * Version *1.0.0-stable* will have a stable API.
-* Version *1.0.0-stable* will require PHP 5.4.
-* Functional enumerations will be supported in version *1.0.0-stable*.
+* Version *1.0.0-stable* will follow the [PSR-1](http://github.com/pmjones/fig-standards/blob/psr-1-style-guide/proposed/PSR-1.md) Coding Style Guide.
 * `@todo` comments will be fixed and/or removed until version *1.0.0-stable*.
-* *fw\Component\Core\Enum* is developed with the help of [Phix](http://phix-project.org). **This may change in the future.**
+* **fw\Component\Core\Enum** is developed with the help of [Phix](http://phix-project.org). **This may change in the future.**
 
-Requirements
-------------
+## Requirements
 
-* [PHP](http://php.net) 5.3.0 (or later)
-    **NOTICE:** Version *1.0.0-stable* will require PHP 5.4 (or later).
+* [PHP](http://php.net) 5.4.0 (or later)
 * [Symfony 2 ClassLoader Component](http://symfony.com/doc/current/components/class_loader.html) 2.0.12
-    **NOTICE:** The *ClassLoader Component* is automatically installed if *fw\Component\Core\Enum* is installed using the [PEAR Installer](http://pear.php.net).
+    **NOTICE:** The *ClassLoader Component* is automatically installed if **fw\Component\Core\Enum** is installed using the [PEAR Installer](http://pear.php.net).
 
-System-Wide Installation
-------------------------
+## System-Wide Installation
 
-*fw\Component\Core\Enum* should be installed using the [PEAR Installer](http://pear.php.net). This installer is the PHP community's de-facto standard for installing PHP components.
+**fw\Component\Core\Enum** should be installed using the [PEAR Installer](http://pear.php.net). This installer is the PHP community's de-facto standard for installing PHP components.
 
     sudo pear channel-discover http://florianwolters.github.com/pear
     sudo pear install --alldeps fw/Enum
 
-As A Dependency On Your Component
----------------------------------
+## As A Dependency On Your Component
 
-If you are creating a component that relies on *fw\Component\Core\Enum*, please make sure that you add *fw\Component\Core\Enum* to your component's `package.xml` file:
+If you are creating a component that relies on **fw\Component\Core\Enum**, please make sure that you add **fw\Component\Core\Enum** to your component's `package.xml` file:
 
 ```xml
 <dependencies>
@@ -114,42 +96,45 @@ If you are creating a component that relies on *fw\Component\Core\Enum*, please 
     <package>
       <name>Enum</name>
       <channel>http://florianwolters.github.com/pear</channel>
-      <min>0.1.0</min>
-      <max>0.1.9</max>
+      <min>0.2.0</min>
+      <max>0.2.99</max>
     </package>
   </required>
 </dependencies>
 ```
 
-Usage
------
+## Usage
 
-The best documentation for *fw\Component\Core\Enum* are the unit tests, which are shipped in the package. You will find them installed into your PEAR repository, which on Linux systems is normally `/usr/share/php/test`.
+The best documentation for **fw\Component\Core\Enum** are the unit tests, which are shipped in the package. You will find them installed into your PEAR repository, which on Linux systems is normally `/usr/share/php/test`.
 
-[Click here](http://florianwolters.github.com/PHP-Component-Core-Enum) for the API documentation of *fw\Component\Core\Enum*.
+* [Click here](http://florianwolters.github.com/PHP-Component-Core-Enum) for the API documentation of **fw\Component\Core\Enum**.
+* [Click here](http://github.com/FlorianWolters/PHP-Component-Core-Enum/wiki) for the Wiki of **fw\Component\Core\Enum**.
 
-#### Best Practices
+The most important usage rule:
+
+> Always declare the method to retrieve the enumeration constant as `final public static`.
+
+### Best Practices
 
 * Always declare an enumeration class as `final`, except the enumeration class should be extended by another enumeration class.
-* Always declare the method to retrieve the enumeration constant as `static final`.
 * Always add a DocBlock tag `@return` with the name of the enumeration class to each method that retrieves an enumeration constant. This enables Autocompletion in the Integrated Development Environment (IDE).
 
-#### Examples
+### Examples
 
 ```php
 <?php
 // Example 01: High dynamic and implicit, but with lower performance.
 final class GenderEnum extends fw\Component\Core\Enum\Enum {
     /** @return GenderEnum */
-    public static final function FEMALE() { return self::getConstant(); }
+    final public static function FEMALE() { return self::getConstant(); }
     /** @return GenderEnum */
-    public static final function MALE() { return self::getConstant(); }
+    final public static function MALE() { return self::getConstant(); }
 }
 
 // Example 02: High performance and explicit, but with more source code to write.
 final class BooleanEnum extends fw\Component\Core\Enum\Enum {
     /** @return BooleanEnum */
-    public static final function FALSE() {
+    final public static function FALSE() {
         // The first parameter can be the name of this enumeration class.
         // => The name can be retrieved via the __CLASS__ constant.
         // The second parameter can be the name of this enumeration constant.
@@ -157,19 +142,18 @@ final class BooleanEnum extends fw\Component\Core\Enum\Enum {
         return self::getConstant(__CLASS__, __FUNCTION__);
     }
     /** @return BooleanEnum */
-    public static final function TRUE() { return self::getConstant(__CLASS__, __FUNCTION__); }
+    final public static function TRUE() { return self::getConstant(__CLASS__, __FUNCTION__); }
 }
 
 // Example 03: Subclassed enumeration types.
 // NOTE: The class GenderEnum declared above is final, change that to get this example to compile.
 final class ExtendedGenderEnum extends GenderEnum {
     /** @return ExtendedGenderEnum */
-    public static final function HYBRID() { return self::getConstant(); }
+    final public static function HYBRID() { return self::getConstant(); }
 }
 ```
 
-Development Environment
------------------------
+## Development Environment
 
 If you want to patch or enhance this component, you will need to create a suitable development environment. The easiest way to do that is to install [phix4componentdev](http://phix-project.org):
 
@@ -193,8 +177,7 @@ To make life easier for you, common tasks (such as running unit tests, generatin
 
 Run the command 'phing' in the component's top-level folder to see the full list of available automated tasks.
 
-Comparison
-----------
+## Comparison
 
 **This chapter is not finished yet!**
 
@@ -250,6 +233,24 @@ The implementation of [bzikarsky][105] uses one protected field (of data type ar
 * Too much magic.
 * The enumeration class is in the global namespace.
 
+## License
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License along with this program. If not, see http://gnu.org/licenses/lgpl.txt.
+
+
+
+[1]: http://docs.oracle.com/javase/1.5.0/docs/guide/language/enums.html "Oracle. Enums. 2004, 2010."
+[2]: http://docs.oracle.com/javase/tutorial/java/javaOO/enum.html "Oracle. The Java Tutorials: Enum Types. 1995, 2012."
+[3]: http://docs.oracle.com/javase/7/docs/api/java/lang/Enum.html "Oracle. Java Platform SE 7: Enum. 1993, 2011."
+[4]: http://php.net "The PHP Group. PHP: Hypertext Preprocessor. 2001-2012."
+[5]: http://java.sun.com/docs/books/effective "J. Bloch. Effective Java, 2nd Edition. Boston: Addison-Wesley, 2008."
+[6]: http://java.sun.com/developer/Books/shiftintojava/page1.html#replaceenums
+[7]: http://php.net/language.namespaces "The PHP Group. PHP: Namespaces. 2001-2012."
+[8]: http://php.net/language.oop5.inheritance "The PHP Group. PHP: Object Inheritcance. 2001-2012."
 [100]: http://php.net/class.splenum "SplEnum"
 [101]: http://github.com/headzoo/php-enum "Sean Hickey"
 [102]: http://github.com/ircmaxell/PHP-CryptLib/blob/master/lib/CryptLib/Core/Enum.php "Anthony Ferrara"
@@ -267,11 +268,3 @@ The implementation of [bzikarsky][105] uses one protected field (of data type ar
 [114]: http://phpbuilder.com/board/showpost.php?s=52297b12ba0b12ad8e1c1da1247c187c&p=10901578&postcount=13 "NogDog"
 [115]: http://stackoverflow.com/a/4522078 "Christopher Fox"
 [116]: http://stackoverflow.com/a/4522078 "aelg"
-License
--------
-
-This program is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more details.
-
-You should have received a copy of the GNU Lesser General Public License along with this program. If not, see http://gnu.org/licenses/lgpl.txt.

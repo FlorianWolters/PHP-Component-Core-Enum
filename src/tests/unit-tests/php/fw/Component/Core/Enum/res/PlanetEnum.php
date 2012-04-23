@@ -1,6 +1,6 @@
 <?php
 /**
- * `UsageExampleEnum.php`
+ * `PlanetEnum.php`
  *
  * This file is part of fwComponents.
  *
@@ -26,7 +26,7 @@
  * @license    http://gnu.org/licenses/lgpl.txt GNU Lesser General Public License
  * @version    GIT: $Id$
  * @link       http://github.com/FlorianWolters/PHP-Component-Core-Enum
- * @since      File available since Release 0.1.0
+ * @since      File available since Release 0.2.0
  */
 
 declare(encoding = 'UTF-8');
@@ -34,10 +34,10 @@ declare(encoding = 'UTF-8');
 namespace fw\Component\Core\Enum;
 
 /**
- * The {@link SingletonEnum} enumeration demonstrates the following usage of
+ * The {@link PlanetEnum} enumeration demonstrates the following usage of
  * **fw\Component\Core\Enum**:
  *
- * * Simple valid and invalid usage.
+ * * Functional enumeration.
  *
  * @category   Test
  * @package    Core
@@ -47,61 +47,95 @@ namespace fw\Component\Core\Enum;
  * @license    http://gnu.org/licenses/lgpl.txt GNU Lesser General Public License
  * @version    Release: @package_version@
  * @link       http://github.com/FlorianWolters/PHP-Component-Core-Enum
- * @since      Class available since Release 0.1.0
+ * @since      Class available since Release 0.2.0
  */
-final class UsageExampleEnum extends EnumAbstract
+final class PlanetEnum extends EnumAbstract
 {
     // @codingStandardsIgnoreStart
 
     /**
-     * Invalid usage of the first and second parameter of {@link
-     * EnumAbstract::getConstant}.
+     * The universal gravitational constant (m3 kg-1 s-2).
      *
-     * @return UsageExampleEnum The enumeration constant.
+     * @var float
      */
-    final public static function INVALID()
+    const G = 6.67300E-11;
+
+    /**
+     * The mass of this Planet in kilograms.
+     *
+     * @var float
+     */
+    private $_mass;
+
+    /**
+     * The radius of this Planet in meters.
+     *
+     * @var float
+     */
+    private $_radius;
+
+    /**
+     * The planet mercury.
+     *
+     * @return PlanetEnum The planet mercury.
+     */
+    final public static function MERCURY()
     {
-        return self::getConstant('INVALID', 'INVALID');
+        $self = self::getConstant();
+        $self->_mass = 3.303e+23;
+        $self->_radius = 2.4397e6;
+
+        return $self;
     }
 
     /**
-     * Invalid usage of the first parameter of {@link EnumAbstract::getConstant}.
+     * The planet venus.
      *
-     * @return UsageExampleEnum The enumeration constant.
+     * @return PlanetEnum The planet venus.
      */
-    final public static function INVALID_TYPE()
+    final public static function VENUS()
     {
-        return self::getConstant('WRONG', __FUNCTION__);
+        $self = self::getConstant();
+        $self->_mass = 4.869e+24;
+        $self->_radius = 6.0518e6;
+
+        return $self;
     }
 
     /**
-     * Invalid usage of the second parameter of {@link EnumAbstract::getConstant}.
+     * The planet earth.
      *
-     * @return UsageExampleEnum The enumeration constant.
+     * @return PlanetEnum The planet earth.
      */
-    final public static function INVALID_NAME()
+    final public static function EARTH()
     {
-        return self::getConstant(__CLASS__, 'WRONG');
+        $self = self::getConstant();
+        $self->_mass = 5.976e+24;
+        $self->_radius = 6.37814e6;
+
+        return $self;
     }
 
     /**
-     * Correct usage of {@link EnumAbstract::getConstant}.
+     * Calculates and returns the surface gravity of this planet.
      *
-     * @return UsageExampleEnum The enumeration constant.
+     * @return float The surface gravity.
      */
-    final public static function CORRECT_USAGE()
+    public function surfaceGravity()
     {
-        return self::getConstant();
+        return self::G * $this->_mass / ($this->_radius ^ 2);
     }
 
     /**
-     * Correct usage of {@link EnumAbstract::getConstant}.
+     * Calculates and returns the surface weight of this planet.
      *
-     * @return UsageExampleEnum The enumeration constant.
+     * @param float $otherMass Another mass in kilograms.
+     *
+     * @return float The surface weight.
      */
-    final public static function CORRECT_USAGE_2()
+    public function surfaceWeight($otherMass)
     {
-        return self::getConstant(__CLASS__, __FUNCTION__);
+        return $otherMass * $this->surfaceGravity();
     }
 
     // @codingStandardsIgnoreEnd

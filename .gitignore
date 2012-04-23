@@ -4,3 +4,7 @@ dist
 nbproject
 review
 vendor
+
+# TODO: Create submodules and remove the following lines.
+apigen.xml
+build.local.xml

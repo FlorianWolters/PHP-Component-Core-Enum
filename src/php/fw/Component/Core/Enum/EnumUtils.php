@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License along
  * with fwComponents.  If not, see http://gnu.org/licenses/lgpl.txt.
  *
- * PHP version 5.3
+ * PHP version 5.4
  *
  * @category   Component
  * @package    Core
@@ -29,7 +29,7 @@
  * @since      File available since Release 0.1.0
  */
 
-declare(encoding = 'utf-8');
+declare(encoding = 'UTF-8');
 
 namespace fw\Component\Core\Enum;
 
@@ -105,7 +105,7 @@ class EnumUtils
      * @throws \InvalidArgumentException If the specified class name does not
      *                                   represent an enumeration type.
      */
-    public static final function values($enumType)
+    public static function values($enumType)
     {
         self::_throwInvalidArgumentExceptionIfIsNotEnumType($enumType);
 
@@ -124,7 +124,7 @@ class EnumUtils
      */
     private static function _throwInvalidArgumentExceptionIfIsNotEnumType($className)
     {
-        if ( false === self::isEnumType($className) ) {
+        if (false === self::isEnumType($className)) {
             throw new \InvalidArgumentException(
                 'The class ' . $className. ' does not represent an enumeration type'
             );
@@ -139,7 +139,7 @@ class EnumUtils
      * @return boolean `true` if the specified class name represents an enumeration
      *                 type; `false` otherwise.
      */
-    public static final function isEnumType($className)
+    public static function isEnumType($className)
     {
         return is_subclass_of($className, __NAMESPACE__ . '\EnumAbstract');
     }
@@ -163,7 +163,7 @@ class EnumUtils
      *                                   name, or the specified class name does not
      *                                   represent an enumeration type.
      */
-    public static final function valueOf($enumType, $name)
+    public static function valueOf($enumType, $name)
     {
         self::_throwInvalidArgumentExceptionIfIsNotEnumType($enumType);
 
@@ -174,9 +174,9 @@ class EnumUtils
      * Returns the name of the enumeration constant of the specified enumeration type
      * with the specified ordinal.
      *
-     * @param string $enumType The class name of the enumeration type from which to
-     *                         return the ordinal of the enumeration constant.
-     * @param string $ordinal  The ordinal of the enumeration constant to return.
+     * @param string  $enumType The class name of the enumeration type from which to
+     *                          return the ordinal of the enumeration constant.
+     * @param integer $ordinal  The ordinal of the enumeration constant to return.
      *
      * @return string|null The name of the enumeration constant of the specified
      *                     enumeration type with the specified ordinal on success;
@@ -188,7 +188,7 @@ class EnumUtils
         $result = null;
 
         foreach ($constants as $constant) {
-            if ( $constant->getOrdinal() === $ordinal ) {
+            if ($constant->getOrdinal() === $ordinal) {
                 $result = $constant->getName();
                 break;
             }
@@ -215,7 +215,7 @@ class EnumUtils
         $result = null;
 
         foreach ($constants as $constant) {
-            if ( $constant->getName() === $name ) {
+            if ($constant->getName() === $name) {
                 $result = $constant->getOrdinal();
                 break;
             }
@@ -240,7 +240,7 @@ class EnumUtils
         $result = false;
 
         foreach ($names as $item) {
-            if ( $item === $name ) {
+            if ($item === $name) {
                 $result = true;
                 break;
             }
@@ -253,8 +253,8 @@ class EnumUtils
      * Checks whether an enumeration constant with the specified ordinal exists in
      * the specified enumeration type.
      *
-     * @param string $enumType The class name of the enumeration type to check.
-     * @param string $ordinal  The ordinal of the enumeration constant to check.
+     * @param string  $enumType The class name of the enumeration type to check.
+     * @param integer $ordinal  The ordinal of the enumeration constant to check.
      *
      * @return boolean `true` if the enumeration constant with the specified ordinal
      *                 exists in the specified enumeration type; `false` otherwise.
@@ -265,7 +265,7 @@ class EnumUtils
         $result = false;
 
         foreach ($constants as $constant) {
-            if ( $constant->getOrdinal() === $ordinal ) {
+            if ($constant->getOrdinal() === $ordinal) {
                 $result = true;
                 break;
             }

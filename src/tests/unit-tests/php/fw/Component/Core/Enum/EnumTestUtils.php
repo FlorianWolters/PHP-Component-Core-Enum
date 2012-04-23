@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License along
  * with fwComponents.  If not, see http://gnu.org/licenses/lgpl.txt.
  *
- * PHP version 5.3
+ * PHP version 5.4
  *
  * @category   Test
  * @package    Core
@@ -29,16 +29,21 @@
  * @since      File available since Release 0.1.0
  */
 
-declare(encoding = 'utf-8');
+declare(encoding = 'UTF-8');
 
 namespace fw\Component\Core\Enum;
 
-require_once 'res/ColorEnum.php';
-require_once 'res/ExtraColorEnum.php';
-require_once 'res/ExtraExtraColorEnum.php';
-require_once 'res/GenderEnum.php';
-require_once 'res/ExtraGenderEnum.php';
 require_once 'res/UsageExampleEnum.php';
+
+require_once 'res/GenderEnum.php';
+require_once 'res/ExtendedGenderEnum.php';
+
+require_once 'res/ColorEnum.php';
+require_once 'res/ExtendedColorEnum.php';
+require_once 'res/ExtendedExtendedColorEnum.php';
+
+require_once 'res/SingletonEnum.php';
+require_once 'res/PlanetEnum.php';
 
 /**
  * The {@link EnumTestUtils} class is an utility class for the test classes of the

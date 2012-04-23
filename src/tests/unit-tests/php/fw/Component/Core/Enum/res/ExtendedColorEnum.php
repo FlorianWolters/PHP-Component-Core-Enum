@@ -1,6 +1,6 @@
 <?php
 /**
- * `ExtraColorEnum.php`
+ * `ExtendedColorEnum.php`
  *
  * This file is part of fwComponents.
  *
@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License along
  * with fwComponents.  If not, see http://gnu.org/licenses/lgpl.txt.
  *
- * PHP version 5.3
+ * PHP version 5.4
  *
  * @category   Test
  * @package    Core
@@ -26,18 +26,20 @@
  * @license    http://gnu.org/licenses/lgpl.txt GNU Lesser General Public License
  * @version    GIT: $Id$
  * @link       http://github.com/FlorianWolters/PHP-Component-Core-Enum
- * @since      File available since Release 0.1.0
+ * @since      File available since Release 0.2.0
  */
 
-declare(encoding = 'utf-8');
+declare(encoding = 'UTF-8');
 
 namespace fw\Component\Core\Enum;
 
 require_once 'ColorEnum.php';
 
 /**
- * A subclassed enumeration type for the unit tests of namespace
- * `fw\Component\Core\Enum`.
+ * The {@link ExtendedColorEnum} enumeration demonstrates the following usage of
+ * **fw\Component\Core\Enum**:
+ *
+ * * Subclassed enumeration *with* performance mode enabled.
  *
  * @category   Test
  * @package    Core
@@ -47,17 +49,18 @@ require_once 'ColorEnum.php';
  * @license    http://gnu.org/licenses/lgpl.txt GNU Lesser General Public License
  * @version    Release: @package_version@
  * @link       http://github.com/FlorianWolters/PHP-Component-Core-Enum
- * @since      Class available since Release 0.1.0
+ * @since      Class available since Release 0.2.0
  */
-class ExtraColorEnum extends ColorEnum
+class ExtendedColorEnum extends ColorEnum
 {
+    // @codingStandardsIgnoreStart
 
     /**
      * The color cyan.
      *
-     * @return ExtraColorEnum
+     * @return ExtendedColorEnum The color cyan.
      */
-    public static final function CYAN()
+    final public static function CYAN()
     {
         return self::getConstant(__CLASS__, __FUNCTION__);
     }
@@ -65,9 +68,9 @@ class ExtraColorEnum extends ColorEnum
     /**
      * The color magenta.
      *
-     * @return ExtraColorEnum
+     * @return ExtendedColorEnum The color magenta.
      */
-    public static final function MAGENTA()
+    final public static function MAGENTA()
     {
         return self::getConstant(__CLASS__, __FUNCTION__);
     }
@@ -75,11 +78,12 @@ class ExtraColorEnum extends ColorEnum
     /**
      * The color yellow.
      *
-     * @return ExtraColorEnum
+     * @return ExtendedColorEnum The color yellow.
      */
-    public static final function YELLOW()
+    final public static function YELLOW()
     {
         return self::getConstant(__CLASS__, __FUNCTION__);
     }
 
+    // @codingStandardsIgnoreEnd
 }

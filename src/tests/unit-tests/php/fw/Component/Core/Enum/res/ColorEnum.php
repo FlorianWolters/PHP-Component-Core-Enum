@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License along
  * with fwComponents.  If not, see http://gnu.org/licenses/lgpl.txt.
  *
- * PHP version 5.3
+ * PHP version 5.4
  *
  * @category   Test
  * @package    Core
@@ -29,13 +29,15 @@
  * @since      File available since Release 0.1.0
  */
 
-declare(encoding = 'utf-8');
+declare(encoding = 'UTF-8');
 
 namespace fw\Component\Core\Enum;
 
 /**
- * A simple enumeration type for the unit tests of namespace
- * `fw\Component\Core\Enum`.
+ * The {@link ColorEnum} enumeration demonstrates the following usage of
+ * **fw\Component\Core\Enum**:
+ *
+ * * Simple enumeration *with* performance mode enabled.
  *
  * @category   Test
  * @package    Core
@@ -49,13 +51,14 @@ namespace fw\Component\Core\Enum;
  */
 class ColorEnum extends EnumAbstract
 {
+    // @codingStandardsIgnoreStart
 
     /**
      * The color red.
      *
-     * @return ColorEnum
+     * @return ColorEnum The color red.
      */
-    public static final function RED()
+    final public static function RED()
     {
         return self::getConstant(__CLASS__, __FUNCTION__);
     }
@@ -63,9 +66,9 @@ class ColorEnum extends EnumAbstract
     /**
      * The color green.
      *
-     * @return ColorEnum
+     * @return ColorEnum The color red.
      */
-    public static final function GREEN()
+    final public static function GREEN()
     {
         return self::getConstant(__CLASS__, __FUNCTION__);
     }
@@ -73,11 +76,12 @@ class ColorEnum extends EnumAbstract
     /**
      * The color blue.
      *
-     * @return ColorEnum
+     * @return ColorEnum The color red.
      */
-    public static final function BLUE()
+    final public static function BLUE()
     {
         return self::getConstant(__CLASS__, __FUNCTION__);
     }
 
+    // @codingStandardsIgnoreEnd
 }

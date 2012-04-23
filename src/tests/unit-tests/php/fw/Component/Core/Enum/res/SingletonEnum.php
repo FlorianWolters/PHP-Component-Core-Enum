@@ -1,6 +1,6 @@
 <?php
 /**
- * `ExtraGenderEnum.php`
+ * `SingletonEnum.php`
  *
  * This file is part of fwComponents.
  *
@@ -16,9 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License along
  * with fwComponents.  If not, see http://gnu.org/licenses/lgpl.txt.
  *
- * PHP version 5.3
+ * PHP version 5.4
  *
- * @category   Test
+ * @category   Component
  * @package    Core
  * @subpackage Enum
  * @author     Florian Wolters <florian.wolters.85@googlemail.com>
@@ -26,18 +26,22 @@
  * @license    http://gnu.org/licenses/lgpl.txt GNU Lesser General Public License
  * @version    GIT: $Id$
  * @link       http://github.com/FlorianWolters/PHP-Component-Core-Enum
- * @since      File available since Release 0.1.0
+ * @since      File available since Release 0.2.0
  */
 
-declare(encoding = 'utf-8');
+declare(encoding = 'UTF-8');
 
 namespace fw\Component\Core\Enum;
 
-require_once 'GenderEnum.php';
+declare(encoding = 'UTF-8');
+
+namespace fw\Component\Core\Enum;
 
 /**
- * A subclassed enumeration type for the unit tests of namespace
- * `fw\Component\Core\Enum`.
+ * The {@link SingletonEnum} enumeration demonstrates the following usage of
+ * **fw\Component\Core\Enum**:
+ *
+ * * Singleton enumeration.
  *
  * @category   Test
  * @package    Core
@@ -47,19 +51,33 @@ require_once 'GenderEnum.php';
  * @license    http://gnu.org/licenses/lgpl.txt GNU Lesser General Public License
  * @version    Release: @package_version@
  * @link       http://github.com/FlorianWolters/PHP-Component-Core-Enum
- * @since      Class available since Release 0.1.0
+ * @since      Class available since Release 0.2.0
  */
-final class ExtraGenderEnum extends GenderEnum
+final class SingletonEnum extends EnumAbstract
 {
+    // @codingStandardsIgnoreStart
 
     /**
-     * The mixed gender.
+     * The *Singleton* instance of this class.
      *
-     * @return ExtraGenderEnum
+     * @return SingletonEnum The *Singleton* instance.
      */
-    public static final function MIXED()
+    final public static function INSTANCE()
     {
         return self::getConstant();
     }
 
+    /**
+     * Returns the string representation of this instance.
+     *
+     * This method implements the *Debug Print Method* implementation pattern.
+     *
+     * @return string The string representation.
+     */
+    public function __toString()
+    {
+        return __CLASS__;
+    }
+
+    // @codingStandardsIgnoreEnd
 }

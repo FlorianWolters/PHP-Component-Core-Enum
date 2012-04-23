@@ -52,8 +52,8 @@ $autoLoader = new UniversalClassLoader;
 // Registers an array of namespaces.
 $autoLoader->registerNamespaces(
     array(
-        'Symfony' => 'vendor/php',
-        'fw' => 'src/php'
+        'Symfony' => __DIR__ . '/vendor/php',
+        'fw' => __DIR__ . '/src/php'
     )
 );
 
