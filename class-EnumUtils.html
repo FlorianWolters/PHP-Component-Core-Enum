@@ -7,7 +7,7 @@
 	<title>Class EnumUtils | Enum</title>
 
 	<script type="text/javascript" src="resources/combined.js?144019575"></script>
-	<script type="text/javascript" src="elementlist.js?3665433848"></script>
+	<script type="text/javascript" src="elementlist.js?3334275698"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1532301413" />
 
 	<script type="text/javascript">
@@ -88,9 +88,6 @@
 			</li>
 			<li>
 				<a href="deprecated.html" title="List of deprecated elements"><span>Deprecated</span></a>
-			</li>
-			<li>
-				<a href="todo.html" title="Todo list"><span>Todo</span></a>
 			</li>
 		</ul>
 		<ul>
@@ -214,7 +211,7 @@ enumeration type, in the order they are declared.<br />
 	<tr data-order="values" id="_values">
 
 		<td class="attributes"><code>
-			final public static
+			 public static
 			array
 			
 			</code>
@@ -281,7 +278,7 @@ in the order they are declared.<br />
 	<tr data-order="isEnumType" id="_isEnumType">
 
 		<td class="attributes"><code>
-			final public static
+			 public static
 			boolean
 			
 			</code>
@@ -323,7 +320,7 @@ in the order they are declared.<br />
 	<tr data-order="valueOf" id="_valueOf">
 
 		<td class="attributes"><code>
-			final public static
+			 public static
 			static|null
 			
 			</code>
@@ -386,7 +383,7 @@ name, or the specified class name does not represent an enumeration type.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getNameForOrdinal">#</a>
-		<code><a href="source-class-EnumUtils.html#173" title="Go to source code">getNameForOrdinal</a>( <span>string <var>$enumType</var></span>, <span>string <var>$ordinal</var></span> )</code>
+		<code><a href="source-class-EnumUtils.html#173" title="Go to source code">getNameForOrdinal</a>( <span>string <var>$enumType</var></span>, <span>integer <var>$ordinal</var></span> )</code>
 
 		<div class="description short">
 			
@@ -408,7 +405,7 @@ type with the specified ordinal.</p>
 					<dd><code>string</code><br> The class name of the enumeration type from which to return the ordinal of the
 enumeration constant.</dd>
 					<dt><var>$ordinal</var></dt>
-					<dd><code>string</code><br> The ordinal of the enumeration constant to return.</dd>
+					<dd><code>integer</code><br> The ordinal of the enumeration constant to return.</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -526,7 +523,7 @@ the specified enumeration type; <code>false</code> otherwise.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_isDefinedOrdinal">#</a>
-		<code><a href="source-class-EnumUtils.html#252" title="Go to source code">isDefinedOrdinal</a>( <span>string <var>$enumType</var></span>, <span>string <var>$ordinal</var></span> )</code>
+		<code><a href="source-class-EnumUtils.html#252" title="Go to source code">isDefinedOrdinal</a>( <span>string <var>$enumType</var></span>, <span>integer <var>$ordinal</var></span> )</code>
 
 		<div class="description short">
 			
@@ -547,7 +544,7 @@ the specified enumeration type.</p>
 					<dt><var>$enumType</var></dt>
 					<dd><code>string</code><br> The class name of the enumeration type to check.</dd>
 					<dt><var>$ordinal</var></dt>
-					<dd><code>string</code><br> The ordinal of the enumeration constant to check.</dd>
+					<dd><code>integer</code><br> The ordinal of the enumeration constant to check.</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
