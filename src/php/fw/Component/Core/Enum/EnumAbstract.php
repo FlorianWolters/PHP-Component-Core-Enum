@@ -4,17 +4,18 @@
  *
  * This file is part of fwComponents.
  *
- * fwComponents is free software: you can redistribute it and/or modify it under the
- * terms of the GNU Lesser General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
+ * fwComponents is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option) any
+ * later version.
  *
- * fwComponents is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
- * PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more details.
+ * fwComponents is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more
+ * details.
  *
- * You should have received a copy of the GNU Lesser General Public License along
- * with fwComponents.  If not, see http://gnu.org/licenses/lgpl.txt.
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with fwComponents.  If not, see http://gnu.org/licenses/lgpl.txt.
  *
  * PHP version 5.4
  *
@@ -23,7 +24,7 @@
  * @subpackage Enum
  * @author     Florian Wolters <florian.wolters.85@googlemail.com>
  * @copyright  2011-2012 Florian Wolters
- * @license    http://gnu.org/licenses/lgpl.txt GNU Lesser General Public License
+ * @license    http://gnu.org/licenses/lgpl.txt GNU LGPL
  * @version    GIT: $Id$
  * @link       http://github.com/FlorianWolters/PHP-Component-Core-Enum
  * @since      File available since Release 0.1.0
@@ -37,11 +38,11 @@ namespace fw\Component\Core\Enum;
  * The {@link EnumAbstract} class is the abstract base class of all PHP language
  * type-safe enumerations.
  *
- * One feature of the C programming language lacking in PHP is enumerations. Using an
- * implementation based on integers is poor and open to abuse. This class implements
- * the *{@link
- * http://java.sun.com/developer/Books/shiftintojava/page1.html#replaceenums Typesafe
- * Enum}* pattern. The pattern has been adapted and abstracted for PHP.
+ * One feature of the C programming language lacking in PHP is enumerations.
+ * Using an implementation based on integers is poor and open to abuse. This
+ * class implements the *{@link
+ * http://java.sun.com/developer/Books/shiftintojava/page1.html#replaceenums
+ * Typesafe Enum}* pattern. The pattern has been adapted and abstracted for PHP.
  *
  * **Simple enumerations**
  *
@@ -58,18 +59,18 @@ namespace fw\Component\Core\Enum;
  * }
  * </code>
  *
- * Each enumeration constant has a name and an ordinal. These can be accessed using
- * the {@link getName}, respectively the {@link getOrdinal} method.
+ * Each enumeration constant has a name and an ordinal. These can be accessed
+ * using the {@link getName}, respectively the {@link getOrdinal} method.
  *
  * The {@link valueOf} and {@link values} methods can be used to access the
  * enumeration constants dynamically.
  *
  * **Subclassed enumerations**
  *
- * A hierarchy of enumeration classes can be built. In this case, the superclass is
- * unaffected by the addition of subclasses (as per normal PHP). The query methods on
- * the subclass will return all of the enumeration constants from the superclass and
- * the subclass.
+ * A hierarchy of enumeration classes can be built. In this case, the superclass
+ * is unaffected by the addition of subclasses (as per normal PHP). The query
+ * methods on the subclass will return all of the enumeration constants from the
+ * superclass and the subclass.
  *
  * <code>
  * // NOTE: The class ColorEnum declared above is final, change that to get this
@@ -85,7 +86,8 @@ namespace fw\Component\Core\Enum;
  * The enumeration classes can have functionality:
  *
  * <code>
- * abstract class ArithmeticOperationEnum extends fw\Component\Core\Enum\EnumAbstract {
+ * abstract class ArithmeticOperationEnum
+ *         extends fw\Component\Core\Enum\EnumAbstract {
  *     /** @return ArithmeticOperationEnum {@*}
  *     final public static function PLUS() {
  *         return static::getConstant(
@@ -118,7 +120,11 @@ namespace fw\Component\Core\Enum;
  * Polymorphism is used to calculate the result of the artihmetic operation.
  *
  * <code>
- * $operations = [ArithmeticOperationEnum::PLUS(), ArithmeticOperationEnum::MINUS()];
+ * $operations = [
+ *     ArithmeticOperationEnum::PLUS(),
+ *     ArithmeticOperationEnum::MINUS()
+ * ];
+ *
  * foreach ($operations as $operation) {
  *     echo $operation->evaluate(1, 1), \PHP_EOL;
  * }
@@ -129,7 +135,7 @@ namespace fw\Component\Core\Enum;
  * @subpackage Enum
  * @author     Florian Wolters <florian.wolters.85@googlemail.com>
  * @copyright  2011-2012 Florian Wolters
- * @license    http://gnu.org/licenses/lgpl.txt GNU Lesser General Public License
+ * @license    http://gnu.org/licenses/lgpl.txt GNU LGPL
  * @version    Release: @package_version@
  * @link       http://github.com/FlorianWolters/PHP-Component-Core-Enum
  * @since      Class available since Release 0.1.0
@@ -200,11 +206,11 @@ abstract class EnumAbstract
     private $_hashCode;
 
     /**
-     * Returns an array containing the names of the enumeration constants of this
-     * enumeration type, in the order they are declared.
+     * Returns an array containing the names of the enumeration constants of
+     * this enumeration type, in the order they are declared.
      *
-     * This method may be used to iterate over the names of the enumerated constants
-     * as follows:
+     * This method may be used to iterate over the names of the enumerated
+     * constants as follows:
      *
      * <code>
      * foreach (ConcreteEnum::names() as $name) {
@@ -230,9 +236,15 @@ abstract class EnumAbstract
         // The argument $filter of the method getMethods uses a logical OR. Therefore
         // we have to return all methods for each filter and calculate the intersect.
 
-        $finalMethods = $reflectedClass->getMethods(\ReflectionMethod::IS_FINAL);
-        $staticMethods = $reflectedClass->getMethods(\ReflectionMethod::IS_STATIC);
-        $publicMethods = $reflectedClass->getMethods(\ReflectionMethod::IS_PUBLIC);
+        $finalMethods = $reflectedClass->getMethods(
+            \ReflectionMethod::IS_FINAL
+        );
+        $staticMethods = $reflectedClass->getMethods(
+            \ReflectionMethod::IS_STATIC
+        );
+        $publicMethods = $reflectedClass->getMethods(
+            \ReflectionMethod::IS_PUBLIC
+        );
         $reflectedMethods = \array_intersect(
             $finalMethods, $staticMethods, $publicMethods
         );
@@ -281,17 +293,17 @@ abstract class EnumAbstract
     }
 
     /**
-     * Returns the enumeration constant with the specified name from this enumeration
-     * type.
+     * Returns the enumeration constant with the specified name from this
+     * enumeration type.
      *
-     * The string must match exactly an identifier used to declare an enumeration
-     * constant in this enumeration type. (Extraneous whitespace characters are not
-     * permitted.)
+     * The string must match exactly an identifier used to declare an
+     * enumeration constant in this enumeration type. (Extraneous whitespace
+     * characters are not permitted.)
      *
      * @param string $name The name of the enumeration constant to return.
      *
-     * @return EnumAbstract|null The enumeration constant with the specified name on
-     *                           success; `null` on failure.
+     * @return EnumAbstract|null The enumeration constant with the specified
+     *                           name on success; `null` on failure.
      */
     public static function valueOf($name)
     {
@@ -321,21 +333,29 @@ abstract class EnumAbstract
      * Use this method as follows in a subclass of this class:
      *
      * <code>
-     * final class ConcreteEnum extends fw\Component\Core\Enum\EnumAbstract {
-     *     final public static function CONSTANT() { return self::getConstant(); }
+     * final class ConcreteEnum extends fw\Component\Core\Enum\EnumAbstract
+     * {
+     *
+     *     /** @return ConcreteEnum {@*}
+     *     final public static function CONSTANT()
+     *     {
+     *         return self::getConstant();
+     *     }
+     *
      * }
      * </code>
      *
      * @param string $enumType The name of the enumeration type.
-     * @param string $name     The name of the enumeration constant, which is the
-     *                         identifier used to declare it.
+     * @param string $name     The name of the enumeration constant, which is
+     *                         the identifier used to declare it.
      *
-     * @return EnumAbstract The enumeration constant of the specified enumeration
-     *                      type with the specified name.
-     * @throws \InvalidArgumentException If the specified enumeration type has no
-     *                                   enumeration constant with the specified
-     *                                   name, or the specified class name does not
-     *                                   represent an enumeration type.
+     * @return EnumAbstract The enumeration constant of the specified
+     *                      enumeration type with the specified name.
+     * @throws \InvalidArgumentException If the specified enumeration type has
+     *                                   no enumeration constant with the
+     *                                   specified name, or the specified class
+     *                                   name does not represent an enumeration
+     *                                   type.
      */
     final protected static function getConstant($enumType = null, $name = null)
     {
@@ -347,8 +367,8 @@ abstract class EnumAbstract
             $enumType = $backtrace[1]['class'];
             $name = $backtrace[1]['function'];
         } else {
-            // TODO Check the plausability of the specified parameters? Or leave it
-            // as it is as a "performance mode"?
+            // TODO Check the plausability of the specified parameters? Or leave
+            // it as it is as a "performance mode"?
             $enumType = (string) $enumType;
             $name = (string) $name;
             self::_exists($enumType, $name);
@@ -365,24 +385,24 @@ abstract class EnumAbstract
     }
 
     /**
-     * Checks whether the enumeration constant with the specified name exists in the
-     * specified enumeration type.
+     * Checks whether the enumeration constant with the specified name exists in
+     * the specified enumeration type.
      *
      * @param string $enumType The name of the enumeration type.
-     * @param string $name     The name of the enumeration constant, which is the
-     *                         identifier used to declare it.
+     * @param string $name     The name of the enumeration constant, which is
+     *                         the identifier used to declare it.
      *
      * @return void
-     * @throws \InvalidArgumentException If the specified enumeration type has no
-     *                                   enumeration constant with the specified
-     *                                   name.
+     * @throws \InvalidArgumentException If the specified enumeration type has
+     *                                   no enumeration constant with the
+     *                                   specified name.
      */
     private static function _exists($enumType, $name)
     {
         // TODO This is not 100% exact as the client can swap the name of two
-        // enumeration constants without raising an exception. Should be fixed in
-        // 1.0.0. Possible fix would be using the backtrace and comparing the caller
-        // with the specified name.
+        // enumeration constants without raising an exception. Should be fixed
+        // in 1.0.0. Possible fix would be using the backtrace and comparing the
+        // caller with the specified name.
         if (false === \method_exists($enumType, $name)) {
             throw new \InvalidArgumentException(
                 'No enumeration constant ' . self::_formatString($enumType, $name)
@@ -391,15 +411,15 @@ abstract class EnumAbstract
     }
 
     /**
-     * Returns the ordinal of the enumeration constant with the specified name in
-     * this enumeration type.
+     * Returns the ordinal of the enumeration constant with the specified name
+     * in this enumeration type.
      *
      * @param string $name The name of the enumeration constant, which is the
      *                     identifier used to declare it.
      *
-     * @return integer The ordinal of the enumeration constant (its position in the
-     *                 enumeration declaration, where the initial enumeration
-     *                 constant is assigned an ordinal of zero).
+     * @return integer The ordinal of the enumeration constant (its position in
+     *                 the enumeration declaration, where the initial
+     *                 enumeration constant is assigned an ordinal of zero).
      */
     private static function _retrieveOrdinalFor($name)
     {
@@ -419,11 +439,12 @@ abstract class EnumAbstract
     /**
      * Constructs an enumeration constant.
      *
-     * @param string  $name    The name of the enumeration constant, which is the
-     *                         identifier used to declare it.
-     * @param integer $ordinal The ordinal of the enumeration constant (its position
-     *                         in the enumeration declaration, where the initial
-     *                         enumeration constant is assigned an ordinal of zero).
+     * @param string  $name    The name of the enumeration constant, which is
+     *                         the identifier used to declare it.
+     * @param integer $ordinal The ordinal of the enumeration constant (its
+     *                         position in the enumeration declaration, where
+     *                         the initial enumeration constant is assigned an
+     *                         ordinal of zero).
      */
     private function __construct($name, $ordinal)
     {
@@ -438,8 +459,8 @@ abstract class EnumAbstract
     /**
      * Throws an {@link UnexpectedValueException}.
      *
-     * `__callStatic()` is triggered when invoking inaccessible methods in a static
-     * context.
+     * `__callStatic()` is triggered when invoking inaccessible methods in a
+     * static context.
      *
      * @param string $name The name of the enumeration constant, which is the
      *                     identifier used to declare it.
@@ -494,13 +515,15 @@ abstract class EnumAbstract
      */
     final public function __set($name, $value)
     {
-        throw new \BadMethodCallException('An enumeration constant is immutable');
+        throw new \BadMethodCallException(
+            'An enumeration constant is immutable'
+        );
     }
 
     /**
      * Returns the ordinal of this enumeration constant (its position in its
-     * enumeration declaration, where the initial constant is assigned an ordinal of
-     * zero).
+     * enumeration declaration, where the initial constant is assigned an
+     * ordinal of zero).
      *
      * @return integer The ordinal of this enumeration constant.
      * @see getOrdinal
@@ -512,8 +535,8 @@ abstract class EnumAbstract
     }
 
     /**
-     * Returns the name of this enumeration constant, in the format <tt><enumeration
-     * type>[<enumeration constant name>]</tt>.
+     * Returns the name of this enumeration constant, in the format
+     * <tt><enumeration_type>[<enumeration_constant_name>]</tt>.
      *
      * This method may be overridden, though it typically isn't necessary or
      * desirable. An enumeration type should override this method when a more
@@ -532,12 +555,12 @@ abstract class EnumAbstract
     }
 
     /**
-     * Returns the name of this enumeration constant, in the format <tt><enumeration
-     * type>[<enumeration constant name>]</tt>.
+     * Returns the name of this enumeration constant, in the format
+     * <tt><enumeration_type>[<enumeration_constant_name>]</tt>.
      *
      * @param string $enumType The name of the enumeration type.
-     * @param string $name     The name of the enumeration constant, which is the
-     *                         identifier used to declare it.
+     * @param string $name     The name of the enumeration constant, which is
+     *                         the identifier used to declare it.
      *
      * @return string The string representation.
      * @todo Is there a more useful string representation?
@@ -556,8 +579,8 @@ abstract class EnumAbstract
      * user-friendly name.**
      *
      * This method is designed primarily for use in specialized situations where
-     * correctness depends on getting the exact name which will not vary from release
-     * to release.
+     * correctness depends on getting the exact name which will not vary from
+     * release to release.
      *
      * @return string The name of this enumeration constant.
      */
@@ -568,8 +591,8 @@ abstract class EnumAbstract
 
     /**
      * Returns the ordinal of this enumeration constant (its position in its
-     * enumeration declaration, where the initial constant is assigned an ordinal of
-     * zero).
+     * enumeration declaration, where the initial constant is assigned an
+     * ordinal of zero).
      *
      * @return integer The ordinal of this enumeration constant.
      * @see __invoke
@@ -580,19 +603,19 @@ abstract class EnumAbstract
     }
 
     /**
-     * Compares this enumeration constant with the specified enumeration constant for
-     * order.
+     * Compares this enumeration constant with the specified enumeration
+     * constant for order.
      *
-     * Enumeration constants are only comparable to other enumeration constants of
-     * the same enumeration type. The natural order implemented by this method is the
-     * order in which the enumeration constants are declared.
+     * Enumeration constants are only comparable to other enumeration constants
+     * of the same enumeration type. The natural order implemented by this
+     * method is the order in which the enumeration constants are declared.
      *
      * @param EnumAbstract $other The other enumeration constant to compare this
      *                            enumeration constant to.
      *
      * @return integer A negative integer, zero, or a positive integer as this
-     *                 enumeration constant is less than, equal to, or greater than
-     *                 the specified enumeration constant.
+     *                 enumeration constant is less than, equal to, or greater
+     *                 than the specified enumeration constant.
      */
     public function compareTo(self $other)
     {
@@ -600,18 +623,19 @@ abstract class EnumAbstract
     }
 
     /**
-     * Compares an enumeration constant with another enumeration constant for order.
+     * Compares an enumeration constant with another enumeration constant for
+     * order.
      *
-     * Enumeration constants are only comparable to other enumeration constants of
-     * the same enumeration type. The natural order implemented by this method is the
-     * order in which the enumeration constants are declared.
+     * Enumeration constants are only comparable to other enumeration constants
+     * of the same enumeration type. The natural order implemented by this
+     * method is the order in which the enumeration constants are declared.
      *
      * @param EnumAbstract $first  The first enumeration constant to compare.
      * @param EnumAbstract $second The second enumeration constant to compare.
      *
-     * @return integer A negative integer, zero, or a positive integer as the first
-     *                 enumeration constant is less than, equal to, or greater than
-     *                 the second enumeration constant.
+     * @return integer A negative integer, zero, or a positive integer as the
+     *                 first enumeration constant is less than, equal to, or
+     *                 greater than the second enumeration constant.
      */
     final static public function compare(self $first, self $second)
     {
@@ -622,11 +646,11 @@ abstract class EnumAbstract
      * Determines whether this enumeration constants is equal to the specified
      * enumeration constant.
      *
-     * Two enumeration constants are considered equal if they have the same class
-     * names, the same names and the same ordinals.
+     * Two enumeration constants are considered equal if they have the same
+     * class names, the same names and the same ordinals.
      *
-     * **Most programmers should use the *identical comparison operator* (`===`) in
-     * preference to this method, as the comparison operator is faster.**
+     * **Most programmers should use the *identical comparison operator* (`===`)
+     * in preference to this method, as the comparison operator is faster.**
      *
      * <code>
      * ConcreteEnum::FIRST_CONSTANT() === ConcreteEnum::SECOND_CONSTANT()
@@ -635,8 +659,8 @@ abstract class EnumAbstract
      * @param EnumAbstract $other The enumeration constant to compare with this
      *                            enumeration constant.
      *
-     * @return boolean `true` if this enumeration constant is equal to the specified
-     *                 enumeration constant; `false` otherwise.
+     * @return boolean `true` if this enumeration constant is equal to the
+     *                 specified enumeration constant; `false` otherwise.
      * @deprecated Use the *identical comparison operator* (`===`) instead.
      */
     public final function equals(self $other)
@@ -647,11 +671,11 @@ abstract class EnumAbstract
     /**
      * Determines whether the specified enumeration constants are equal.
      *
-     * Two enumeration constants are considered equal if they have the same class
-     * names, the same names and the same ordinals.
+     * Two enumeration constants are considered equal if they have the same
+     * class names, the same names and the same ordinals.
      *
-     * **Most programmers should use the *identical comparison operator* (`===`) in
-     * preference to this method, as the comparison operator is faster.**
+     * **Most programmers should use the *identical comparison operator* (`===`)
+     * in preference to this method, as the comparison operator is faster.**
      *
      * <code>
      * ConcreteEnum::FIRST_CONSTANT() === ConcreteEnum::SECOND_CONSTANT()

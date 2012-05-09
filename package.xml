@@ -21,7 +21,7 @@
  !
  ! Author:    Florian Wolters <florian.wolters.85@googlemail.com>
  ! Copyright: 2011-2012 Florian Wolters
- ! License:   http://gnu.org/licenses/lgpl.txt GNU Lesser General Public License
+ ! License:   http://gnu.org/licenses/lgpl.txt GNU LGPL
  ! Version:   GIT: $Id$
  ! Link:      http://github.com/FlorianWolters/PHP-Component-Core-Enum
  !-->
@@ -107,9 +107,7 @@
                 <api>beta</api>
             </stability>
             <date>2012-04-14</date>
-            <license uri="http://gnu.org/licenses/lgpl.txt">
-                GNU Lesser General Public License
-            </license>
+            <license uri="http://gnu.org/licenses/lgpl.txt">GNU LGPL</license>
             <notes>
 * Updated to PHP version 5.4 (e.g. short array syntax).
 * Dropped support for PHP version 5.3 (or earlier).
@@ -130,9 +128,7 @@
                 <api>beta</api>
             </stability>
             <date>2012-04-23</date>
-            <license uri="http://gnu.org/licenses/lgpl.txt">
-                GNU Lesser General Public License
-            </license>
+            <license uri="http://gnu.org/licenses/lgpl.txt">GNU LGPL</license>
             <notes>Initial release.</notes>
         </release>
     </changelog>
