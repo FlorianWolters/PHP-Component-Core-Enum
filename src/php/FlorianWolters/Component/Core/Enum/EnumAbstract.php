@@ -22,9 +22,9 @@
  * @category   Component
  * @package    Core
  * @subpackage Enum
- * @author     Florian Wolters <florian.wolters.85@googlemail.com>
+ * @author     Florian Wolters <wolters.fl@gmail.com>
  * @copyright  2011-2012 Florian Wolters
- * @license    http://gnu.org/licenses/lgpl.txt GNU LGPL
+ * @license    http://gnu.org/licenses/lgpl.txt LGPL-3.0+
  * @version    GIT: $Id$
  * @link       http://github.com/FlorianWolters/PHP-Component-Core-Enum
  * @since      File available since Release 0.1.0
@@ -32,7 +32,7 @@
 
 declare(encoding = 'UTF-8');
 
-namespace fw\Component\Core\Enum;
+namespace FlorianWolters\Component\Core\Enum;
 
 /**
  * The {@link EnumAbstract} class is the abstract base class of all PHP language
@@ -49,7 +49,9 @@ namespace fw\Component\Core\Enum;
  * To use this class, it must be subclassed. For example:
  *
  * <code>
- * final class ColorEnum extends fw\Component\Core\Enum\EnumAbstract {
+ * final class ColorEnum
+ *     extends FlorianWolters\Component\Core\Enum\EnumAbstract
+ * {
  *     /** @return ColorEnum {@*}
  *     final public static function RED() { return self::getConstant(); }
  *     /** @return ColorEnum {@*}
@@ -74,8 +76,9 @@ namespace fw\Component\Core\Enum;
  *
  * <code>
  * // NOTE: The class ColorEnum declared above is final, change that to get this
- * // example to compile.
- * final class ExtraColorEnum extends ColorEnum {
+ * // example to run.
+ * final class ExtraColorEnum extends ColorEnum
+ * {
  *     /** @return ExtraColorEnum {@*}
  *     final public static function YELLOW() { return self::getConstant(); }
  * }
@@ -87,7 +90,8 @@ namespace fw\Component\Core\Enum;
  *
  * <code>
  * abstract class ArithmeticOperationEnum
- *         extends fw\Component\Core\Enum\EnumAbstract {
+ *     extends FlorianWolters\Component\Core\Enum\EnumAbstract
+ * {
  *     /** @return ArithmeticOperationEnum {@*}
  *     final public static function PLUS() {
  *         return static::getConstant(
@@ -104,13 +108,17 @@ namespace fw\Component\Core\Enum;
  *     abstract public function evaluate($first, $second);
  * }
  *
- * final class PlusOperationEnum extends ArithmeticOperationEnum {
+ * final class PlusOperationEnum extends ArithmeticOperationEnum
+ * {
+ *     /** @return integer|float {@*}
  *     public function evaluate($first, $second) {
  *         return $first + $second;
  *     }
  * }
  *
- * final class MinusOperationEnum extends ArithmeticOperationEnum {
+ * final class MinusOperationEnum extends ArithmeticOperationEnum
+ * {
+ *     /** @return integer|float {@*}
  *     public function evaluate($first, $second) {
  *         return $first - $second;
  *     }
@@ -121,8 +129,7 @@ namespace fw\Component\Core\Enum;
  *
  * <code>
  * $operations = [
- *     ArithmeticOperationEnum::PLUS(),
- *     ArithmeticOperationEnum::MINUS()
+ *     ArithmeticOperationEnum::PLUS(), ArithmeticOperationEnum::MINUS()
  * ];
  *
  * foreach ($operations as $operation) {
@@ -133,13 +140,12 @@ namespace fw\Component\Core\Enum;
  * @category   Component
  * @package    Core
  * @subpackage Enum
- * @author     Florian Wolters <florian.wolters.85@googlemail.com>
+ * @author     Florian Wolters <wolters.fl@gmail.com>
  * @copyright  2011-2012 Florian Wolters
- * @license    http://gnu.org/licenses/lgpl.txt GNU LGPL
+ * @license    http://gnu.org/licenses/lgpl.txt LGPL-3.0+
  * @version    Release: @package_version@
  * @link       http://github.com/FlorianWolters/PHP-Component-Core-Enum
  * @since      Class available since Release 0.1.0
- * @todo       Improve the *Functional enumerations* example above (bad design).
  */
 abstract class EnumAbstract
 {
@@ -147,8 +153,9 @@ abstract class EnumAbstract
     /**
      * The created enumeration constants.
      *
-     * This is a two dimensional array containing all enumeration constants by the
-     * class name of the enumeration type and the name of the enumeration constant.
+     * This is a two dimensional array containing all enumeration constants by
+     * the class name of the enumeration type and the name of the enumeration
+     * constant.
      *
      * @var array
      */
@@ -157,7 +164,8 @@ abstract class EnumAbstract
     /**
      * The name of this enumeration constant.
      *
-     * The name is the identifier which is used to declare the enumeration constant.
+     * The name is the identifier which is used to declare the enumeration
+     * constant.
      *
      * @var string
      * @see getName, __construct
@@ -167,8 +175,8 @@ abstract class EnumAbstract
     /**
      * The ordinal of this enumeration constant.
      *
-     * The ordinal is the position in the enumeration declaration, where the initial
-     * constant is assigned an ordinal of zero.
+     * The ordinal is the position in the enumeration declaration, where the
+     * initial constant is assigned an ordinal of zero.
      *
      * @var integer
      * @see getOrdinal, __construct
@@ -233,8 +241,9 @@ abstract class EnumAbstract
 
         $reflectedClass = new \ReflectionClass($enumType);
 
-        // The argument $filter of the method getMethods uses a logical OR. Therefore
-        // we have to return all methods for each filter and calculate the intersect.
+        // The argument $filter of the method getMethods uses a logical OR.
+        // Therefore we have to return all methods for each filter and calculate
+        // the intersect.
 
         $finalMethods = $reflectedClass->getMethods(
             \ReflectionMethod::IS_FINAL
@@ -268,7 +277,8 @@ abstract class EnumAbstract
      * Returns an array containing the enumeration constants of this enumeration
      * type, in the order they are declared.
      *
-     * This method may be used to iterate over the enumeration constants as follows:
+     * This method may be used to iterate over the enumeration constants as
+     * follows:
      *
      * <code>
      * foreach (ConcreteEnum::values() as $constant) {
@@ -325,23 +335,22 @@ abstract class EnumAbstract
     }
 
     /**
-     * Creates and returns an enumeration constant for the specified enumeration type
-     * with the specified name.
+     * Creates and returns an enumeration constant for the specified enumeration
+     * type with the specified name.
      *
      * This method implements the *Lazy Load* implementation pattern.
      *
      * Use this method as follows in a subclass of this class:
      *
      * <code>
-     * final class ConcreteEnum extends fw\Component\Core\Enum\EnumAbstract
+     * final class ConcreteEnum
+     *     extends FlorianWolters\Component\Core\Enum\EnumAbstract
      * {
-     *
      *     /** @return ConcreteEnum {@*}
      *     final public static function CONSTANT()
      *     {
      *         return self::getConstant();
      *     }
-     *
      * }
      * </code>
      *
@@ -405,7 +414,7 @@ abstract class EnumAbstract
         // caller with the specified name.
         if (false === \method_exists($enumType, $name)) {
             throw new \InvalidArgumentException(
-                'No enumeration constant ' . self::_formatString($enumType, $name)
+                'No enumeration constant ' . $enumType . '::' .  $name . '()'
             );
         }
     }
@@ -494,7 +503,6 @@ abstract class EnumAbstract
     private function __clone()
     {
     }
-
     // @codeCoverageIgnoreEnd
 
     /**
@@ -548,26 +556,10 @@ abstract class EnumAbstract
     public function __toString()
     {
         if (null === $this->_toString) {
-            $this->_toString = self::_formatString($this->_className, $this->_name);
+            $this->_toString = $this->_name;
         }
 
         return $this->_toString;
-    }
-
-    /**
-     * Returns the name of this enumeration constant, in the format
-     * <tt><enumeration_type>[<enumeration_constant_name>]</tt>.
-     *
-     * @param string $enumType The name of the enumeration type.
-     * @param string $name     The name of the enumeration constant, which is
-     *                         the identifier used to declare it.
-     *
-     * @return string The string representation.
-     * @todo Is there a more useful string representation?
-     */
-    static private function _formatString($enumType, $name)
-    {
-        return $enumType . '[' . $name . ']';
     }
 
     /**

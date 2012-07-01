@@ -22,9 +22,9 @@
  * @category   Component
  * @package    Core
  * @subpackage Enum
- * @author     Florian Wolters <florian.wolters.85@googlemail.com>
+ * @author     Florian Wolters <wolters.fl@gmail.com>
  * @copyright  2011-2012 Florian Wolters
- * @license    http://gnu.org/licenses/lgpl.txt GNU LGPL
+ * @license    http://gnu.org/licenses/lgpl.txt LGPL-3.0+
  * @version    GIT: $Id$
  * @link       http://github.com/FlorianWolters/PHP-Component-Core-Enum
  * @since      File available since Release 0.1.0
@@ -32,7 +32,7 @@
 
 declare(encoding = 'UTF-8');
 
-namespace fw\Component\Core\Enum;
+namespace FlorianWolters\Component\Core\Enum;
 
 /**
  * The {@link EnumUtils} class is an utility class for accessing and
@@ -41,9 +41,9 @@ namespace fw\Component\Core\Enum;
  * @category   Component
  * @package    Core
  * @subpackage Enum
- * @author     Florian Wolters <florian.wolters.85@googlemail.com>
+ * @author     Florian Wolters <wolters.fl@gmail.com>
  * @copyright  2011-2012 Florian Wolters
- * @license    http://gnu.org/licenses/lgpl.txt GNU LGPL
+ * @license    http://gnu.org/licenses/lgpl.txt LGPL-3.0+
  * @version    Release: @package_version@
  * @link       http://github.com/FlorianWolters/PHP-Component-Core-Enum
  * @since      Class available since Release 0.1.0
@@ -287,8 +287,6 @@ class EnumUtils
         return $result;
     }
 
-    // @codeCoverageIgnoreStart
-
     /**
      * Private default constructor.
      *
@@ -296,8 +294,8 @@ class EnumUtils
      */
     private function __construct()
     {
+        // @codeCoverageIgnoreStart
     }
-
     // @codeCoverageIgnoreEnd
 
 }
