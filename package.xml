@@ -19,9 +19,9 @@
  ! You should have received a copy of the GNU Lesser General Public License
  ! along with fwComponents.  If not, see http://gnu.org/licenses/lgpl.txt.
  !
- ! Author:    Florian Wolters <florian.wolters.85@googlemail.com>
+ ! Author:    Florian Wolters <wolters.fl@gmail.com>
  ! Copyright: 2011-2012 Florian Wolters
- ! License:   http://gnu.org/licenses/lgpl.txt GNU LGPL
+ ! License:   http://gnu.org/licenses/lgpl.txt LGPL-3.0+
  ! Version:   GIT: $Id$
  ! Link:      http://github.com/FlorianWolters/PHP-Component-Core-Enum
  !-->
@@ -37,8 +37,7 @@
     <name>${project.name}</name>
     <channel>${project.channel}</channel>
     <summary>${project.summary}</summary>
-    <description>${project.description}
-    </description>
+    <description>${project.description}</description>
 
     <lead>
         <name>${project.author.name}</name>
@@ -60,17 +59,13 @@
         <api>${project.apistability}</api>
     </stability>
 
-    <license uri="${project.license.uri}">
-        ${project.license.name}
-    </license>
+    <license uri="${project.license.uri}">${project.license.name}</license>
 
-    <notes>${project.notes}
-    </notes>
+    <notes>${project.notes}</notes>
 
     <contents>
         <dir baseinstalldir="/" name="/">
-            ${contents}
-        </dir>
+${contents}</dir>
     </contents>
 
     <dependencies>
@@ -85,18 +80,32 @@
                 <min>1.9.4</min>
             </pearinstaller>
 
-            <package>
-                <name>ClassLoader</name>
-                <channel>pear.symfony.com</channel>
-                <min>2.0.12</min>
-            </package>
-
         </required>
     </dependencies>
 
     <phprelease />
 
     <changelog>
+        <release>
+            <version>
+                <release>0.3.0</release>
+                <api>0.3</api>
+            </version>
+            <stability>
+                <release>beta</release>
+                <api>beta</api>
+            </stability>
+            <date>2012-07-01</date>
+            <license uri="http://gnu.org/licenses/lgpl.txt">LGPL-3.0+</license>
+            <notes>
+* Changed vendor from "fw" to "FlorianWolters".
+* Changed default "__toString()" implementation, so that it matched the return value of "name()" (as in Java).
+* Added Composer support.
+* Fixed and unified author and license information.
+* Fixes in the comments.
+            </notes>
+        </release>
+
         <release>
             <version>
                 <release>0.2.0</release>
@@ -107,7 +116,7 @@
                 <api>beta</api>
             </stability>
             <date>2012-04-14</date>
-            <license uri="http://gnu.org/licenses/lgpl.txt">GNU LGPL</license>
+            <license uri="http://gnu.org/licenses/lgpl.txt">LGPL-3.0+</license>
             <notes>
 * Updated to PHP version 5.4 (e.g. short array syntax).
 * Dropped support for PHP version 5.3 (or earlier).
@@ -128,7 +137,7 @@
                 <api>beta</api>
             </stability>
             <date>2012-04-23</date>
-            <license uri="http://gnu.org/licenses/lgpl.txt">GNU LGPL</license>
+            <license uri="http://gnu.org/licenses/lgpl.txt">LGPL-3.0+</license>
             <notes>Initial release.</notes>
         </release>
     </changelog>
