@@ -92,7 +92,7 @@ ${contents}</dir>
                 <api>0.3</api>
             </version>
             <stability>
-                <release>beta</release>
+                <release>stable</release>
                 <api>beta</api>
             </stability>
             <date>2012-07-01</date>
@@ -112,7 +112,7 @@ ${contents}</dir>
                 <api>0.2</api>
             </version>
             <stability>
-                <release>beta</release>
+                <release>stable</release>
                 <api>beta</api>
             </stability>
             <date>2012-04-14</date>
@@ -133,7 +133,7 @@ ${contents}</dir>
                 <api>0.1</api>
             </version>
             <stability>
-                <release>beta</release>
+                <release>stable</release>
                 <api>beta</api>
             </stability>
             <date>2012-04-23</date>
