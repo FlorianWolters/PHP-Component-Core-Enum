@@ -27,11 +27,11 @@
  ! You should have received a copy of the GNU Lesser General Public License
  ! along with fwComponents.  If not, see http://gnu.org/licenses/lgpl.txt.
  !
- ! Author:    Florian Wolters <florian.wolters.85@googlemail.com>
+ ! Author:    Florian Wolters <wolters.fl@gmail.com>
  ! Copyright: 2011-2012 Florian Wolters
- ! License:   http://gnu.org/licenses/lgpl.txt GNU Lesser General Public License
+ ! License:   http://gnu.org/licenses/lgpl.txt LGPL-3.0+
  ! Version:   GIT: $Id$
- ! Link:      http://github.com/FlorianWolters/PHPUnit-configuration
+ ! Link:      http://github.com/FlorianWolters/PHP-Component-Core-Enum
  !-->
 
 <!--
@@ -40,7 +40,7 @@
  !-->
 <phpunit backupGlobals="false"
          backupStaticAttributes="false"
-         bootstrap="phpunit.bootstrap.php"
+         bootstrap="vendor/autoload.php"
          cacheTokens="true"
          colors="true"
          convertErrorsToExceptions="true"
@@ -106,28 +106,6 @@
         <log type="testdox-html" target="review/phpunit/testdox.html" />
         <log type="testdox-text" target="review/phpunit/testdox.txt" />
     </logging>
-
-    <!--
-     ! The <selenium> element and its <browser> children can be used configure a
-     ! list of Selenium RC servers.
-     !-->
-    <selenium>
-        <browser name="Mozilla Firefox on Windows 7"
-                 browser="*firefox"
-                 host="127.0.0.1"
-                 port="4444"
-                 timeout="30" />
-        <browser name="Google Chrome on Windows 7"
-                 browser="*chrome"
-                 host="127.0.0.1"
-                 port="4444"
-                 timeout="30" />
-        <browser name="Internet Explorer on Windows 7"
-                 browser="*iexplore"
-                 host="127.0.0.1"
-                 port="4444"
-                 timeout="30" />
-    </selenium>
 
     <!--
      ! The <php> element and its children can be used to configure PHP settings,
