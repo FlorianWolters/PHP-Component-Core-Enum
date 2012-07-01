@@ -4,10 +4,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="generator" content="ApiGen 2.6.1" />
 
-	<title>Class EnumUtils | Enum</title>
+	<title>Class EnumUtils | FlorianWolters\Component\Core\Enum</title>
 
 	<script type="text/javascript" src="resources/combined.js?144019575"></script>
-	<script type="text/javascript" src="elementlist.js?3334275698"></script>
+	<script type="text/javascript" src="elementlist.js?2274371059"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1532301413" />
 
 	<script type="text/javascript">
@@ -30,19 +30,8 @@
 
 
 		<div id="groups">
-			<h3>Packages</h3>
-			<ul>
-				<li class="active"><a href="package-Core.html">Core<span></span></a>
-						<ul>
-				<li class="active"><a href="package-Core.Enum.html">Enum</a>
-						</li>
-							</ul></li>
-				<li><a href="package-PHP.html">PHP</a>
-						</li>
-			</ul>
 		</div>
 
-		<hr />
 
 
 		<div id="elements">
@@ -76,9 +65,6 @@
 			<li>
 				<a href="index.html" title="Overview"><span>Overview</span></a>
 			</li>
-			<li>
-				<a href="package-Core.Enum.html" title="Summary of Core\Enum"><span>Package</span></a>
-			</li>
 			<li class="active">
 <span>Class</span>			</li>
 		</ul>
@@ -89,10 +75,13 @@
 			<li>
 				<a href="deprecated.html" title="List of deprecated elements"><span>Deprecated</span></a>
 			</li>
+			<li>
+				<a href="todo.html" title="Todo list"><span>Todo</span></a>
+			</li>
 		</ul>
 		<ul>
 			<li>
-				<a href="enum-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
+				<a href="florianwolters-component-core-enum-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
 			</li>
 		</ul>
 	</div>
@@ -120,24 +109,24 @@ manipulating enumerations.</p>
 		
 		
 		
-		<b>Package:</b> <a href="package-Core.html">Core</a>\<a href="package-Core.Enum.html">Enum</a><br />
+		<b>Package:</b> Core\Enum<br />
 
 				<b>Category:</b>
 				Component<br />
 				<b>Copyright:</b>
 				2011-2012 Florian Wolters<br />
 				<b>License:</b>
-				<a href="http://gnu.org/licenses/lgpl.txt">GNU Lesser General Public License</a><br />
+				<a href="http://gnu.org/licenses/lgpl.txt">LGPL-3.0+</a><br />
 				<b>Author:</b>
 				Florian Wolters &lt;<a
-href="mailto:florian.wolters.85&#64;googlemail.com">florian.wolters.85&#64;<!---->googlemail.com</a>&gt;<br />
+href="mailto:wolters.fl&#64;gmail.com">wolters.fl&#64;<!---->gmail.com</a>&gt;<br />
 				<b>Version:</b>
 				Release: @package_version@<br />
 				<b>Since:</b>
 				Class available since Release 0.1.0<br />
 				<b>Link:</b>
 				<a href="http://github.com/FlorianWolters/PHP-Component-Core-Enum">http://github.com/FlorianWolters/PHP-Component-Core-Enum</a><br />
-		<b>Located at</b> <a href="source-class-EnumUtils.html#36" title="Go to source code">fw/Component/Core/Enum/EnumUtils.php</a><br />
+		<b>Located at</b> <a href="source-class-EnumUtils.html#37" title="Go to source code">FlorianWolters/Component/Core/Enum/EnumUtils.php</a><br />
 	</div>
 
 
@@ -154,7 +143,7 @@ href="mailto:florian.wolters.85&#64;googlemail.com">florian.wolters.85&#64;<!---
 
 		<td class="name"><div>
 		<a class="anchor" href="#_names">#</a>
-		<code><a href="source-class-EnumUtils.html#53" title="Go to source code">names</a>( <span>string <var>$enumType</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-EnumUtils.html#54" title="Go to source code">names</a>( <span>string <var>$enumType</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -201,7 +190,7 @@ enumeration type, in the order they are declared.<br />
 
 				<h4>Throws</h4>
 				<div class="list">
-					<code><code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code></code><br>If the specified class name does not represent an enumeration type.<br />
+					<code>InvalidArgumentException</code><br>If the specified class name does not represent an enumeration type.<br />
 				</div>
 
 
@@ -219,7 +208,7 @@ enumeration type, in the order they are declared.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_values">#</a>
-		<code><a href="source-class-EnumUtils.html#84" title="Go to source code">values</a>( <span>string <var>$enumType</var></span> )</code>
+		<code><a href="source-class-EnumUtils.html#86" title="Go to source code">values</a>( <span>string <var>$enumType</var></span> )</code>
 
 		<div class="description short">
 			
@@ -268,7 +257,7 @@ in the order they are declared.<br />
 
 				<h4>Throws</h4>
 				<div class="list">
-					<code><code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code></code><br>If the specified class name does not represent an enumeration type.<br />
+					<code>InvalidArgumentException</code><br>If the specified class name does not represent an enumeration type.<br />
 				</div>
 
 
@@ -286,7 +275,7 @@ in the order they are declared.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_isEnumType">#</a>
-		<code><a href="source-class-EnumUtils.html#134" title="Go to source code">isEnumType</a>( <span>string <var>$className</var></span> )</code>
+		<code><a href="source-class-EnumUtils.html#139" title="Go to source code">isEnumType</a>( <span>string <var>$className</var></span> )</code>
 
 		<div class="description short">
 			
@@ -328,7 +317,7 @@ in the order they are declared.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_valueOf">#</a>
-		<code><a href="source-class-EnumUtils.html#147" title="Go to source code">valueOf</a>( <span>string <var>$enumType</var></span>, <span>string <var>$name</var></span> )</code>
+		<code><a href="source-class-EnumUtils.html#152" title="Go to source code">valueOf</a>( <span>string <var>$enumType</var></span>, <span>string <var>$name</var></span> )</code>
 
 		<div class="description short">
 			
@@ -364,7 +353,7 @@ name on success; <code>null</code> on failure.<br />
 
 				<h4>Throws</h4>
 				<div class="list">
-					<code><code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code></code><br>If the specified enumeration type has no enumeration constant with the specified
+					<code>InvalidArgumentException</code><br>If the specified enumeration type has no enumeration constant with the specified
 name, or the specified class name does not represent an enumeration type.<br />
 				</div>
 
@@ -383,7 +372,7 @@ name, or the specified class name does not represent an enumeration type.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getNameForOrdinal">#</a>
-		<code><a href="source-class-EnumUtils.html#173" title="Go to source code">getNameForOrdinal</a>( <span>string <var>$enumType</var></span>, <span>integer <var>$ordinal</var></span> )</code>
+		<code><a href="source-class-EnumUtils.html#181" title="Go to source code">getNameForOrdinal</a>( <span>string <var>$enumType</var></span>, <span>integer <var>$ordinal</var></span> )</code>
 
 		<div class="description short">
 			
@@ -430,7 +419,7 @@ specified ordinal on success; <code>null</code> on failure.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getOrdinalForName">#</a>
-		<code><a href="source-class-EnumUtils.html#200" title="Go to source code">getOrdinalForName</a>( <span>string <var>$enumType</var></span>, <span>string <var>$name</var></span> )</code>
+		<code><a href="source-class-EnumUtils.html#210" title="Go to source code">getOrdinalForName</a>( <span>string <var>$enumType</var></span>, <span>string <var>$name</var></span> )</code>
 
 		<div class="description short">
 			
@@ -477,7 +466,7 @@ the specified ordinal on success; <code>null</code> on failure.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_isDefinedName">#</a>
-		<code><a href="source-class-EnumUtils.html#227" title="Go to source code">isDefinedName</a>( <span>string <var>$enumType</var></span>, <span>string <var>$name</var></span> )</code>
+		<code><a href="source-class-EnumUtils.html#237" title="Go to source code">isDefinedName</a>( <span>string <var>$enumType</var></span>, <span>string <var>$name</var></span> )</code>
 
 		<div class="description short">
 			
@@ -523,7 +512,7 @@ the specified enumeration type; <code>false</code> otherwise.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_isDefinedOrdinal">#</a>
-		<code><a href="source-class-EnumUtils.html#252" title="Go to source code">isDefinedOrdinal</a>( <span>string <var>$enumType</var></span>, <span>integer <var>$ordinal</var></span> )</code>
+		<code><a href="source-class-EnumUtils.html#263" title="Go to source code">isDefinedOrdinal</a>( <span>string <var>$enumType</var></span>, <span>integer <var>$ordinal</var></span> )</code>
 
 		<div class="description short">
 			
@@ -572,7 +561,7 @@ in the specified enumeration type; <code>false</code> otherwise.<br />
 </div>
 
 	<div id="footer">
-		Enum API documentation generated by <a href="http://apigen.org">ApiGen 2.6.1</a>
+		FlorianWolters\Component\Core\Enum API documentation generated by <a href="http://apigen.org">ApiGen 2.6.1</a>
 	</div>
 </div>
 </div>

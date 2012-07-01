@@ -4,10 +4,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="generator" content="ApiGen 2.6.1" />
 
-	<title>Class EnumAbstract | Enum</title>
+	<title>Class EnumAbstract | FlorianWolters\Component\Core\Enum</title>
 
 	<script type="text/javascript" src="resources/combined.js?144019575"></script>
-	<script type="text/javascript" src="elementlist.js?3334275698"></script>
+	<script type="text/javascript" src="elementlist.js?2274371059"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?1532301413" />
 
 	<script type="text/javascript">
@@ -30,19 +30,8 @@
 
 
 		<div id="groups">
-			<h3>Packages</h3>
-			<ul>
-				<li class="active"><a href="package-Core.html">Core<span></span></a>
-						<ul>
-				<li class="active"><a href="package-Core.Enum.html">Enum</a>
-						</li>
-							</ul></li>
-				<li><a href="package-PHP.html">PHP</a>
-						</li>
-			</ul>
 		</div>
 
-		<hr />
 
 
 		<div id="elements">
@@ -76,9 +65,6 @@
 			<li>
 				<a href="index.html" title="Overview"><span>Overview</span></a>
 			</li>
-			<li>
-				<a href="package-Core.Enum.html" title="Summary of Core\Enum"><span>Package</span></a>
-			</li>
 			<li class="active">
 <span>Class</span>			</li>
 		</ul>
@@ -89,10 +75,13 @@
 			<li>
 				<a href="deprecated.html" title="List of deprecated elements"><span>Deprecated</span></a>
 			</li>
+			<li>
+				<a href="todo.html" title="Todo list"><span>Todo</span></a>
+			</li>
 		</ul>
 		<ul>
 			<li>
-				<a href="enum-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
+				<a href="florianwolters-component-core-enum-api-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
 			</li>
 		</ul>
 	</div>
@@ -117,8 +106,10 @@ PHP.</p>
 
 <pre>
 <span class="php-keyword1">final</span> <span
-class="php-keyword1">class</span> ColorEnum <span
-class="php-keyword1">extends</span> fw\Component\Core\Enum\EnumAbstract {
+class="php-keyword1">class</span> ColorEnum
+    <span
+class="php-keyword1">extends</span> FlorianWolters\Component\Core\Enum\EnumAbstract
+{
     <span
 class="php-comment">/** @return ColorEnum */</span>
     <span
@@ -160,11 +151,12 @@ superclass and the subclass.</p>
 <span
 class="php-comment">// NOTE: The class ColorEnum declared above is final, change that to get this</span>
 <span
-class="php-comment">// example to compile.</span>
+class="php-comment">// example to run.</span>
 <span
 class="php-keyword1">final</span> <span
 class="php-keyword1">class</span> ExtraColorEnum <span
-class="php-keyword1">extends</span> ColorEnum {
+class="php-keyword1">extends</span> ColorEnum
+{
     <span
 class="php-comment">/** @return ExtraColorEnum */</span>
     <span
@@ -181,8 +173,10 @@ class="php-keyword1">return</span> self::getConstant(); }
 
 <pre>
 <span class="php-keyword1">abstract</span> <span
-class="php-keyword1">class</span> ArithmeticOperationEnum <span
-class="php-keyword1">extends</span> fw\Component\Core\Enum\EnumAbstract {
+class="php-keyword1">class</span> ArithmeticOperationEnum
+    <span
+class="php-keyword1">extends</span> FlorianWolters\Component\Core\Enum\EnumAbstract
+{
     <span
 class="php-comment">/** @return ArithmeticOperationEnum */</span>
     <span
@@ -221,7 +215,10 @@ class="php-var">$first</span>, <span class="php-var">$second</span>);
 <span
 class="php-keyword1">final</span> <span
 class="php-keyword1">class</span> PlusOperationEnum <span
-class="php-keyword1">extends</span> ArithmeticOperationEnum {
+class="php-keyword1">extends</span> ArithmeticOperationEnum
+{
+    <span
+class="php-comment">/** @return integer|float */</span>
     <span
 class="php-keyword1">public</span> <span
 class="php-keyword1">function</span> evaluate(<span
@@ -236,7 +233,10 @@ class="php-var">$second</span>;
 <span
 class="php-keyword1">final</span> <span
 class="php-keyword1">class</span> MinusOperationEnum <span
-class="php-keyword1">extends</span> ArithmeticOperationEnum {
+class="php-keyword1">extends</span> ArithmeticOperationEnum
+{
+    <span
+class="php-comment">/** @return integer|float */</span>
     <span
 class="php-keyword1">public</span> <span
 class="php-keyword1">function</span> evaluate(<span
@@ -253,7 +253,10 @@ class="php-var">$second</span>;
 
 <pre>
 <span
-class="php-var">$operations</span> = [ArithmeticOperationEnum::PLUS(), ArithmeticOperationEnum::MINUS()];
+class="php-var">$operations</span> = [
+    ArithmeticOperationEnum::PLUS(), ArithmeticOperationEnum::MINUS()
+];
+
 <span
 class="php-keyword1">foreach</span> (<span
 class="php-var">$operations</span> <span class="php-keyword1">as</span> <span
@@ -279,24 +282,24 @@ class="php-num">1</span>, <span class="php-num">1</span>), \PHP_EOL;
 		<b>Abstract</b><br />
 		
 		
-		<b>Package:</b> <a href="package-Core.html">Core</a>\<a href="package-Core.Enum.html">Enum</a><br />
+		<b>Package:</b> Core\Enum<br />
 
 				<b>Category:</b>
 				Component<br />
 				<b>Copyright:</b>
 				2011-2012 Florian Wolters<br />
 				<b>License:</b>
-				<a href="http://gnu.org/licenses/lgpl.txt">GNU Lesser General Public License</a><br />
+				<a href="http://gnu.org/licenses/lgpl.txt">LGPL-3.0+</a><br />
 				<b>Author:</b>
 				Florian Wolters &lt;<a
-href="mailto:florian.wolters.85&#64;googlemail.com">florian.wolters.85&#64;<!---->googlemail.com</a>&gt;<br />
+href="mailto:wolters.fl&#64;gmail.com">wolters.fl&#64;<!---->gmail.com</a>&gt;<br />
 				<b>Version:</b>
 				Release: @package_version@<br />
 				<b>Since:</b>
 				Class available since Release 0.1.0<br />
 				<b>Link:</b>
 				<a href="http://github.com/FlorianWolters/PHP-Component-Core-Enum">http://github.com/FlorianWolters/PHP-Component-Core-Enum</a><br />
-		<b>Located at</b> <a href="source-class-EnumAbstract.html#36" title="Go to source code">fw/Component/Core/Enum/EnumAbstract.php</a><br />
+		<b>Located at</b> <a href="source-class-EnumAbstract.html#37" title="Go to source code">FlorianWolters/Component/Core/Enum/EnumAbstract.php</a><br />
 	</div>
 
 
@@ -313,7 +316,7 @@ href="mailto:florian.wolters.85&#64;googlemail.com">florian.wolters.85&#64;<!---
 
 		<td class="name"><div>
 		<a class="anchor" href="#_names">#</a>
-		<code><a href="source-class-EnumAbstract.html#202" title="Go to source code">names</a>( )</code>
+		<code><a href="source-class-EnumAbstract.html#216" title="Go to source code">names</a>( )</code>
 
 		<div class="description short">
 			
@@ -364,7 +367,7 @@ order they are declared.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_values">#</a>
-		<code><a href="source-class-EnumAbstract.html#255" title="Go to source code">values</a>( )</code>
+		<code><a href="source-class-EnumAbstract.html#276" title="Go to source code">values</a>( )</code>
 
 		<div class="description short">
 			
@@ -418,7 +421,7 @@ order they are declared.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_valueOf">#</a>
-		<code><a href="source-class-EnumAbstract.html#283" title="Go to source code">valueOf</a>( <span>string <var>$name</var></span> )</code>
+		<code><a href="source-class-EnumAbstract.html#305" title="Go to source code">valueOf</a>( <span>string <var>$name</var></span> )</code>
 
 		<div class="description short">
 			
@@ -466,7 +469,7 @@ on failure.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getConstant">#</a>
-		<code><a href="source-class-EnumAbstract.html#315" title="Go to source code">getConstant</a>( <span>string <var>$enumType</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$name</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-EnumAbstract.html#337" title="Go to source code">getConstant</a>( <span>string <var>$enumType</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$name</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -486,14 +489,21 @@ type with the specified name.</p>
 
 <pre>
 <span class="php-keyword1">final</span> <span
-class="php-keyword1">class</span> ConcreteEnum <span
-class="php-keyword1">extends</span> fw\Component\Core\Enum\EnumAbstract {
+class="php-keyword1">class</span> ConcreteEnum
+    <span
+class="php-keyword1">extends</span> FlorianWolters\Component\Core\Enum\EnumAbstract
+{
+    <span
+class="php-comment">/** @return ConcreteEnum */</span>
     <span
 class="php-keyword1">final</span> <span class="php-keyword1">public</span> <span
 class="php-keyword1">static</span> <span
 class="php-keyword1">function</span> <span
-class="php-keyword2">CONSTANT</span>() { <span
-class="php-keyword1">return</span> self::getConstant(); }
+class="php-keyword2">CONSTANT</span>()
+    {
+        <span
+class="php-keyword1">return</span> self::getConstant();
+    }
 }
 </pre>
 
@@ -516,7 +526,7 @@ name.<br />
 
 				<h4>Throws</h4>
 				<div class="list">
-					<code><code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code></code><br>If the specified enumeration type has no enumeration constant with the specified
+					<code>InvalidArgumentException</code><br>If the specified enumeration type has no enumeration constant with the specified
 name, or the specified class name does not represent an enumeration type.<br />
 				</div>
 
@@ -535,7 +545,7 @@ name, or the specified class name does not represent an enumeration type.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#___invoke">#</a>
-		<code><a href="source-class-EnumAbstract.html#500" title="Go to source code">__invoke</a>( )</code>
+		<code><a href="source-class-EnumAbstract.html#531" title="Go to source code">__invoke</a>( )</code>
 
 		<div class="description short">
 			
@@ -581,19 +591,19 @@ href="http://php.net/language.oop5.magic#language.oop5.magic.invoke">http://php.
 
 		<td class="name"><div>
 		<a class="anchor" href="#___toString">#</a>
-		<code><a href="source-class-EnumAbstract.html#514" title="Go to source code">__toString</a>( )</code>
+		<code><a href="source-class-EnumAbstract.html#545" title="Go to source code">__toString</a>( )</code>
 
 		<div class="description short">
 			
 <p>Returns the name of this enumeration constant, in the format
-<tt>&lt;enumeration type&gt;[&lt;enumeration constant name&gt;]</tt>.</p>
+&lt;tt&gt;&lt;enumeration_type&gt;[&lt;enumeration_constant_name&gt;]&lt;/tt&gt;.</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
 <p>Returns the name of this enumeration constant, in the format
-<tt>&lt;enumeration type&gt;[&lt;enumeration constant name&gt;]</tt>.</p>
+&lt;tt&gt;&lt;enumeration_type&gt;[&lt;enumeration_constant_name&gt;]&lt;/tt&gt;.</p>
 
 <p>This method may be overridden, though it typically isn't necessary or
 desirable. An enumeration type should override this method when a more
@@ -628,7 +638,7 @@ href="http://php.net/language.oop5.magic#language.oop5.magic.tostring">http://ph
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getName">#</a>
-		<code><a href="source-class-EnumAbstract.html#550" title="Go to source code">getName</a>( )</code>
+		<code><a href="source-class-EnumAbstract.html#565" title="Go to source code">getName</a>( )</code>
 
 		<div class="description short">
 			
@@ -674,7 +684,7 @@ to release.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getOrdinal">#</a>
-		<code><a href="source-class-EnumAbstract.html#569" title="Go to source code">getOrdinal</a>( )</code>
+		<code><a href="source-class-EnumAbstract.html#584" title="Go to source code">getOrdinal</a>( )</code>
 
 		<div class="description short">
 			
@@ -718,7 +728,7 @@ zero).</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_compareTo">#</a>
-		<code><a href="source-class-EnumAbstract.html#582" title="Go to source code">compareTo</a>( <span><code><a href="class-EnumAbstract.html">EnumAbstract</a></code> <var>$other</var></span> )</code>
+		<code><a href="source-class-EnumAbstract.html#597" title="Go to source code">compareTo</a>( <span><code><a href="class-EnumAbstract.html">EnumAbstract</a></code> <var>$other</var></span> )</code>
 
 		<div class="description short">
 			
@@ -766,7 +776,7 @@ less than, equal to, or greater than the specified enumeration constant.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_compare">#</a>
-		<code><a href="source-class-EnumAbstract.html#602" title="Go to source code">compare</a>( <span><code><a href="class-EnumAbstract.html">EnumAbstract</a></code> <var>$first</var></span>, <span><code><a href="class-EnumAbstract.html">EnumAbstract</a></code> <var>$second</var></span> )</code>
+		<code><a href="source-class-EnumAbstract.html#617" title="Go to source code">compare</a>( <span><code><a href="class-EnumAbstract.html">EnumAbstract</a></code> <var>$first</var></span>, <span><code><a href="class-EnumAbstract.html">EnumAbstract</a></code> <var>$second</var></span> )</code>
 
 		<div class="description short">
 			
@@ -817,7 +827,7 @@ constant.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_equals">#</a>
-		<code><a href="source-class-EnumAbstract.html#621" title="Go to source code">equals</a>( <span><code><a href="class-EnumAbstract.html">EnumAbstract</a></code> <var>$other</var></span> )</code>
+		<code><a href="source-class-EnumAbstract.html#637" title="Go to source code">equals</a>( <span><code><a href="class-EnumAbstract.html">EnumAbstract</a></code> <var>$other</var></span> )</code>
 
 		<div class="description short">
 			
@@ -876,7 +886,7 @@ enumeration constant; <code>false</code> otherwise.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_isEqual">#</a>
-		<code><a href="source-class-EnumAbstract.html#647" title="Go to source code">isEqual</a>( <span><code><a href="class-EnumAbstract.html">EnumAbstract</a></code> <var>$first</var></span>, <span><code><a href="class-EnumAbstract.html">EnumAbstract</a></code> <var>$second</var></span> )</code>
+		<code><a href="source-class-EnumAbstract.html#663" title="Go to source code">isEqual</a>( <span><code><a href="class-EnumAbstract.html">EnumAbstract</a></code> <var>$first</var></span>, <span><code><a href="class-EnumAbstract.html">EnumAbstract</a></code> <var>$second</var></span> )</code>
 
 		<div class="description short">
 			
@@ -935,7 +945,7 @@ otherwise.<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_hashCode">#</a>
-		<code><a href="source-class-EnumAbstract.html#674" title="Go to source code">hashCode</a>( )</code>
+		<code><a href="source-class-EnumAbstract.html#690" title="Go to source code">hashCode</a>( )</code>
 
 		<div class="description short">
 			
@@ -974,7 +984,7 @@ otherwise.<br />
 </div>
 
 	<div id="footer">
-		Enum API documentation generated by <a href="http://apigen.org">ApiGen 2.6.1</a>
+		FlorianWolters\Component\Core\Enum API documentation generated by <a href="http://apigen.org">ApiGen 2.6.1</a>
 	</div>
 </div>
 </div>
