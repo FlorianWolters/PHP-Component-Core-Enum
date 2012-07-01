@@ -1,4 +1,4 @@
-# Microsoft Windows operating
+# Microsoft Windows
 
 # Image file cache
 Thumbs.db
@@ -37,7 +37,6 @@ nb-configuration.xml
 review/
 vendor/
 
-# TODO: Create submodules and remove the following lines
+# PHPUnit
 
-apigen.xml
-build.local.xml
+phpunit.xml
