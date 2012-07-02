@@ -4,9 +4,9 @@
 
 **FlorianWolters\Component\Core\Enum** is a simple-to-use [PHP][17] component that provides type-safe enumerations in the [PHP][17] scripting language.
 
-The current version is *0.3.0-beta*, which means the API may change until version *1.0.0-stable*.
+The current version is *0.3.1-stable*, which means the API may change until version *1.0.0-stable*.
 
-Although the current version tag is *0.3.0-beta*, the function of this component an be considered as stable. (Hint: The component has a code coverage via unit tests of 100%.)
+Although the current version tag is *0.3.1-stable*, this component can be considered as stable. (Hint: The component has a code coverage via unit tests of 100%.)
 
 ## Introduction
 
@@ -19,11 +19,11 @@ Many programming languages, e.g. Pascal, Modula-2, Modula-3, Ada, Haskell, C, C+
 One can use the *`int` Enum* pattern to represent an enumerated type in [PHP][17]:
 
 ```php
-    <?php
-    public const SEASON_WINTER = 0;
-    public const SEASON_SPRING = 1;
-    public const SEASON_SUMMER = 2;
-    public const SEASON_FALL = 3;
+<?php
+public const SEASON_WINTER = 0;
+public const SEASON_SPRING = 1;
+public const SEASON_SUMMER = 2;
+public const SEASON_FALL = 3;
 ```
 
 > The *`int` Enum* pattern has many (severe) problems, such as:
@@ -86,7 +86,21 @@ The implementation **does not** (and **will not**) feature the following:
 
 * [PHP][17] 5.4.0 (or later)
 
-## System-Wide Installation
+## Installation
+
+### Local Installation
+
+**FlorianWolters\Component\Core\Enum** should be installed using the dependency manager [Composer][3]. [Composer][1] can be installed with [PHP][6].
+
+    php -r "eval('?>'.file_get_contents('http://getcomposer.org/installer'));"
+
+> This will just check a few [PHP][17] settings and then download `composer.phar` to your working directory. This file is the [Composer][1] binary. It is a PHAR ([PHP][17] archive), which is an archive format for [PHP][17] which can be run on the command line, amongst other things.
+>
+> Next, run the `install` command to resolve and download dependencies:
+
+    php composer.phar install
+
+### System-Wide Installation
 
 **FlorianWolters\Component\Core\Enum** should be installed using the [PEAR installer][11]. This installer is the [PHP][17] community's de-facto standard for installing [PHP][17] components.
 
@@ -103,7 +117,7 @@ If you are creating a component that relies on **FlorianWolters\Component\Core\E
     <package>
       <name>Enum</name>
       <channel>http://pear.florianwolters.de</channel>
-      <min>0.3.0</min>
+      <min>0.3.1</min>
       <max>0.3.99</max>
     </package>
   </required>
@@ -164,9 +178,9 @@ final class ExtendedGenderEnum extends GenderEnum {
 
 If you want to patch or enhance this component, you will need to create a suitable development environment. The easiest way to do that is to install [phix4componentdev][16]:
 
-	# phix4componentdev
-	pear channel-discover pear.phix-project.org
-	pear install phix/phix4componentdev
+    # phix4componentdev
+    pear channel-discover pear.phix-project.org
+    pear install phix/phix4componentdev
 
 You can then clone the Git repository:
 
@@ -175,68 +189,12 @@ You can then clone the Git repository:
 
 Then, install a local copy of this component's dependencies to complete the development environment:
 
-	# build vendor/ folder
-	phing build-vendor
+    # build vendor/ folder
+    phing build-vendor
 
 To make life easier for you, common tasks (such as running unit tests, generating code review analytics, and creating the [PEAR package][13]) have been automated using [phing][15]. You'll find the automated steps inside the `build.xml` file that ships with the component.
 
 Run the command `phing` in the component's top-level folder to see the full list of available automated tasks.
-
-## Comparison
-
-**This chapter is not finished yet!**
-
-### Comparison matrix
-
-**Disclaimer:** This matrix tries to compare existing enumeration type implentations for the PHP scripting language. It is neither complete nor can I guarantee that it is absolutely correct.
-
-Name/Author              | type-safe? | Value Object? | Autocompletion? | Allows documentation of enum constants?         | Unit tests? | API documentation? | No errors/warnings?
------------------------- | ---------- | ------------- | --------------- | ----------------------------------------------- | ----------- | ------------------ | -------------------
-[SplEnum][100]           | Yes        | ?             | Yes             | Yes (one class constant for each enum constant) | ?           | Yes                | ?
-[Sean Hickey][101]       | Yes        | Yes           | Yes             | Yes (one class constant for each enum constant) | Yes         | Yes                | Yes
-[Anthony Ferrara][102]   | Yes        | No            | Yes             | Yes (one class constant for each enum constant) | Yes         | Yes                | Yes
-[Vlasta Neubauer][103]   | Yes        | Yes           | Yes             | Yes (one class constant for each enum constant) | No          | No                 | No
-[zanshine][104]          | Yes        | Yes           | Yes             | Yes (generates one class for each enum type)    | Yes         | Yes                | ?
-[bzikarsky][105]         | Yes        | Yes           | No              | - (one protected field for all enum constants)  | No          | Yes                | Yes
-[jsjohnsr][106]          | Yes        | Yes           | No              | Yes (one subclass for each enum constant)       | No          | No                 | ?
-[Jonathan Hohle][107]    | Yes        | Yes           | No              | No (one global function)                        | No          | Yes                | ?
-[BiplaneEnumBundle][108] | ?          | ?             | ?               | ?                                               | ?           | Yes                | ?
-[Fabian Schmengler][109] | ?          | ?             | ?               | ?                                               | ?           | ?                  | ?
-[Oliver Anan][110]       | ?          | ?             | ?               | ?                                               | ?           | ?                  | ?
-[Jim Sierra][111]        | ?          | ?             | ?               | ?                                               | ?           | ?                  | ?
-[Ellery Leung][112]      | ?          | ?             | ?               | ?                                               | ?           | ?                  | ?
-[Protato][113]           | ?          | ?             | ?               | ?                                               | ?           | ?                  | ?
-[NogDog][114]            | ?          | ?             | ?               | ?                                               | ?           | ?                  | ?
-[Christopher Fox][115]   | ?          | ?             | ?               | ?                                               | ?           | ?                  | ?
-[aelg][116]              | ?          | ?             | ?               | ?                                               | ?           | ?                  | ?
-
-### Analyses
-
-**Disclaimer:** This chapter reflects my personal (and therefore subjective) opinion. I don't write this down to hate, but to educate.
-
-The implementations of [Sean Hickey][101], [Anthony Ferrara][102] and [Vlasta Neubauer][103] are userland implementations of the PECL extension [SplEnum][100].
-
-These four implementations (including [SplEnum][100]) have one major drawback: They use class constants to represent the enumeration constants and the magic method [`__callStatic()`](http://php.net/language.oop5.overloading.php#object.callstatic) to retrieve the enumeration constant objects.
-Therefore the identifier of the class constant is interpreted as the name of the enumeration constant and the value of the class constant is interpreted as the value of the enumeration constant.
-This does not force the clients to use the enumeration constants as `Color::RED()`. A client can still use `COLOR::RED` which will always return a scalar (e.g. an integer) and not an object (the enumeration constant).
-In addition, multiple enumeration constants can have the same value, which makes serialization unreliable.
-
-The implementations differ in aspects of quality. For example, some have a documented API and unit tests while others are missing them.
-Some allow other data types than integer as a value for an enumeration constant which is against the definition of an (C++) enumeration.
-
-The implementation of [Jonathan Hohle][107] consists of one function that generates one abstract base class for each enumeration type and one concrete subclass for each enumeration constant of the enumeration type. In addition one class is generated that implements the `[\Iterator](http://php.net/class.iterator)` interface.
-**Drawbacks:**
-
-* The enumeration types can not be placed in a namespace.
-* The function uses the "evil" eval() function. Enumeration constants such as `EMPTY` and `UNSET` cannot be created.
-* Too much magic.
-* The enumeration function is in the global namespace.
-
-The implementation of [bzikarsky][105] uses one protected field (of data type array) to represent the enumeration constants.
-**Drawbacks:**
-
-* Too much magic.
-* The enumeration class is in the global namespace.
 
 ## License
 
@@ -282,21 +240,3 @@ You should have received a copy of the GNU Lesser General Public License along w
 [31]: http://php.net/serialize
 [32]: http://php.net/unserialize
 [33]: http://wiki.php.net/rfc/enum
-
-[100]: http://php.net/class.splenum "SplEnum"
-[101]: http://github.com/headzoo/php-enum "Sean Hickey"
-[102]: http://github.com/ircmaxell/PHP-CryptLib/blob/master/lib/CryptLib/Core/Enum.php "Anthony Ferrara"
-[103]: http://gist.github.com/1753178 "Vlasta Neubauer"
-[104]: http://github.com/zanshine/php-enums "zanshine"
-[105]: http://gist.github.com/638407 "bzikarsky"
-[106]: http://github.com/jsjohnst/php_class_lib/tree/master/classes/types/enum "jsjohnsr"
-[107]: http://it.toolbox.com/blogs/macsploitation/enums-in-php-a-native-implementation-25228 "Jonathan Hohle"
-[108]: http://github.com/yethee/BiplaneEnumBundle "BiplaneEnumBundle"
-[109]: http://phpclasses.org/package/6021-PHP-Implement-enumerated-values-as-class-functions.html "Fabian Schmengler"
-[110]: http://phpclasses.org/package/6911-PHP-Create-enumerated-types-from-arrays-of-values.html "Oliver Anan"
-[111]: http://phpclasses.org/package/4757-PHP-Provide-enumerated-data-type-with-constants.html "Jim Sierra"
-[112]: http://phpclasses.org/package/4169-PHP-Implement-enumerated-types-using-arrays.html "Ellery Leung"
-[113]: http://phpbuilder.com/board/showpost.php?s=52297b12ba0b12ad8e1c1da1247c187c&p=10885044&postcount=11 "Protato"
-[114]: http://phpbuilder.com/board/showpost.php?s=52297b12ba0b12ad8e1c1da1247c187c&p=10901578&postcount=13 "NogDog"
-[115]: http://stackoverflow.com/a/4522078 "Christopher Fox"
-[116]: http://stackoverflow.com/a/4522078 "aelg"
