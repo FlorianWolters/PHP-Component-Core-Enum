@@ -3,12 +3,24 @@
 <url>
 	<loc>http://florianwolters.github.com/PHP-Component-Core-Enum/index.html</loc>
 </url>
-
-
 <url>
-	<loc>http://florianwolters.github.com/PHP-Component-Core-Enum/class-EnumAbstract.html</loc>
+	<loc>http://florianwolters.github.com/PHP-Component-Core-Enum/namespace-FlorianWolters.html</loc>
 </url>
 <url>
-	<loc>http://florianwolters.github.com/PHP-Component-Core-Enum/class-EnumUtils.html</loc>
+	<loc>http://florianwolters.github.com/PHP-Component-Core-Enum/namespace-FlorianWolters.Component.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Core-Enum/namespace-FlorianWolters.Component.Core.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Core-Enum/namespace-FlorianWolters.Component.Core.Enum.html</loc>
+</url>
+
+
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Core-Enum/class-FlorianWolters.Component.Core.Enum.EnumAbstract.html</loc>
+</url>
+<url>
+	<loc>http://florianwolters.github.com/PHP-Component-Core-Enum/class-FlorianWolters.Component.Core.Enum.EnumUtils.html</loc>
 </url>
 </urlset>
