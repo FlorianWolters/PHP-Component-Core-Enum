@@ -29,8 +29,6 @@
  * @since      File available since Release 0.2.0
  */
 
-declare(encoding = 'UTF-8');
-
 namespace FlorianWolters\Component\Core\Enum;
 
 require_once 'ColorEnum.php';

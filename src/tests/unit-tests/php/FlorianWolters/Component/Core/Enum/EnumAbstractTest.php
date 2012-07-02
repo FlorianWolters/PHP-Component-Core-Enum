@@ -38,8 +38,6 @@
  * @todo       Add @testdoc annotation to each test case.
  */
 
-declare(encoding = 'UTF-8');
-
 namespace FlorianWolters\Component\Core\Enum;
 
 require_once 'EnumTestUtils.php';
