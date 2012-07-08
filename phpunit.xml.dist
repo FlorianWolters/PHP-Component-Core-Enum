@@ -63,7 +63,7 @@
      ! used to compose a test suite out of test suites and test cases.
      !-->
     <testsuites>
-        <testsuite>
+        <testsuite name="Unit Test Suite">
             <directory>src/tests/unit-tests/php</directory>
         </testsuite>
     </testsuites>
@@ -78,7 +78,6 @@
             <directory suffix=".php">src/tests</directory>
         </blacklist>
         <whitelist addUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">src/bin</directory>
             <directory suffix=".php">src/php</directory>
             <exclude>
                 <directory suffix="Enum.php">src/php</directory>
