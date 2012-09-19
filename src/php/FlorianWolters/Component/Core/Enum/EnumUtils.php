@@ -1,53 +1,30 @@
 <?php
-/**
- * `EnumUtils.php`
- *
- * This file is part of fwComponents.
- *
- * fwComponents is free software: you can redistribute it and/or modify it under
- * the terms of the GNU Lesser General Public License as published by the Free
- * Software Foundation, either version 3 of the License, or (at your option) any
- * later version.
- *
- * fwComponents is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more
- * details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with fwComponents.  If not, see http://gnu.org/licenses/lgpl.txt.
- *
- * PHP version 5.4
- *
- * @category   Component
- * @package    Core
- * @subpackage Enum
- * @author     Florian Wolters <wolters.fl@gmail.com>
- * @copyright  2011-2012 Florian Wolters
- * @license    http://gnu.org/licenses/lgpl.txt LGPL-3.0+
- * @version    GIT: $Id$
- * @link       http://github.com/FlorianWolters/PHP-Component-Core-Enum
- * @since      File available since Release 0.1.0
- */
-
 namespace FlorianWolters\Component\Core\Enum;
 
 /**
- * The {@link EnumUtils} class is an utility class for accessing and
+ * The static class {@link EnumUtils} is an utility class for accessing and
  * manipulating enumerations.
  *
- * @category   Component
- * @package    Core
- * @subpackage Enum
  * @author     Florian Wolters <wolters.fl@gmail.com>
  * @copyright  2011-2012 Florian Wolters
  * @license    http://gnu.org/licenses/lgpl.txt LGPL-3.0+
- * @version    Release: @package_version@
  * @link       http://github.com/FlorianWolters/PHP-Component-Core-Enum
  * @since      Class available since Release 0.1.0
  */
 class EnumUtils
 {
+    // @codeCoverageIgnoreStart
+
+    /**
+     * Private default constructor.
+     *
+     * This guarantees that this "static" class is never instantiated.
+     */
+    private function __construct()
+    {
+    }
+
+    // @codeCoverageIgnoreEnd
 
     /**
      * Returns the names of the enumeration constants of the specified
@@ -59,11 +36,11 @@ class EnumUtils
      * This method may be used to iterate over the names of the enumerated
      * constants as follows:
      *
-     * <code>
+     * /---code php
      * foreach (EnumUtils::names('Vendor\Package\ConcreteEnum') as $name) {
      *     echo $name, \PHP_EOL;
      * }
-     * </code>
+     * \---
      *
      * @param string $enumType The class name of the enumeration type from which
      *                         to return the names of the enumeration constants.
@@ -76,7 +53,7 @@ class EnumUtils
      */
     public static function names($enumType = null)
     {
-        self::_throwInvalidArgumentExceptionIfIsNotEnumType($enumType);
+        self::throwInvalidArgumentExceptionIfIsNotEnumType($enumType);
 
         return $enumType::names();
     }
@@ -92,11 +69,11 @@ class EnumUtils
      * This method may be used to iterate over the enumerated constants as
      * follows:
      *
-     * <code>
+     * /---code php
      * foreach (EnumUtils::values('Vendor\Package\ConcreteEnum') as $constant) {
      *     echo $constant . \PHP_EOL;
      * }
-     * </code>
+     * \---
      *
      * @param string $enumType The class name of the enumeration type from which
      *                         to return the enumeration constants.
@@ -108,7 +85,7 @@ class EnumUtils
      */
     public static function values($enumType)
     {
-        self::_throwInvalidArgumentExceptionIfIsNotEnumType($enumType);
+        self::throwInvalidArgumentExceptionIfIsNotEnumType($enumType);
 
         return $enumType::values();
     }
@@ -123,7 +100,7 @@ class EnumUtils
      * @throws \InvalidArgumentException If the specified class name does not
      *                                   represent an enumeration type.
      */
-    private static function _throwInvalidArgumentExceptionIfIsNotEnumType(
+    private static function throwInvalidArgumentExceptionIfIsNotEnumType(
         $className
     ) {
         if (false === self::isEnumType($className)) {
@@ -171,7 +148,7 @@ class EnumUtils
      */
     public static function valueOf($enumType, $name)
     {
-        self::_throwInvalidArgumentExceptionIfIsNotEnumType($enumType);
+        self::throwInvalidArgumentExceptionIfIsNotEnumType($enumType);
 
         return $enumType::valueOf($name);
     }
@@ -284,16 +261,4 @@ class EnumUtils
 
         return $result;
     }
-
-    /**
-     * Private default constructor.
-     *
-     * This guarantees that this "static" class is never instantiated.
-     */
-    private function __construct()
-    {
-        // @codeCoverageIgnoreStart
-    }
-    // @codeCoverageIgnoreEnd
-
 }
