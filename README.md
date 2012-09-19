@@ -6,8 +6,6 @@
 
 The current version is *0.3.1-stable*, which means the API may change until version *1.0.0-stable*.
 
-Although the current version tag is *0.3.1*, this component can be considered as stable. (Hint: The component has a code coverage via unit tests of 100%.)
-
 ## Introduction
 
 The [PHP][17] scripting language is missing one important data type: **The enumerated type.**
@@ -202,7 +200,7 @@ This program is free software: you can redistribute it and/or modify it under th
 
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more details.
 
-You should have received a copy of the GNU Lesser General Public License along with this program. If not, see http://gnu.org/licenses/lgpl.txt.
+You should have received a copy of the GNU Lesser General Public License along with this program. If not, see <http://gnu.org/licenses/lgpl.txt>.
 
 
 
