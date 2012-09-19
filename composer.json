@@ -18,7 +18,10 @@
     },
     "autoload": {
         "psr-0": {
-            "FlorianWolters": ["src/php", "src/tests/unit-tests/php"]
+            "FlorianWolters": [
+                "src/php",
+                "src/tests/unit-tests/php"
+            ]
         }
     }
 }
