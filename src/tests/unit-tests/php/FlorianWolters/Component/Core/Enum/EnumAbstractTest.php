@@ -1,68 +1,43 @@
 <?php
+namespace FlorianWolters\Component\Core\Enum;
+
+use \ReflectionClass;
+use \ReflectionMethod;
+
+use FlorianWolters\Mock\ColorEnum;
+use FlorianWolters\Mock\ExtendedColorEnum;
+use FlorianWolters\Mock\ExtendedExtendedColorEnum;
+use FlorianWolters\Mock\ExtendedGenderEnum;
+use FlorianWolters\Mock\GenderEnum;
+use FlorianWolters\Mock\PlanetEnum;
+use FlorianWolters\Mock\SingletonEnum;
+
 /**
- * `EnumAbstractTest.php`
+ * Test class for {@link EnumAbstract}.
  *
- * This file is part of fwComponents.
+ * @author    Florian Wolters <wolters.fl@gmail.com>
+ * @copyright 2011-2013 Florian Wolters
+ * @license   http://gnu.org/licenses/lgpl.txt LGPL-3.0+
+ * @link      http://github.com/FlorianWolters/PHP-Component-Core-Enum
+ * @since     Class available since Release 0.1.0
  *
- * fwComponents is free software: you can redistribute it and/or modify it under
- * the terms of the GNU Lesser General Public License as published by the Free
- * Software Foundation, either version 3 of the License, or (at your option) any
- * later version.
- *
- * fwComponents is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more
- * details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with fwComponents.  If not, see http://gnu.org/licenses/lgpl.txt.
- *
- * PHP version 5.4
- *
- * @category   Test
- * @package    Core
- * @subpackage Enum
- * @author     Florian Wolters <wolters.fl@gmail.com>
- * @copyright  2011-2012 Florian Wolters
- * @license    http://gnu.org/licenses/lgpl.txt LGPL-3.0+
- * @version    GIT: $Id$
- * @link       http://github.com/FlorianWolters/PHP-Component-Core-Enum
- * @since      File available since Release 0.1.0
+ * @covers FlorianWolters\Component\Core\Enum\EnumAbstract
  * @todo       Analyze and remove redundant test cases.
  * @todo       Merge data providers with the data providers of class {@link
  *             EnumUtilsTest} and place them in a static class called
  *             `EnumTestDataProvider`.
  * @todo       Separate integration tests from unit test by creating separate
- *             files for unit tests (using mock objects) and integration tests
- *             (testing the concrete enumerations in the `res` directory).
+ *             files for unit tests (using mock objects) and integration tests.
  * @todo       Add @testdoc annotation to each test case.
- */
-
-namespace FlorianWolters\Component\Core\Enum;
-
-require_once 'EnumTestUtils.php';
-
-/**
- * Test class for {@link EnumAbstract}.
- *
- * @category   Test
- * @package    Core
- * @subpackage Enum
- * @author     Florian Wolters <wolters.fl@gmail.com>
- * @copyright  2011-2012 Florian Wolters
- * @license    http://gnu.org/licenses/lgpl.txt LGPL-3.0+
- * @version    Release: @package_version@
- * @link       http://github.com/FlorianWolters/PHP-Component-Core-Enum
- * @since      Class available since Release 0.1.0
- *
- * @covers FlorianWolters\Component\Core\Enum\EnumAbstract
  */
 class EnumAbstractTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var string
+     */
+    private static $mockNamespace = 'FlorianWolters\Mock';
 
     /**
-     * Tests the definition of the class (@link EnumAbstract).
-     *
      * @return void
      *
      * @group specification
@@ -71,8 +46,7 @@ class EnumAbstractTest extends \PHPUnit_Framework_TestCase
      */
     public function testClassDefinition()
     {
-        // Get the class via Reflection and test its signature.
-        $reflectedClass = new \ReflectionClass(__NAMESPACE__ . '\EnumAbstract');
+        $reflectedClass = new ReflectionClass(__NAMESPACE__ . '\EnumAbstract');
         $this->assertTrue($reflectedClass->inNamespace());
         $this->assertTrue($reflectedClass->isAbstract());
         $this->assertFalse($reflectedClass->isFinal());
@@ -81,18 +55,28 @@ class EnumAbstractTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($reflectedClass->isInternal());
         $this->assertFalse($reflectedClass->isIterateable());
         $this->assertTrue($reflectedClass->isUserDefined());
-
-        // Get the constructor via Reflection and test its signature.
-        $reflectedConstructor = $reflectedClass->getMethod('__construct');
-        $this->assertFalse($reflectedConstructor->isAbstract());
-        $this->assertTrue($reflectedConstructor->isConstructor());
-        $this->assertFalse($reflectedConstructor->isFinal());
-        $this->assertFalse($reflectedConstructor->isProtected());
     }
 
     /**
-     * Tests whether an enumeration constant is an *Immutable Object*.
+     * @return void
      *
+     * @group specification
+     * @testdox The definition of the constructor EnumAbstract::__construct is correct.
+     * @test
+     */
+    public function testConstructorDefinition()
+    {
+        $reflectedConstructor = new ReflectionMethod(
+            __NAMESPACE__ . '\EnumAbstract',
+            '__construct'
+        );
+        $this->assertFalse($reflectedConstructor->isAbstract());
+        $this->assertTrue($reflectedConstructor->isConstructor());
+        $this->assertFalse($reflectedConstructor->isFinal());
+        $this->assertTrue($reflectedConstructor->isPrivate());
+    }
+
+    /**
      * @return void
      *
      * @expectedException \BadMethodCallException
@@ -100,83 +84,39 @@ class EnumAbstractTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsImmutableObject()
     {
-        $constant = UsageExampleEnum::CORRECT_USAGE();
+        $constant = ColorEnum::RED();
         $constant->newAttribute = null;
     }
 
     /**
-     * Tests whether {@link EnumAbstract::getConstant()} returns an instance of
-     * class {@link EnumAbstract}.
-     *
      * @return void
-     * @deprecated Redundant test case-
+     * @deprecated Redundant test case.
      *
-     * @covers FlorianWolters\Component\Core\Enum\EnumAbstract::getConstant
+     * @coversClass getConstant
      * @test
      */
     public function testGetConstantReturnsInstanceOfEnumAbstract()
     {
         $this->assertInstanceOf(
-            __NAMESPACE__ . '\EnumAbstract', UsageExampleEnum::CORRECT_USAGE()
+            __NAMESPACE__ . '\EnumAbstract',
+            ColorEnum::RED()
         );
     }
 
     /**
-     * Data provider for {@link testGetConstantThrowsInvalidArgumentException}.
-     *
-     * @return array The parameters for the test method.
-     */
-    public static function providerGetConstantThrowsInvalidArgumentException()
-    {
-        return [
-            ['UsageExampleEnum', 'INVALID'],
-            ['UsageExampleEnum', 'INVALID_TYPE'],
-            ['UsageExampleEnum', 'INVALID_NAME']
-        ];
-    }
-
-    /**
-     * Tests whether an {@link \InvalidArgumentException} if both parameters,
-     * the first parameter and the second parameter of {@link
-     * EnumAbstract::getConstant} are incorrect.
-     *
-     * @param string $enumType The name of a enumeration type.
-     * @param string $name     The name of a enumeration constant in the
-     *                         specified enumeration type.
-     *
      * @return void
      *
-     * @covers FlorianWolters\Component\Core\Enum\EnumAbstract::getConstant
-     * @dataProvider providerGetConstantThrowsInvalidArgumentException
-     * @expectedException \InvalidArgumentException
-     * @test
-     */
-    public function testGetConstantThrowsInvalidArgumentException(
-        $enumType, $name
-    ) {
-        $className = EnumTestUtils::buildClassName($enumType);
-        $className::$name();
-    }
-
-    /**
-     * Tests whether {@link EnumAbstract::__callStatic} throws an {@link
-     * \UnexpectedValueException}.
-     *
-     * @return void
-     *
-     * @covers FlorianWolters\Component\Core\Enum\EnumAbstract::__callStatic
+     * @coversClass __callStatic
      * @expectedException \UnexpectedValueException
      * @test
      */
     public function testThrowsUnexpectedValueExceptionIfConstantIsNotDefined()
     {
-        UsageExampleEnum::UNEXPECTED();
+        ColorEnum::UNKNOWN();
     }
 
     /**
-     * Data provider for {@link testNames}.
-     *
-     * @return array The parameters for the test method.
+     * @return array
      */
     public static function providerNames()
     {
@@ -184,108 +124,103 @@ class EnumAbstractTest extends \PHPUnit_Framework_TestCase
         $expectedExtGender = \array_merge($expectedGender, ['HYBRID']);
         $expectedColor = ['RED', 'GREEN', 'BLUE'];
         $expectedExtColor = \array_merge(
-            $expectedColor, ['CYAN', 'MAGENTA', 'YELLOW']
+            $expectedColor,
+            array('CYAN', 'MAGENTA', 'YELLOW')
         );
         $expectedExtExtColor = \array_merge(
-            $expectedExtColor, ['BLACK', 'WHITE']
+            $expectedExtColor,
+            array('BLACK', 'WHITE')
         );
-        $expectedSingleton = ['INSTANCE'];
-        $expectedPlanet = ['MERCURY', 'VENUS', 'EARTH'];
+        $expectedSingleton = array('INSTANCE');
+        $expectedPlanet = array('MERCURY', 'VENUS', 'EARTH');
 
         return [
-            ['GenderEnum', $expectedGender],
-            ['ExtendedGenderEnum', $expectedExtGender],
-            ['ColorEnum', $expectedColor],
-            ['ExtendedColorEnum', $expectedExtColor],
-            ['ExtendedExtendedColorEnum', $expectedExtExtColor],
-            ['SingletonEnum', $expectedSingleton],
-            ['PlanetEnum', $expectedPlanet]
+            [self::$mockNamespace . '\GenderEnum', $expectedGender],
+            [self::$mockNamespace . '\ExtendedGenderEnum', $expectedExtGender],
+            [self::$mockNamespace . '\ColorEnum', $expectedColor],
+            [self::$mockNamespace . '\ExtendedColorEnum', $expectedExtColor],
+            [self::$mockNamespace . '\ExtendedExtendedColorEnum', $expectedExtExtColor],
+            [self::$mockNamespace . '\SingletonEnum', $expectedSingleton],
+            [self::$mockNamespace . '\PlanetEnum', $expectedPlanet]
         ];
     }
 
     /**
-     * Tests {@link EnumAbstract::names}.
-     *
-     * @param string $enumType The name of a enumeration type.
-     * @param array  $expected The expected return value.
-     *
      * @return void
      *
-     * @covers FlorianWolters\Component\Core\Enum\EnumAbstract::names
+     * @coversClass names
      * @dataProvider providerNames
      * @test
      */
-    public function testNames($enumType, array $expected)
+    public function testNames($className, array $expected)
     {
-        $className = EnumTestUtils::buildClassName($enumType);
         $actual = $className::names();
         $this->assertEquals($expected, $actual);
     }
 
     /**
-     * Data provider for {@link testValues}.
-     *
-     * @return array The parameters for the test method.
+     * @return array
      */
     public static function providerValues()
     {
-        $expectedGender = [GenderEnum::FEMALE(), GenderEnum::MALE()];
+        $expectedGender = array(GenderEnum::FEMALE(), GenderEnum::MALE());
         $expectedExtGender = \array_merge(
-            $expectedGender, [ExtendedGenderEnum::HYBRID()]
+            $expectedGender,
+            array(ExtendedGenderEnum::HYBRID())
         );
-        $expectedColor = [ColorEnum::RED(),
+        $expectedColor = array(
+            ColorEnum::RED(),
             ColorEnum::GREEN(),
-            ColorEnum::BLUE()];
+            ColorEnum::BLUE()
+        );
         $expectedExtColor = \array_merge(
             $expectedColor,
-            [ExtendedColorEnum::CYAN(),
-            ExtendedColorEnum::MAGENTA(),
-            ExtendedColorEnum::YELLOW()]
+            array(
+                ExtendedColorEnum::CYAN(),
+                ExtendedColorEnum::MAGENTA(),
+                ExtendedColorEnum::YELLOW()
+            )
         );
         $expectedExtExtColor = \array_merge(
             $expectedExtColor,
-            [ExtendedExtendedColorEnum::BLACK(),
-            ExtendedExtendedColorEnum::WHITE()]
+            array(
+                ExtendedExtendedColorEnum::BLACK(),
+                ExtendedExtendedColorEnum::WHITE()
+            )
         );
-        $expectedSingleton = [SingletonEnum::INSTANCE()];
+        $expectedSingleton = array(SingletonEnum::INSTANCE());
         $expectedPlanet = \array_merge(
-            [PlanetEnum::MERCURY(), PlanetEnum::VENUS(), PlanetEnum::EARTH()]
+            array(
+                PlanetEnum::MERCURY(), PlanetEnum::VENUS(), PlanetEnum::EARTH()
+            )
         );
 
         return [
-            ['GenderEnum', $expectedGender],
-            ['ExtendedGenderEnum', $expectedExtGender],
-            ['ColorEnum', $expectedColor],
-            ['ExtendedColorEnum', $expectedExtColor],
-            ['ExtendedExtendedColorEnum', $expectedExtExtColor],
-            ['SingletonEnum', $expectedSingleton],
-            ['PlanetEnum', $expectedPlanet]
+            [self::$mockNamespace . '\GenderEnum', $expectedGender],
+            [self::$mockNamespace . '\ExtendedGenderEnum', $expectedExtGender],
+            [self::$mockNamespace . '\ColorEnum', $expectedColor],
+            [self::$mockNamespace . '\ExtendedColorEnum', $expectedExtColor],
+            [self::$mockNamespace . '\ExtendedExtendedColorEnum', $expectedExtExtColor],
+            [self::$mockNamespace . '\SingletonEnum', $expectedSingleton],
+            [self::$mockNamespace . '\PlanetEnum', $expectedPlanet]
         ];
     }
 
     /**
-     * Tests {@link EnumAbstract::values}.
-     *
-     * @param string $enumType The name of a enumeration type.
-     * @param array  $expected The expected return value.
-     *
      * @return void
      *
-     * @covers FlorianWolters\Component\Core\Enum\EnumAbstract::values
+     * @coversClass values
      * @dataProvider providerValues
      * @test
      */
-    public function testValues($enumType, array $expected)
+    public function testValues($className, array $expected)
     {
-        $className = EnumTestUtils::buildClassName($enumType);
         $actual = $className::values();
         $this->assertEquals($expected, $actual);
     }
 
     /**
-     * Data provider for {@link testValueOf} and {@link testGetName}.
-     *
-     * @return array The parameters for the test method.
+     * @return array
      */
     public static function providerGetNameAndValueOf()
     {
@@ -297,15 +232,9 @@ class EnumAbstractTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests {@link EnumAbstract::getName}.
-     *
-     * @param string       $expected The expected name of the specified
-     *                               enumeration constant.
-     * @param EnumAbstract $constant The enumeration constant under test.
-     *
      * @return void
      *
-     * @covers FlorianWolters\Component\Core\Enum\EnumAbstract::getName
+     * @coversClass getName
      * @dataProvider providerGetNameAndValueOf
      * @test
      */
@@ -316,15 +245,9 @@ class EnumAbstractTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests {@link EnumAbstract::valueOf}.
-     *
-     * @param string       $name     The name of a enumeration constant.
-     * @param EnumAbstract $expected The expected enumeration constant for the
-     *                               specified name.
-     *
      * @return void
      *
-     * @covers FlorianWolters\Component\Core\Enum\EnumAbstract::valueOf
+     * @coversClass valueOf
      * @dataProvider providerGetNameAndValueOf
      * @test
      */
@@ -335,22 +258,18 @@ class EnumAbstractTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests {@link EnumAbstract::valueOf}.
-     *
      * @return void
      *
-     * @covers FlorianWolters\Component\Core\Enum\EnumAbstract::valueOf
+     * @coversClass valueOf
      * @test
      */
     public function testValueOfReturnsNullIfNameDoesNotExist()
     {
-        $this->assertNull(UsageExampleEnum::valueOf('UNKNOWN'));
+        $this->assertNull(ColorEnum::valueOf('UNKNOWN'));
     }
 
     /**
-     * Data provider for {@link testGetOrdinal}.
-     *
-     * @return array The parameters for the test method.
+     * @return array
      */
     public static function providerGetOrdinalAndMagicInvokeMethod()
     {
@@ -374,15 +293,9 @@ class EnumAbstractTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests {@link EnumAbstract::getOrdinal}.
-     *
-     * @param string       $expected The expected ordinal of the enumeration
-     *                               constant.
-     * @param EnumAbstract $constant The enumeration constant under test.
-     *
      * @return void
      *
-     * @covers FlorianWolters\Component\Core\Enum\EnumAbstract::getOrdinal
+     * @coversClass getOrdinal
      * @dataProvider providerGetOrdinalAndMagicInvokeMethod
      * @test
      */
@@ -393,15 +306,9 @@ class EnumAbstractTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests {@link EnumAbstract::__invoke}.
-     *
-     * @param string       $expected The expected string representation of the
-     *                               enumeration constant.
-     * @param EnumAbstract $constant The enumeration constant under test.
-     *
      * @return void
      *
-     * @covers FlorianWolters\Component\Core\Enum\EnumAbstract::__invoke
+     * @coversClass __invoke
      * @dataProvider providerGetOrdinalAndMagicInvokeMethod
      * @test
      */
@@ -414,15 +321,9 @@ class EnumAbstractTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests {@link EnumAbstract::__toString}.
-     *
-     * @param string       $expected The expected string representation of the
-     *                               enumeration constant.
-     * @param EnumAbstract $constant The enumeration constant under test.
-     *
      * @return void
      *
-     * @covers FlorianWolters\Component\Core\Enum\EnumAbstract::__toString
+     * @coversClass __toString
      * @dataProvider providerGetNameAndValueOf
      * @test
      */
@@ -433,97 +334,68 @@ class EnumAbstractTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests {@link EnumAbstract::__toString}.
-     *
      * @return void
      * @todo The code is not covered with the data provider above. Find out why.
      *
-     * @covers FlorianWolters\Component\Core\Enum\EnumAbstract::__toString
+     * @coversClass __toString
      * @test
      */
     public function testMagicToStringMethodCodeCoverage()
     {
         $this->assertEquals(
-            'CORRECT_USAGE',
-            UsageExampleEnum::CORRECT_USAGE()->__toString()
+            'RED',
+            ColorEnum::RED()->__toString()
         );
     }
 
     /**
-     * Data provider for {@link testCompareTo}.
-     *
-     * @return array The parameters for the test method.
+     * @return array
      */
     public static function providerCompareTo()
     {
         return [
             // Simple enumeration type.
-            [
-                0, GenderEnum::FEMALE(), GenderEnum::FEMALE()
-            ], [
-                0, GenderEnum::MALE(), GenderEnum::MALE()
-            ], [
-                -1, GenderEnum::FEMALE(), GenderEnum::MALE()
-            ], [
-                1, GenderEnum::MALE(), GenderEnum::FEMALE()
+            [0, GenderEnum::FEMALE(), GenderEnum::FEMALE()],
+            [0, GenderEnum::MALE(), GenderEnum::MALE()],
+            [-1, GenderEnum::FEMALE(), GenderEnum::MALE()],
+            [1, GenderEnum::MALE(), GenderEnum::FEMALE()],
             // Subclassed enumeration types.
-            ], [
-                0, ExtendedGenderEnum::HYBRID(), ExtendedGenderEnum::HYBRID()
-            ], [
-                0, GenderEnum::FEMALE(), ExtendedGenderEnum::FEMALE()
-            ], [
-                0, ExtendedGenderEnum::MALE(), GenderEnum::MALE()
-            ], [
-                -2, GenderEnum::FEMALE(), ExtendedGenderEnum::HYBRID()
-            ], [
-                -1, GenderEnum::MALE(), ExtendedGenderEnum::HYBRID()
-            ], [
-                2, ExtendedGenderEnum::HYBRID(), ExtendedGenderEnum::FEMALE()
-            ], [
-                1, ExtendedGenderEnum::HYBRID(), ExtendedGenderEnum::MALE()
-            ], [
-                0, SingletonEnum::INSTANCE(), SingletonEnum::INSTANCE()
-            ]
+            [0, ExtendedGenderEnum::HYBRID(), ExtendedGenderEnum::HYBRID()],
+            [0, GenderEnum::FEMALE(), ExtendedGenderEnum::FEMALE()],
+            [ 0, ExtendedGenderEnum::MALE(), GenderEnum::MALE()],
+            [-2, GenderEnum::FEMALE(), ExtendedGenderEnum::HYBRID()],
+            [-1, GenderEnum::MALE(), ExtendedGenderEnum::HYBRID()],
+            [2, ExtendedGenderEnum::HYBRID(), ExtendedGenderEnum::FEMALE()],
+            [1, ExtendedGenderEnum::HYBRID(), ExtendedGenderEnum::MALE()],
+            [0, SingletonEnum::INSTANCE(), SingletonEnum::INSTANCE()]
         ];
     }
 
     /**
-     * Tests {@link EnumAbstract::compareTo}.
-     *
-     * @param integer      $expected The expected return value of {@link
-     *                               EnumAbstract::compareTo}.
-     * @param EnumAbstract $first    The first enumeration constant to compare.
-     * @param EnumAbstract $second   The second enumeration constant to compare.
-     *
      * @return void
      *
-     * @covers FlorianWolters\Component\Core\Enum\EnumAbstract::compareTo
-     * @covers FlorianWolters\Component\Core\Enum\EnumAbstract::compare
+     * @coversClass compareTo
      * @dataProvider providerCompareTo
      * @test
      */
     public function testCompareTo(
-        $expected, EnumAbstract $first, EnumAbstract $second
+        $expected,
+        EnumAbstract $first,
+        EnumAbstract $second
     ) {
         $actual = $first->compareTo($second);
         $this->assertEquals($expected, $actual);
     }
 
     /**
-     * Data provider for {@link testEqualityOperator} and {@link
-     * testIdentityOperator}.
-     *
-     * @return array The parameters for the test method.
+     * @return array
      */
     public static function providerComparisonOperators()
     {
         return [
             // Simple enumeration type.
-            [
-                true, GenderEnum::FEMALE(), GenderEnum::FEMALE()
-            ], [
-                true, GenderEnum::MALE(), GenderEnum::MALE()
-            ], [
+            [true, GenderEnum::FEMALE(), GenderEnum::FEMALE()],
+            [true, GenderEnum::MALE(), GenderEnum::MALE()], [
                 false, GenderEnum::FEMALE(), GenderEnum::MALE()
             ], [
                 false, GenderEnum::MALE(), GenderEnum::FEMALE()
@@ -551,18 +423,15 @@ class EnumAbstractTest extends \PHPUnit_Framework_TestCase
     /**
      * Tests the equality (`==`) of enumeration constants.
      *
-     * @param boolean      $expected The expected return value of the
-     *                               comparison.
-     * @param EnumAbstract $first    The first enumeration constant to compare.
-     * @param EnumAbstract $second   The second enumeration constant to compare.
-     *
      * @return void
      *
      * @dataProvider providerComparisonOperators
      * @test
      */
     public function testEqualityOperator(
-        $expected, EnumAbstract $first, EnumAbstract $second
+        $expected,
+        EnumAbstract $first,
+        EnumAbstract $second
     ) {
         $actual = ($first == $second);
         $this->assertEquals($expected, $actual);
@@ -571,49 +440,38 @@ class EnumAbstractTest extends \PHPUnit_Framework_TestCase
     /**
      * Tests the identity (`===`) of enumeration constants.
      *
-     * @param boolean      $expected The expected return value of the
-     *                               comparison.
-     * @param EnumAbstract $first    The first enumeration constant to compare.
-     * @param EnumAbstract $second   The second enumeration constant to compare.
-     *
      * @return void
      *
      * @dataProvider providerComparisonOperators
      * @test
      */
     public function testIdentityOperator(
-        $expected, EnumAbstract $first, EnumAbstract $second
+        $expected,
+        EnumAbstract $first,
+        EnumAbstract $second
     ) {
         $actual = ($first === $second);
         $this->assertEquals($expected, $actual);
     }
 
     /**
-     * Tests {@link EnumAbstract::equals}.
-     *
-     * @param boolean      $expected The expected return value of {@link
-     *                               EnumAbstract::equals}.
-     * @param EnumAbstract $first    The first enumeration constant to compare.
-     * @param EnumAbstract $second   The second enumeration constant to compare.
-     *
      * @return void
      *
-     * @covers FlorianWolters\Component\Core\Enum\EnumAbstract::equals
-     * @covers FlorianWolters\Component\Core\Enum\EnumAbstract::isEqual
+     * @coversClass equals
      * @dataProvider providerComparisonOperators
      * @test
      */
     public function testEquals(
-        $expected, EnumAbstract $first, EnumAbstract $second
+        $expected,
+        EnumAbstract $first,
+        EnumAbstract $second
     ) {
         $actual = $first->equals($second);
         $this->assertEquals($expected, $actual);
     }
 
     /**
-     * Data provider for {@link testHashCode} and {@link testSerialization}.
-     *
-     * @return array The parameters for the test method.
+     * @return array
      */
     public static function providerHashCodeAndSerialization()
     {
@@ -625,13 +483,9 @@ class EnumAbstractTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests {@link EnumAbstract::hashCode}.
-     *
-     * @param EnumAbstract $constant TODO
-     *
      * @return void
      *
-     * @covers FlorianWolters\Component\Core\Enum\EnumAbstract::hashCode
+     * @coversClass hashCode
      * @dataProvider providerHashCodeAndSerialization
      * @test
      */
@@ -648,10 +502,6 @@ class EnumAbstractTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests the serialization of an enumeration constant.
-     *
-     * @param EnumAbstract $constant An enumeration constant.
-     *
      * @return void
      *
      * @dataProvider providerHashCodeAndSerialization
@@ -666,8 +516,6 @@ class EnumAbstractTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests the correctness of a *Singleton* enumeration.
-     *
      * @return void
      *
      * @test
@@ -681,8 +529,6 @@ class EnumAbstractTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests the correctness of a simple functional enumeration.
-     *
      * @return void
      *
      * @test
@@ -692,12 +538,10 @@ class EnumAbstractTest extends \PHPUnit_Framework_TestCase
         $constant = SingletonEnum::INSTANCE();
         $actual = $constant->__toString();
 
-        $this->assertEquals('FlorianWolters\Component\Core\Enum\SingletonEnum', $actual);
+        $this->assertEquals('FlorianWolters\Mock\SingletonEnum', $actual);
     }
 
     /**
-     * Tests the correctness of a complex functional enumeration.
-     *
      * @return void
      *
      * @test
@@ -711,5 +555,4 @@ class EnumAbstractTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(62522671.963089, $gravity, null, .0000001);
         $this->assertEquals(62522671963.089, $weigth, null, .001);
     }
-
 }

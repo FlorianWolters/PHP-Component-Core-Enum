@@ -1,56 +1,22 @@
 <?php
-/**
- * `PlanetEnum.php`
- *
- * This file is part of fwComponents.
- *
- * fwComponents is free software: you can redistribute it and/or modify it under the
- * terms of the GNU Lesser General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later
- * version.
- *
- * fwComponents is distributed in the hope that it will be useful, but WITHOUT ANY
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
- * PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License along
- * with fwComponents.  If not, see http://gnu.org/licenses/lgpl.txt.
- *
- * PHP version 5.4
- *
- * @category   Test
- * @package    Core
- * @subpackage Enum
- * @author     Florian Wolters <wolters.fl@gmail.com>
- * @copyright  2011-2012 Florian Wolters
- * @license    http://gnu.org/licenses/lgpl.txt LGPL-3.0+
- * @version    GIT: $Id$
- * @link       http://github.com/FlorianWolters/PHP-Component-Core-Enum
- * @since      File available since Release 0.2.0
- */
+namespace FlorianWolters\Mock;
 
-namespace FlorianWolters\Component\Core\Enum;
+use FlorianWolters\Component\Core\Enum\EnumAbstract;
 
 /**
  * The {@link PlanetEnum} enumeration demonstrates the following usage of
- * **fw\Component\Core\Enum**:
+ * **FlorianWolters\Component\Core\Enum**:
  *
  * * Functional enumeration.
  *
- * @category   Test
- * @package    Core
- * @subpackage Enum
- * @author     Florian Wolters <wolters.fl@gmail.com>
- * @copyright  2011-2012 Florian Wolters
- * @license    http://gnu.org/licenses/lgpl.txt LGPL-3.0+
- * @version    Release: @package_version@
- * @link       http://github.com/FlorianWolters/PHP-Component-Core-Enum
- * @since      Class available since Release 0.2.0
+ * @author    Florian Wolters <wolters.fl@gmail.com>
+ * @copyright 2011-2013 Florian Wolters
+ * @license   http://gnu.org/licenses/lgpl.txt LGPL-3.0+
+ * @link      http://github.com/FlorianWolters/PHP-Component-Core-Enum
+ * @since     Class available since Release 0.2.0
  */
 final class PlanetEnum extends EnumAbstract
 {
-    // @codingStandardsIgnoreStart
-
     /**
      * The universal gravitational constant (m3 kg-1 s-2).
      *
@@ -63,14 +29,16 @@ final class PlanetEnum extends EnumAbstract
      *
      * @var float
      */
-    private $_mass;
+    private $mass;
 
     /**
      * The radius of this Planet in meters.
      *
      * @var float
      */
-    private $_radius;
+    private $radius;
+
+    // @codingStandardsIgnoreStart
 
     /**
      * The planet mercury.
@@ -79,9 +47,9 @@ final class PlanetEnum extends EnumAbstract
      */
     final public static function MERCURY()
     {
-        $self = self::getConstant();
-        $self->_mass = 3.303e+23;
-        $self->_radius = 2.4397e6;
+        $self = self::getInstance();
+        $self->mass = 3.303e+23;
+        $self->radius = 2.4397e6;
 
         return $self;
     }
@@ -93,9 +61,9 @@ final class PlanetEnum extends EnumAbstract
      */
     final public static function VENUS()
     {
-        $self = self::getConstant();
-        $self->_mass = 4.869e+24;
-        $self->_radius = 6.0518e6;
+        $self = self::getInstance();
+        $self->mass = 4.869e+24;
+        $self->radius = 6.0518e6;
 
         return $self;
     }
@@ -107,12 +75,14 @@ final class PlanetEnum extends EnumAbstract
      */
     final public static function EARTH()
     {
-        $self = self::getConstant();
-        $self->_mass = 5.976e+24;
-        $self->_radius = 6.37814e6;
+        $self = self::getInstance();
+        $self->mass = 5.976e+24;
+        $self->radius = 6.37814e6;
 
         return $self;
     }
+
+    // @codingStandardsIgnoreEnd
 
     /**
      * Calculates and returns the surface gravity of this planet.
@@ -121,7 +91,7 @@ final class PlanetEnum extends EnumAbstract
      */
     public function surfaceGravity()
     {
-        return self::G * $this->_mass / ($this->_radius ^ 2);
+        return self::G * $this->mass / ($this->radius ^ 2);
     }
 
     /**
@@ -135,6 +105,4 @@ final class PlanetEnum extends EnumAbstract
     {
         return $otherMass * $this->surfaceGravity();
     }
-
-    // @codingStandardsIgnoreEnd
 }

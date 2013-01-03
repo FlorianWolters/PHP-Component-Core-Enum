@@ -1,14 +1,212 @@
 {
-    "hash": "93219b49d50e5c4ca34ac1542969b2e5",
+    "hash": "836e205c117b06c739eca51604d25fba",
     "packages": [
-
+        {
+            "name": "florianwolters/component-core-debugprint",
+            "version": "v0.1.0-beta",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FlorianWolters/PHP-Component-Core-DebugPrint",
+                "reference": "v0.1.0-beta"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/FlorianWolters/PHP-Component-Core-DebugPrint/zipball/v0.1.0-beta",
+                "reference": "v0.1.0-beta",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "florianwolters/component-core-hashcode": "0.1.*@beta"
+            },
+            "time": "2012-09-24 04:51:37",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "FlorianWolters": [
+                        "src/php",
+                        "src/tests/unit-tests/php"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Florian Wolters",
+                    "email": "wolters.fl@gmail.com",
+                    "homepage": "http://blog.florianwolters.de",
+                    "role": "Developer"
+                }
+            ],
+            "description": "The Debug Print Method implementation pattern as a simple-to-use PHP component.",
+            "homepage": "http://github.com/FlorianWolters/PHP-Component-Core-DebugPrint",
+            "keywords": [
+                "debug",
+                "pattern",
+                "language",
+                "debug print method",
+                "tostring"
+            ]
+        },
+        {
+            "name": "florianwolters/component-core-equality",
+            "version": "v0.1.0-beta",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FlorianWolters/PHP-Component-Core-Equality",
+                "reference": "v0.1.0-beta"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/FlorianWolters/PHP-Component-Core-Equality/zipball/v0.1.0-beta",
+                "reference": "v0.1.0-beta",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "time": "2012-09-24 05:35:07",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "FlorianWolters": [
+                        "src/php",
+                        "src/tests/unit-tests/php"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Florian Wolters",
+                    "email": "wolters.fl@gmail.com",
+                    "homepage": "http://blog.florianwolters.de",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Implements an equivalence relation on non-null object references.",
+            "homepage": "http://github.com/FlorianWolters/PHP-Component-Core-Equality",
+            "keywords": [
+                "core",
+                "equality",
+                "comparison",
+                "equals"
+            ]
+        },
+        {
+            "name": "florianwolters/component-core-hashcode",
+            "version": "v0.1.0-beta",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FlorianWolters/PHP-Component-Core-HashCode",
+                "reference": "v0.1.0-beta"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/FlorianWolters/PHP-Component-Core-HashCode/zipball/v0.1.0-beta",
+                "reference": "v0.1.0-beta",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "time": "2012-09-24 04:09:54",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "FlorianWolters": [
+                        "src/php",
+                        "src/tests/unit-tests/php"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Florian Wolters",
+                    "email": "wolters.fl@gmail.com",
+                    "homepage": "http://blog.florianwolters.de",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Provides a hash code value for objects.",
+            "homepage": "http://github.com/FlorianWolters/PHP-Component-Core-HashCode",
+            "keywords": [
+                "language",
+                "hash"
+            ]
+        },
+        {
+            "name": "florianwolters/component-util-singleton",
+            "version": "v0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FlorianWolters/PHP-Component-Util-Singleton",
+                "reference": "v0.3.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/FlorianWolters/PHP-Component-Util-Singleton/archive/v0.3.0.zip",
+                "reference": "v0.3.0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "time": "2012-12-13 10:51:32",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "FlorianWolters": [
+                        "src/php",
+                        "src/tests/unit-tests/php",
+                        "src/tests/mocks/php"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Florian Wolters",
+                    "email": "wolters.fl@gmail.com",
+                    "homepage": "http://blog.florianwolters.de",
+                    "role": "Developer"
+                }
+            ],
+            "description": "The Singleton (and Registry of Singletons a.k.a. Multiton) design pattern as a simple-to-use component.",
+            "homepage": "http://github.com/FlorianWolters/PHP-Component-Util-Singleton",
+            "keywords": [
+                "pattern",
+                "utility",
+                "singleton",
+                "creation"
+            ]
+        }
     ],
     "packages-dev": null,
     "aliases": [
 
     ],
-    "minimum-stability": "dev",
-    "stability-flags": [
-
-    ]
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "florianwolters/component-core-debugprint": 10,
+        "florianwolters/component-core-equality": 10,
+        "florianwolters/component-core-hashcode": 10
+    }
 }

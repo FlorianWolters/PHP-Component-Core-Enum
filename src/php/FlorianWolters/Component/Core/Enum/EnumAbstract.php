@@ -1,6 +1,16 @@
 <?php
 namespace FlorianWolters\Component\Core\Enum;
 
+use \BadMethodCallException;
+use \InvalidArgumentException;
+use \ReflectionMethod;
+
+use FlorianWolters\Component\Core\DebugPrintInterface;
+use FlorianWolters\Component\Core\EqualityInterface;
+use FlorianWolters\Component\Core\EqualityTrait;
+use FlorianWolters\Component\Core\HashCodeInterface;
+use FlorianWolters\Component\Util\Singleton\MultitonTrait;
+
 /**
  * The abstract class {@link EnumAbstract} is the base class of all PHP language
  * type-safe enumerations.
@@ -20,11 +30,11 @@ namespace FlorianWolters\Component\Core\Enum;
  *     extends FlorianWolters\Component\Core\Enum\EnumAbstract
  * {
  *     /** @return ColorEnum {@*}
- *     final public static function RED() { return self::getConstant(); }
+ *     final public static function RED() { return self::getInstance(); }
  *     /** @return ColorEnum {@*}
- *     final public static function GREEN() { return self::getConstant(); }
+ *     final public static function GREEN() { return self::getInstance(); }
  *     /** @return ColorEnum {@*}
- *     final public static function BLUE() { return self::getConstant(); }
+ *     final public static function BLUE() { return self::getInstance(); }
  * }
  * \---
  *
@@ -47,7 +57,7 @@ namespace FlorianWolters\Component\Core\Enum;
  * final class ExtraColorEnum extends ColorEnum
  * {
  *     /** @return ExtraColorEnum {@*}
- *     final public static function YELLOW() { return self::getConstant(); }
+ *     final public static function YELLOW() { return self::getInstance(); }
  * }
  * \---
  *
@@ -56,72 +66,84 @@ namespace FlorianWolters\Component\Core\Enum;
  * The enumeration classes can have functionality:
  *
  * /---code php
- * abstract class ArithmeticOperationEnum
+ * final class AnimalEnum
  *     extends FlorianWolters\Component\Core\Enum\EnumAbstract
  * {
- *     /** @return ArithmeticOperationEnum {@*}
- *     final public static function PLUS() {
- *         return static::getConstant(
- *             'PlusOperationEnum', __FUNCTION__
- *         );
+ *     /** @var boolean {@*}
+ *     private $mammal;
+ *
+ *     /** @return AnimalEnum {@*}
+ *     final public static function ELEPHANT()
+ *     {
+ *         $self = self::getInstance();
+ *         $self->mammal = true;
+ *         return $self;
  *     }
- *     /** @return ArithmeticOperationEnum {@*}
- *     final public static function MINUS() {
- *         return static::getConstant(
- *             'MinusOperationEnum', __FUNCTION__
- *         );
+ *
+ *     /** @return AnimalEnum {@*}
+ *     final public static function GIRAFFE()
+ *     {
+ *         $self = self::getInstance();
+ *         $self->mammal = true;
+ *         return $self;
  *     }
- *     /** @return integer|float {@*}
- *     abstract public function evaluate($first, $second);
+ *
+ *     /** @return AnimalEnum {@*}
+ *     final public static function TURTLE()
+ *     {
+ *         $self = self::getInstance();
+ *         $self->mammal = false;
+ *         return $self;
+ *     }
+ *
+ *     /** @return AnimalEnum {@*}
+ *     final public static function SNAKE()
+ *     {
+ *         $self = self::getInstance();
+ *         $self->mammal = false;
+ *         return $self;
+ *     }
+ *
+ *     /** @return AnimalEnum {@*}
+ *     final public static function FROG()
+ *     {
+ *         $self = self::getInstance();
+ *         $self->mammal = false;
+ *         return $self;
+ *     }
+ *
+ *     /** @return boolean {@*}
+ *     public function isMammal()
+ *     {
+ *         return $this->mammal;
+ *     }
  * }
  *
- * final class PlusOperationEnum extends ArithmeticOperationEnum
- * {
- *     /** @return integer|float {@*}
- *     public function evaluate($first, $second) {
- *         return $first + $second;
- *     }
- * }
- *
- * final class MinusOperationEnum extends ArithmeticOperationEnum
- * {
- *     /** @return integer|float {@*}
- *     public function evaluate($first, $second) {
- *         return $first - $second;
- *     }
- * }
- * \---
- *
- * Polymorphism is used to calculate the result of the artihmetic operation.
- *
- * /---code php
- * $operations = [
- *     ArithmeticOperationEnum::PLUS(), ArithmeticOperationEnum::MINUS()
- * ];
- *
- * foreach ($operations as $operation) {
- *     echo $operation->evaluate(1, 1), \PHP_EOL;
+ * /* @var $animal AnimalEnum {@*}
+ * foreach (AnimalEnum::values() as $animal) {
+ *     echo $animal->isMammal(), \PHP_EOL;
  * }
  * \---
  *
  * @author    Florian Wolters <wolters.fl@gmail.com>
- * @copyright 2011-2012 Florian Wolters
+ * @copyright 2011-2013 Florian Wolters
  * @license   http://gnu.org/licenses/lgpl.txt LGPL-3.0+
  * @link      http://github.com/FlorianWolters/PHP-Component-Core-Enum
  * @since     Class available since Release 0.1.0
  */
-abstract class EnumAbstract
+abstract class EnumAbstract implements
+    DebugPrintInterface,
+    EqualityInterface,
+    HashCodeInterface
 {
-    /**
-     * The created enumeration constants.
-     *
-     * This is a two dimensional array containing all enumeration constants by
-     * the class name of the enumeration type and the name of the enumeration
-     * constant.
-     *
-     * @var array
-     */
-    private static $constants = [];
+    use EqualityTrait;
+
+    // @codingStandardsIgnoreStart
+    use MultitonTrait {
+        getInstance as protected traitGetInstance;
+        __wakeup as public;
+    }
+    // @codingStandardsIgnoreEnd
 
     /**
      * The name of this enumeration constant.
@@ -144,14 +166,6 @@ abstract class EnumAbstract
      * @see getOrdinal, __construct
      */
     private $ordinal;
-
-    /**
-     * The class name of this enumeration constant.
-     *
-     * @var string
-     * @see __construct
-     */
-    private $className;
 
     /**
      * The string representation of this enumeration constant.
@@ -208,13 +222,13 @@ abstract class EnumAbstract
         // the intersect.
 
         $finalMethods = $reflectedClass->getMethods(
-            \ReflectionMethod::IS_FINAL
+            ReflectionMethod::IS_FINAL
         );
         $staticMethods = $reflectedClass->getMethods(
-            \ReflectionMethod::IS_STATIC
+            ReflectionMethod::IS_STATIC
         );
         $publicMethods = $reflectedClass->getMethods(
-            \ReflectionMethod::IS_PUBLIC
+            ReflectionMethod::IS_PUBLIC
         );
         $reflectedMethods = \array_intersect(
             $finalMethods,
@@ -224,7 +238,7 @@ abstract class EnumAbstract
 
         $currentMethods = [];
 
-        /* @var $method \ReflectionMethod */
+        /* @var $method ReflectionMethod */
         foreach ($reflectedMethods as $method) {
             if ($method->class === $enumType) {
                 $currentMethods[] = $method->name;
@@ -257,13 +271,13 @@ abstract class EnumAbstract
     public static function values()
     {
         $names = self::names();
-        $results = [];
+        $result = [];
 
         foreach ($names as $name) {
-            $results[] = static::$name();
+            $result[] = static::$name();
         }
 
-        return $results;
+        return $result;
     }
 
     /**
@@ -284,14 +298,14 @@ abstract class EnumAbstract
         $result = null;
 
         try {
-            $enumConst = self::values();
-            foreach ($enumConst as $const) {
-                if ($const->name === $name) {
-                    $result = $const;
+            /* @var $constant EnumAbstract */
+            foreach (self::values() as $constant) {
+                if ($constant->name === $name) {
+                    $result = $constant;
                     break;
                 }
             }
-        } catch (\InvalidArgumentException $ex) {
+        } catch (InvalidArgumentException $ex) {
             // Empty block.
         }
 
@@ -313,74 +327,32 @@ abstract class EnumAbstract
      *     /** @return ConcreteEnum {@*}
      *     final public static function CONSTANT()
      *     {
-     *         return self::getConstant();
+     *         return self::getInstance();
      *     }
      * }
      * \---
      *
-     * @param string $enumType The name of the enumeration type.
-     * @param string $name     The name of the enumeration constant, which is
-     *                         the identifier used to declare it.
-     *
      * @return EnumAbstract The enumeration constant of the specified
      *                      enumeration type with the specified name.
-     * @throws \InvalidArgumentException If the specified enumeration type has
-     *                                   no enumeration constant with the
-     *                                   specified name, or the specified class
-     *                                   name does not represent an enumeration
-     *                                   type.
+     * @throws InvalidArgumentException If the specified enumeration type has no
+     *                                  enumeration constant with the specified
+     *                                  name, or the specified class name does
+     *                                  not represent an enumeration type.
      */
-    final protected static function getConstant($enumType = null, $name = null)
+    final protected static function getInstance()
     {
-        if ((null === $enumType) || (null === $name)) {
-            // TODO Is there a faster solution to retrieve the calling class and
-            // calling method?
-            // TODO This does not allow late-static binding.
-            $backtrace = \debug_backtrace(\DEBUG_BACKTRACE_IGNORE_ARGS);
-            $enumType = $backtrace[1]['class'];
-            $name = $backtrace[1]['function'];
-        } else {
-            // TODO Check the plausability of the specified parameters? Or leave
-            // it as it is as a "performance mode"?
-            $enumType = (string) $enumType;
-            $name = (string) $name;
-            self::exists($enumType, $name);
-        }
+        $backtrace = \debug_backtrace(\DEBUG_BACKTRACE_IGNORE_ARGS);
+        $className = $backtrace[1]['class'];
+        $constantName = $backtrace[1]['function'];
 
-        if (false === isset(self::$constants[$enumType][$name])) {
-            $ordinal = self::retrieveOrdinalFor($name);
-            $newInstance = new $enumType($name, $ordinal);
+        $constantOrdinal = self::retrieveOrdinalFor($constantName);
+        $result = $className::traitGetInstance(
+            $constantName,
+            $constantOrdinal,
+            $className
+        );
 
-            self::$constants[$enumType][$name] = $newInstance;
-        }
-
-        return self::$constants[$enumType][$name];
-    }
-
-    /**
-     * Checks whether the enumeration constant with the specified name exists in
-     * the specified enumeration type.
-     *
-     * @param string $enumType The name of the enumeration type.
-     * @param string $name     The name of the enumeration constant, which is
-     *                         the identifier used to declare it.
-     *
-     * @return void
-     * @throws \InvalidArgumentException If the specified enumeration type has
-     *                                   no enumeration constant with the
-     *                                   specified name.
-     */
-    private static function exists($enumType, $name)
-    {
-        // TODO This is not 100% exact as the client can swap the name of two
-        // enumeration constants without raising an exception. Should be fixed
-        // in 1.0.0. Possible fix would be using the backtrace and comparing the
-        // caller with the specified name.
-        if (false === \method_exists($enumType, $name)) {
-            throw new \InvalidArgumentException(
-                'No enumeration constant ' . $enumType . '::' .  $name . '()'
-            );
-        }
+        return $result;
     }
 
     /**
@@ -396,10 +368,9 @@ abstract class EnumAbstract
      */
     private static function retrieveOrdinalFor($name)
     {
-        $names = self::names();
         $result = null;
 
-        foreach ($names as $key => $value) {
+        foreach (self::names() as $key => $value) {
             if ($name === $value) {
                 $result = $key;
                 break;
@@ -412,18 +383,19 @@ abstract class EnumAbstract
     /**
      * Constructs an enumeration constant.
      *
-     * @param string  $name    The name of the enumeration constant, which is
-     *                         the identifier used to declare it.
-     * @param integer $ordinal The ordinal of the enumeration constant (its
-     *                         position in the enumeration declaration, where
-     *                         the initial enumeration constant is assigned an
-     *                         ordinal of zero).
+     * @param string  $name      The name of the enumeration constant, which is
+     *                           the identifier used to declare it.
+     * @param integer $ordinal   The ordinal of the enumeration constant (its
+     *                           position in the enumeration declaration, where
+     *                           the initial enumeration constant is assigned an
+     *                           ordinal of zero).
+     * @param string  $className The name of the enumeration class.
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    private function __construct($name, $ordinal)
+    private function __construct($name, $ordinal, $className)
     {
-        $this->className = \get_called_class();
         $this->name = $name;
-        $this->ordinal = (int) $ordinal;
+        $this->ordinal = $ordinal;
         $this->hashCode = \spl_object_hash($this);
         // The _toString field cannot be set within the constructor since the
         // subclass can overwrite the __toString() method.
@@ -454,21 +426,6 @@ abstract class EnumAbstract
         );
     }
 
-    // @codeCoverageIgnoreStart
-
-    /**
-     * Clone method which is private.
-     *
-     * This guarantees that enumeration constants are never cloned, which is
-     * necessary to preserve their *Singleton* status.
-     *
-     * @return void
-     */
-    private function __clone()
-    {
-    }
-    // @codeCoverageIgnoreEnd
-
     /**
      * Throws a {@link BadMethodCallException}.
      *
@@ -480,14 +437,14 @@ abstract class EnumAbstract
      * @param mixed  $value The value to assign to the specified property.
      *
      * @return void
-     * @throws \BadMethodCallException If this method is called.
+     * @throws BadMethodCallException If this method is called.
      * @link http://php.net/language.oop5.overloading#object.set
      * @ignore
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     final public function __set($name, $value)
     {
-        throw new \BadMethodCallException(
+        throw new BadMethodCallException(
             'An enumeration constant is immutable'
         );
     }
@@ -504,26 +461,6 @@ abstract class EnumAbstract
     final public function __invoke()
     {
         return $this->ordinal;
-    }
-
-    /**
-     * Returns the name of this enumeration constant, in the format
-     * <tt><enumeration_type>[<enumeration_constant_name>]</tt>.
-     *
-     * This method may be overridden, though it typically isn't necessary or
-     * desirable. An enumeration type should override this method when a more
-     * "programmer-friendly" string form exists.
-     *
-     * @return string The name of this enumeration constant.
-     * @see http://php.net/language.oop5.magic#language.oop5.magic.tostring
-     */
-    public function __toString()
-    {
-        if (null === $this->toString) {
-            $this->toString = $this->name;
-        }
-
-        return $this->toString;
     }
 
     /**
@@ -575,80 +512,7 @@ abstract class EnumAbstract
      */
     public function compareTo(self $other)
     {
-        return static::compare($this, $other);
-    }
-
-    /**
-     * Compares an enumeration constant with another enumeration constant for
-     * order.
-     *
-     * Enumeration constants are only comparable to other enumeration constants
-     * of the same enumeration type. The natural order implemented by this
-     * method is the order in which the enumeration constants are declared.
-     *
-     * @param EnumAbstract $first  The first enumeration constant to compare.
-     * @param EnumAbstract $second The second enumeration constant to compare.
-     *
-     * @return integer A negative integer, zero, or a positive integer as the
-     *                 first enumeration constant is less than, equal to, or
-     *                 greater than the second enumeration constant.
-     */
-    final public static function compare(self $first, self $second)
-    {
-        return ($first->ordinal - $second->ordinal);
-    }
-
-    /**
-     * Determines whether this enumeration constants is equal to the specified
-     * enumeration constant.
-     *
-     * Two enumeration constants are considered equal if they have the same
-     * class names, the same names and the same ordinals.
-     *
-     * **Most programmers should use the *identical comparison operator* (`===`)
-     * in preference to this method, as the comparison operator is faster.**
-     *
-     * /---code php
-     * ConcreteEnum::FIRST_CONSTANT() === ConcreteEnum::SECOND_CONSTANT()
-     * \---
-     *
-     * @param EnumAbstract $other The enumeration constant to compare with this
-     *                            enumeration constant.
-     *
-     * @return boolean `true` if this enumeration constant is equal to the
-     *                 specified enumeration constant; `false` otherwise.
-     * @deprecated Use the *identical comparison operator* (`===`) instead.
-     */
-    final public function equals(self $other)
-    {
-        return self::isEqual($this, $other);
-    }
-
-    /**
-     * Determines whether the specified enumeration constants are equal.
-     *
-     * Two enumeration constants are considered equal if they have the same
-     * class names, the same names and the same ordinals.
-     *
-     * **Most programmers should use the *identical comparison operator* (`===`)
-     * in preference to this method, as the comparison operator is faster.**
-     *
-     * /---code php
-     * ConcreteEnum::FIRST_CONSTANT() === ConcreteEnum::SECOND_CONSTANT()
-     * \---
-     *
-     * @param EnumAbstract $first  The first enumeration constant to compare.
-     * @param EnumAbstract $second The second enumeration constant to compare.
-     *
-     * @return boolean `true` if the enumeration constants are equal; `false`
-     *                 otherwise.
-     * @deprecated Use the *identical comparison operator* (`===`) instead.
-     */
-    final public static function isEqual(self $first, self $second)
-    {
-        return ($first->className === $second->className)
-            && ($first->name === $second->name)
-            && ($first->ordinal === $second->ordinal);
+        return ($this->ordinal - $other->ordinal);
     }
 
     /**
@@ -659,5 +523,25 @@ abstract class EnumAbstract
     final public function hashCode()
     {
         return $this->hashCode;
+    }
+
+    /**
+     * Returns the name of this enumeration constant, in the format
+     * `<enumeration_type>[<enumeration_constant_name>]`.
+     *
+     * This method may be overridden, though it typically isn't necessary or
+     * desirable. An enumeration type should override this method when a more
+     * "programmer-friendly" string form exists.
+     *
+     * @return string The name of this enumeration constant.
+     * @see http://php.net/language.oop5.magic#language.oop5.magic.tostring
+     */
+    public function __toString()
+    {
+        if (null === $this->toString) {
+            $this->toString = $this->name;
+        }
+
+        return $this->toString;
     }
 }

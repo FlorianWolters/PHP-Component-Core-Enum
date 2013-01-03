@@ -1,8 +1,8 @@
 {
     "name": "florianwolters/component-core-enum",
-    "description": "An abstract base class and an utility class for type-safe enumerations in PHP.",
+    "description": "The Typesafe Enum pattern as a simple-to-use PHP component.",
     "type": "library",
-    "keywords": ["enum", "enumeration", "typesafe", "language"],
+    "keywords": ["typesafe enum", "enumeration", "enum", "pattern", "core"],
     "homepage": "http://github.com/FlorianWolters/PHP-Component-Core-Enum",
     "license": "LGPL-3.0+",
     "authors": [
@@ -14,13 +14,17 @@
       }
     ],
     "require": {
-        "php": ">=5.4.0"
+        "php": ">=5.4",
+        "florianwolters/component-core-debugprint": ">=0.1-beta",
+        "florianwolters/component-core-equality": ">=0.1-beta",
+        "florianwolters/component-core-hashcode": ">=0.1-beta",
+        "florianwolters/component-util-singleton": ">=0.3"
     },
     "autoload": {
         "psr-0": {
             "FlorianWolters": [
                 "src/php",
-                "src/tests/unit-tests/php"
+                "src/tests/mocks/php"
             ]
         }
     }

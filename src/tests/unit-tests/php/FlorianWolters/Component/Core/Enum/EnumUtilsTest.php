@@ -1,60 +1,27 @@
 <?php
-/**
- * `EnumUtilsTest.php`
- *
- * This file is part of fwComponents.
- *
- * fwComponents is free software: you can redistribute it and/or modify it under
- * the terms of the GNU Lesser General Public License as published by the Free
- * Software Foundation, either version 3 of the License, or (at your option) any
- * later version.
- *
- * fwComponents is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more
- * details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with fwComponents.  If not, see http://gnu.org/licenses/lgpl.txt.
- *
- * PHP version 5.4
- *
- * @category   Component
- * @package    Core
- * @subpackage Enum
- * @author     Florian Wolters <wolters.fl@gmail.com>
- * @copyright  2011-2012 Florian Wolters
- * @license    http://gnu.org/licenses/lgpl.txt LGPL-3.0+
- * @version    GIT: $Id$
- * @link       http://github.com/FlorianWolters/PHP-Component-Core-Enum
- * @since      File available since Release 0.1.0
- */
-
 namespace FlorianWolters\Component\Core\Enum;
 
-require_once 'EnumTestUtils.php';
+use FlorianWolters\Mock\ExtendedGenderEnum;
 
 /**
  * Test class for {@link EnumUtils}.
  *
- * @category   Component
- * @package    Core
- * @subpackage Enum
- * @author     Florian Wolters <wolters.fl@gmail.com>
- * @copyright  2011-2012 Florian Wolters
- * @license    http://gnu.org/licenses/lgpl.txt LGPL-3.0+
- * @version    Release: @package_version@
- * @link       http://github.com/FlorianWolters/PHP-Component-Core-Enum
- * @since      Class available since Release 0.1.0
+ * @author    Florian Wolters <wolters.fl@gmail.com>
+ * @copyright 2011-2013 Florian Wolters
+ * @license   http://gnu.org/licenses/lgpl.txt LGPL-3.0+
+ * @link      http://github.com/FlorianWolters/PHP-Component-Core-Enum
+ * @since     Class available since Release 0.1.0
  *
  * @covers FlorianWolters\Component\Core\Enum\EnumUtils
  */
 class EnumUtilsTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var string
+     */
+    private static $mockNamespace = 'FlorianWolters\Mock';
 
     /**
-     * Tests the definition of the class (@link EnumUtils).
-     *
      * @return void
      *
      * @group specification
@@ -82,28 +49,25 @@ class EnumUtilsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests {@link EnumUtils::names}.
-     *
      * @return void
      *
-     * @covers FlorianWolters\Component\Core\Enum\EnumUtils::names
+     * @coversClass names
      * @test
      */
     public function testNames()
     {
         $expected = ['FEMALE', 'MALE', 'HYBRID'];
-        $actual = EnumUtils::names(__NAMESPACE__ . '\ExtendedGenderEnum');
+        $actual = EnumUtils::names(
+            self::$mockNamespace . '\ExtendedGenderEnum'
+        );
 
         $this->assertEquals($expected, $actual);
     }
 
     /**
-     * Tests whether {@link EnumUtils::names} throws an {@link
-     * \InvalidArgumentException}.
-     *
      * @return void
      *
-     * @covers FlorianWolters\Component\Core\Enum\EnumUtils::names
+     * @coversClass names
      * @expectedException \InvalidArgumentException
      * @test
      */
@@ -113,11 +77,9 @@ class EnumUtilsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests {@link EnumUtils::values}.
-     *
      * @return void
      *
-     * @covers FlorianWolters\Component\Core\Enum\EnumUtils::values
+     * @coversClass values
      * @test
      */
     public function testValues()
@@ -127,18 +89,17 @@ class EnumUtilsTest extends \PHPUnit_Framework_TestCase
             ExtendedGenderEnum::MALE(),
             ExtendedGenderEnum::HYBRID()
         ];
-        $actual = EnumUtils::values(__NAMESPACE__ . '\ExtendedGenderEnum');
+        $actual = EnumUtils::values(
+            self::$mockNamespace . '\ExtendedGenderEnum'
+        );
 
         $this->assertEquals($expected, $actual);
     }
 
     /**
-     * Tests whether {@link EnumUtils::values} throws an {@link
-     * \InvalidArgumentException}.
-     *
      * @return void
      *
-     * @covers FlorianWolters\Component\Core\Enum\EnumUtils::values
+     * @coversClass values
      * @expectedException \InvalidArgumentException
      * @test
      */
@@ -148,47 +109,43 @@ class EnumUtilsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests {@link EnumUtils::isEnumType}.
-     *
      * @return void
      *
-     * @covers FlorianWolters\Component\Core\Enum\EnumUtils::isEnumType
+     * @coversClass isEnumType
      * @test
      */
     public function testIsEnumType()
     {
-        $this->assertTrue(EnumUtils::isEnumType(__NAMESPACE__ . '\GenderEnum'));
         $this->assertTrue(
-            EnumUtils::isEnumType(__NAMESPACE__ . '\ExtendedGenderEnum')
+            EnumUtils::isEnumType(self::$mockNamespace . '\GenderEnum')
+        );
+        $this->assertTrue(
+            EnumUtils::isEnumType(self::$mockNamespace . '\ExtendedGenderEnum')
         );
         $this->assertFalse(EnumUtils::isEnumType('UnknownEnum'));
     }
 
     /**
-     * Tests {@link EnumUtils::valueOf}.
-     *
      * @return void
      *
-     * @covers FlorianWolters\Component\Core\Enum\EnumUtils::valueOf
+     * @coversClass valueOf
      * @test
      */
     public function testValueOf()
     {
         $expected = ExtendedGenderEnum::HYBRID();
         $actual = EnumUtils::valueOf(
-            __NAMESPACE__ . '\ExtendedGenderEnum', 'HYBRID'
+            self::$mockNamespace . '\ExtendedGenderEnum',
+            'HYBRID'
         );
 
         $this->assertEquals($expected, $actual);
     }
 
     /**
-     * Tests whether {@link EnumUtils::valueof} throws an {@link
-     * \InvalidArgumentException}.
-     *
      * @return void
      *
-     * @covers FlorianWolters\Component\Core\Enum\EnumUtils::valueOf
+     * @coversClass valueOf
      * @expectedException \InvalidArgumentException
      * @test
      */
@@ -198,168 +155,128 @@ class EnumUtilsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Data provider for {@link testGetNameForOrdinal}.
-     *
-     * @return array The parameters for the test method.
+     * @return array
      */
     public static function providerGetNameForOrdinal()
     {
         return [
             // Equivalence class: Positive result.
-            ['FEMALE', 'GenderEnum', 0],
-            ['MALE', 'GenderEnum', 1],
-            ['FEMALE', 'ExtendedGenderEnum', 0],
-            ['MALE', 'ExtendedGenderEnum', 1],
-            ['HYBRID', 'ExtendedGenderEnum', 2],
+            ['FEMALE', self::$mockNamespace . '\GenderEnum', 0],
+            ['MALE', self::$mockNamespace . '\GenderEnum', 1],
+            ['FEMALE', self::$mockNamespace . '\ExtendedGenderEnum', 0],
+            ['MALE', self::$mockNamespace . '\ExtendedGenderEnum', 1],
+            ['HYBRID', self::$mockNamespace . '\ExtendedGenderEnum', 2],
             // Equivalence class: Negative result.
-            [null, 'GenderEnum', 2],
-            [null, 'ExtendedGenderEnum', -1],
-            [null, 'ExtendedGenderEnum', 3]
+            [null, self::$mockNamespace . '\GenderEnum', 2],
+            [null, self::$mockNamespace . '\ExtendedGenderEnum', -1],
+            [null, self::$mockNamespace . '\ExtendedGenderEnum', 3]
         ];
     }
 
     /**
-     * Tests {@link EnumUtils::getNameForOrdinal}.
-     *
-     * @param boolean $expected The expected return value of {@link
-     *                          EnumUtils::getNameForOrdinal}.
-     * @param string  $enumType The name of an enumeration type.
-     * @param integer $ordinal  The ordinal of an enumeration constant.
-     *
      * @return void
      *
-     * @covers FlorianWolters\Component\Core\Enum\EnumUtils::getNameForOrdinal
+     * @coversClass getNameForOrdinal
      * @dataProvider providerGetNameForOrdinal
      * @test
      */
-    public function testGetNameForOrdinal($expected, $enumType, $ordinal)
+    public function testGetNameForOrdinal($expected, $className, $ordinal)
     {
-        $className = EnumTestUtils::buildClassName($enumType);
         $actual = EnumUtils::getNameForOrdinal($className, $ordinal);
         $this->assertEquals($actual, $expected);
     }
 
     /**
-     * Data provider for {@link testGetOrdinalForName}.
-     *
-     * @return array The parameters for the test method.
+     * @return array
      */
     public static function providerGetOrdinalForName()
     {
         return [
             // Equivalence class: Positive result.
-            [0, 'GenderEnum', 'FEMALE'],
-            [1, 'GenderEnum', 'MALE'],
-            [0, 'ExtendedGenderEnum', 'FEMALE'],
-            [1, 'ExtendedGenderEnum', 'MALE'],
-            [2, 'ExtendedGenderEnum', 'HYBRID'],
+            [0, self::$mockNamespace . '\GenderEnum', 'FEMALE'],
+            [1, self::$mockNamespace . '\GenderEnum', 'MALE'],
+            [0, self::$mockNamespace . '\ExtendedGenderEnum', 'FEMALE'],
+            [1, self::$mockNamespace . '\ExtendedGenderEnum', 'MALE'],
+            [2, self::$mockNamespace . '\ExtendedGenderEnum', 'HYBRID'],
             // Equivalence class: Negative result.
-            [null, 'GenderEnum', 'HYBRID'],
-            [null, 'ExtendedGenderEnum', 'UNKNOWN']
+            [null, self::$mockNamespace . '\GenderEnum', 'HYBRID'],
+            [null, self::$mockNamespace . '\ExtendedGenderEnum', 'UNKNOWN']
         ];
     }
 
     /**
-     * Tests {@link EnumUtils::getOrdinalForName}.
-     *
-     * @param boolean $expected The expected return value of {@link
-     *                          EnumUtils::getOrdinalForName}.
-     * @param string  $enumType The name of an enumeration type.
-     * @param string  $name     The name of an enumeration constant.
-     *
      * @return void
      *
-     * @covers FlorianWolters\Component\Core\Enum\EnumUtils::getOrdinalForName
+     * @coversClass getOrdinalForName
      * @dataProvider providerGetOrdinalForName
      * @test
      */
-    public function testGetOrdinalForName($expected, $enumType, $name)
+    public function testGetOrdinalForName($expected, $className, $name)
     {
-        $className = EnumTestUtils::buildClassName($enumType);
         $actual = EnumUtils::getOrdinalForName($className, $name);
         $this->assertEquals($actual, $expected);
     }
 
     /**
-     * Data provider for {@link testIsDefinedName}.
-     *
-     * @return array The parameters for the test method.
+     * @return array
      */
     public static function providerIsDefinedName()
     {
         return [
             // Equivalence class: Positive result.
-            [true, 'GenderEnum', 'FEMALE'],
-            [true, 'GenderEnum', 'MALE'],
-            [true, 'ExtendedGenderEnum', 'FEMALE'],
-            [true, 'ExtendedGenderEnum', 'MALE'],
-            [true, 'ExtendedGenderEnum', 'HYBRID'],
+            [true, self::$mockNamespace . '\GenderEnum', 'FEMALE'],
+            [true, self::$mockNamespace . '\GenderEnum', 'MALE'],
+            [true, self::$mockNamespace . '\ExtendedGenderEnum', 'FEMALE'],
+            [true, self::$mockNamespace . '\ExtendedGenderEnum', 'MALE'],
+            [true, self::$mockNamespace . '\ExtendedGenderEnum', 'HYBRID'],
             // Equivalence class: Negative result.
-            [false, 'GenderEnum', 'HYBRID'],
-            [false, 'ExtendedGenderEnum', 'UNKNOWN']
+            [false, self::$mockNamespace . '\GenderEnum', 'HYBRID'],
+            [false, self::$mockNamespace . '\ExtendedGenderEnum', 'UNKNOWN']
         ];
     }
 
     /**
-     * Tests {@link EnumUtils::isDefinedName}.
-     *
-     * @param boolean $expected The expected return value.
-     * @param string  $enumType The enumeration type to check.
-     * @param string  $name     The name of the enumeration constant to check.
-     *
      * @return void
      *
-     * @covers FlorianWolters\Component\Core\Enum\EnumUtils::isDefinedName
+     * @coversClass isDefinedName
      * @dataProvider providerIsDefinedName
      * @test
      */
-    public function testIsDefinedName($expected, $enumType, $name)
+    public function testIsDefinedName($expected, $className, $name)
     {
-        $className = EnumTestUtils::buildClassName($enumType);
         $actual = EnumUtils::isDefinedName($className, $name);
         $this->assertEquals($actual, $expected);
     }
 
     /**
-     * Data provider for {@link testIsDefinedOrdinal}.
-     *
-     * @return array The parameters for the test method.
+     * @return array
      */
     public static function providerIsDefinedOrdinal()
     {
         return [
             // Equivalence class: Positive result.
-            [true, 'GenderEnum', 0],
-            [true, 'GenderEnum', 1],
-            [true, 'ExtendedGenderEnum', 0],
-            [true, 'ExtendedGenderEnum', 1],
-            [true, 'ExtendedGenderEnum', 2],
+            [true, self::$mockNamespace . '\GenderEnum', 0],
+            [true, self::$mockNamespace . '\GenderEnum', 1],
+            [true, self::$mockNamespace . '\ExtendedGenderEnum', 0],
+            [true, self::$mockNamespace . '\ExtendedGenderEnum', 1],
+            [true, self::$mockNamespace . '\ExtendedGenderEnum', 2],
             // Equivalence class: Negative result.
-            [false, 'GenderEnum', 2],
-            [false, 'ExtendedGenderEnum', -1],
-            [false, 'ExtendedGenderEnum', 3]
+            [false, self::$mockNamespace . '\GenderEnum', 2],
+            [false, self::$mockNamespace . '\ExtendedGenderEnum', -1],
+            [false, self::$mockNamespace . '\ExtendedGenderEnum', 3]
         ];
     }
 
     /**
-     * Tests {@link EnumUtils::isDefinedOrdinal}.
-     *
-     * @param boolean $expected The expected return value.
-     * @param string  $enumType The enumeration type to check.
-     * @param string  $ordinal  The ordinal of the enumeration constant to
-     *                          check.
-     *
      * @return void
      *
-     * @covers FlorianWolters\Component\Core\Enum\EnumUtils::isDefinedOrdinal
+     * @coversClass isDefinedOrdinal
      * @dataProvider providerIsDefinedOrdinal
      * @test
      */
-    public function testIsDefinedOrdinal($expected, $enumType, $ordinal)
+    public function testIsDefinedOrdinal($expected, $className, $ordinal)
     {
-        $className = EnumTestUtils::buildClassName($enumType);
         $actual = EnumUtils::isDefinedOrdinal($className, $ordinal);
         $this->assertEquals($actual, $expected);
     }
-
 }
