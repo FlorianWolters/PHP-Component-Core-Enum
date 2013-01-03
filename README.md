@@ -142,33 +142,19 @@ The most important usage rule:
 
 ```php
 <?php
-// Example 01: High dynamic and implicit, but with lower performance.
-final class GenderEnum extends FlorianWolters\Component\Core\Enum\Enum {
+// Example 01: Standard enumeration type.
+final class GenderEnum extends FlorianWolters\Component\Core\Enum\EnumAbstract {
     /** @return GenderEnum */
-    final public static function FEMALE() { return self::getConstant(); }
+    final public static function FEMALE() { return self::getInstance(); }
     /** @return GenderEnum */
-    final public static function MALE() { return self::getConstant(); }
+    final public static function MALE() { return self::getInstance(); }
 }
 
-// Example 02: High performance and explicit, but with more source code to write.
-final class BooleanEnum extends FlorianWolters\Component\Core\Enum\Enum {
-    /** @return BooleanEnum */
-    final public static function FALSE() {
-        // The first parameter can be the name of this enumeration class.
-        // => The name can be retrieved via the __CLASS__ constant.
-        // The second parameter can be the name of this enumeration constant.
-        // => The name can be retrieved via the __FUNCTION__ constant.
-        return self::getConstant(__CLASS__, __FUNCTION__);
-    }
-    /** @return BooleanEnum */
-    final public static function TRUE() { return self::getConstant(__CLASS__, __FUNCTION__); }
-}
-
-// Example 03: Subclassed enumeration types.
+// Example 02: Subclassed enumeration types.
 // NOTE: The class GenderEnum declared above is final, change that to get this example to run.
 final class ExtendedGenderEnum extends GenderEnum {
     /** @return ExtendedGenderEnum */
-    final public static function HYBRID() { return self::getConstant(); }
+    final public static function HYBRID() { return self::getInstance(); }
 }
 ```
 
@@ -201,8 +187,6 @@ This program is free software: you can redistribute it and/or modify it under th
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more details.
 
 You should have received a copy of the GNU Lesser General Public License along with this program. If not, see <http://gnu.org/licenses/lgpl.txt>.
-
-
 
 [0]: http://github.com/FlorianWolters/PHP-Component-Core-Enum/wiki
 [1]: http://blog.florianwolters.de/PHP-Component-Core-Enum
