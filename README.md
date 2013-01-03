@@ -189,36 +189,69 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU Lesser General Public License along with this program. If not, see <http://gnu.org/licenses/lgpl.txt>.
 
 [0]: http://github.com/FlorianWolters/PHP-Component-Core-Enum/wiki
+     "FlorianWolters\Component\Core\Enum | Wiki"
 [1]: http://blog.florianwolters.de/PHP-Component-Core-Enum
+     "FlorianWolters\Component\Core\Enum | Application Programming Interface (API) documentation"
 [2]: http://apigen.org
+     "ApiGen | API documentation generator for PHP 5.3.+"
 [3]: http://getcomposer.org
+     "Composer"
 [4]: https://github.com/sebastianbergmann/phpcpd
+     "sebastianbergmann/phpcpd · GitHub"
 [5]: https://github.com/sebastianbergmann/phpdcd
+     "sebastianbergmann/phpdcd · GitHub"
 [6]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md
+     "PSR-0 requirements for autoloader interoperability"
 [7]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md
+     "PSR-1 basic coding style guide"
 [8]: https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md
+     "PSR-2 coding style guide"
 [9]: http://pear.florianwolters.de
+     "PEAR channel of Florian Wolters"
 [10]: http://pear.php.net
+      "PEAR - PHP Extension and Application Repository"
 [11]: http://pear.php.net/manual/en/guide.users.commandline.cli.php
+      "Manual :: Command line installer (PEAR)"
 [12]: http://pear.php.net/manual/en/guide.users.concepts.channel.php
+      "Manual :: PEAR Channels"
 [13]: http://pear.php.net/manual/en/guide.users.concepts.package.php
+      "Manual :: PEAR Packages"
 [14]: http://pear.php.net/package/PHP_CodeSniffer
+      "PHP_CodeSniffer"
 [15]: http://phing.info
+      "Phing"
 [16]: https://github.com/stuartherbert/phix4componentdev
-[17]: http://php.net "The PHP Group. PHP: Hypertext Preprocessor. 2001-2012."
+      "stuartherbert/phix4componentdev · GitHub"
+[17]: http://php.net
+      "PHP: Hypertext Preprocessor"
 [18]: http://phpmd.org
+      "PHPMD - PHP Mess Detector"
 [19]: http://phpunit.de
+      "sebastianbergmann/phpunit · GitHub"
 [20]: http://semver.org
-[21]: http://docs.oracle.com/javase/1.5.0/docs/guide/language/enums.html "Oracle. Enums. 2004, 2010."
-[22]: http://docs.oracle.com/javase/7/docs/api/java/lang/Enum.html "Oracle. Java Platform SE 7: Enum. 1993, 2011."
-[23]: http://docs.oracle.com/javase/tutorial/java/javaOO/enum.html "Oracle. The Java Tutorials: Enum Types. 1995, 2012."
+      "Semantic Versioning"
+[21]: http://docs.oracle.com/javase/1.5.0/docs/guide/language/enums.html
+      "Oracle. Enums. 2004, 2010."
+[22]: http://docs.oracle.com/javase/7/docs/api/java/lang/Enum.html
+      "Oracle. Java Platform SE 7: Enum. 1993, 2011."
+[23]: http://docs.oracle.com/javase/tutorial/java/javaOO/enum.html
+      "Oracle. The Java Tutorials: Enum Types. 1995, 2012."
 [24]: http://java.sun.com/developer/Books/shiftintojava/page1.html#replaceenums
-[25]: http://java.sun.com/docs/books/effective "J. Bloch. Effective Java, 2nd Edition. Boston: Addison-Wesley, 2008."
+[25]: http://java.sun.com/docs/books/effective
+      "J. Bloch. Effective Java, 2nd Edition. Boston: Addison-Wesley, 2008."
 [26]: http://martinfowler.com/bliki/ValueObject.html
-[27]: http://php.net/language.namespaces "The PHP Group. PHP: Namespaces. 2001-2012."
+      "M. Fowler. Value Object."
+[27]: http://php.net/language.namespaces
+      "The PHP Group. PHP: Namespaces. 2001-2013."
 [28]: http://php.net/language.oop5.basic.php#language.oop5.basic.new
+      "The PHP Group. PHP: The Basics. 2001-2013."
 [29]: http://php.net/language.oop5.cloning.php#object.clone
-[30]: http://php.net/language.oop5.inheritance "The PHP Group. PHP: Object Inheritcance. 2001-2012."
+      "The PHP Group. PHP: Object Cloning. 2001-2013."
+[30]: http://php.net/language.oop5.inheritance
+      "The PHP Group. PHP: Object Inheritcance. 2001-2013."
 [31]: http://php.net/serialize
+      "The PHP Group. PHP: serialize. 2001-2013."
 [32]: http://php.net/unserialize
+      "The PHP Group. PHP: unserialize. 2001-2013."
 [33]: http://wiki.php.net/rfc/enum
+      "The PHP Group. PHP: rfc:enum [PHP Wiki]. 2001-2013."
