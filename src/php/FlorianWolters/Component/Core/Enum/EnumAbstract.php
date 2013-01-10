@@ -5,6 +5,7 @@ use \BadMethodCallException;
 use \InvalidArgumentException;
 use \ReflectionMethod;
 
+use FlorianWolters\Component\Core\ComparableInterface;
 use FlorianWolters\Component\Core\DebugPrintInterface;
 use FlorianWolters\Component\Core\EqualityInterface;
 use FlorianWolters\Component\Core\EqualityTrait;
@@ -132,6 +133,7 @@ use FlorianWolters\Component\Util\Singleton\MultitonTrait;
  * @since     Class available since Release 0.1.0
  */
 abstract class EnumAbstract implements
+    ComparableInterface,
     DebugPrintInterface,
     EqualityInterface,
     HashCodeInterface
@@ -503,15 +505,21 @@ abstract class EnumAbstract implements
      * of the same enumeration type. The natural order implemented by this
      * method is the order in which the enumeration constants are declared.
      *
-     * @param EnumAbstract $other The other enumeration constant to compare this
-     *                            enumeration constant to.
+     * @param ComparableInterface $other The other enumeration constant to
+     *                                   compare this enumeration constant to.
      *
      * @return integer A negative integer, zero, or a positive integer as this
      *                 enumeration constant is less than, equal to, or greater
      *                 than the specified enumeration constant.
      */
-    public function compareTo(self $other)
+    public function compareTo(ComparableInterface $other)
     {
+        // TODO Replace all calls to \get_called_class() with static field.
+        if (\get_called_class() instanceof $other) {
+            // TODO Replace with specific exception, e.g. ClassCastException.
+            throw new \RuntimeException;
+        }
+
         return ($this->ordinal - $other->ordinal);
     }
 
