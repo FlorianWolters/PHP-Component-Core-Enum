@@ -4,7 +4,7 @@ namespace FlorianWolters\Mock;
 use FlorianWolters\Component\Core\Enum\EnumAbstract;
 
 /**
- * The {@link PlanetEnum} enumeration demonstrates the following usage of
+ * The enumeration class {@see PlanetEnum} demonstrates the following usage of
  * **FlorianWolters\Component\Core\Enum**:
  *
  * * Functional enumeration.
@@ -15,24 +15,24 @@ use FlorianWolters\Component\Core\Enum\EnumAbstract;
  * @link      http://github.com/FlorianWolters/PHP-Component-Core-Enum
  * @since     Class available since Release 0.2.0
  */
-final class PlanetEnum extends EnumAbstract
+class PlanetEnum extends EnumAbstract
 {
     /**
-     * The universal gravitational constant (m3 kg-1 s-2).
+     * The universal gravitational constant.
      *
      * @var float
      */
     const G = 6.67300E-11;
 
     /**
-     * The mass of this Planet in kilograms.
+     * The mass of this planet in kilograms.
      *
      * @var float
      */
     private $mass;
 
     /**
-     * The radius of this Planet in meters.
+     * The radius of this planet in meters.
      *
      * @var float
      */
@@ -47,11 +47,7 @@ final class PlanetEnum extends EnumAbstract
      */
     final public static function MERCURY()
     {
-        $self = self::getInstance();
-        $self->mass = 3.303e+23;
-        $self->radius = 2.4397e6;
-
-        return $self;
+        return self::getInstance(3.303e23, 2.4397e6);
     }
 
     /**
@@ -61,11 +57,7 @@ final class PlanetEnum extends EnumAbstract
      */
     final public static function VENUS()
     {
-        $self = self::getInstance();
-        $self->mass = 4.869e+24;
-        $self->radius = 6.0518e6;
-
-        return $self;
+        return self::getInstance(4.869e24, 6.0518e6);
     }
 
     /**
@@ -75,14 +67,79 @@ final class PlanetEnum extends EnumAbstract
      */
     final public static function EARTH()
     {
-        $self = self::getInstance();
-        $self->mass = 5.976e+24;
-        $self->radius = 6.37814e6;
+        return self::getInstance(5.976e24, 6.37814e6);
+    }
 
-        return $self;
+    /**
+     * The planet mars.
+     *
+     * @return PlanetEnum The planet mars.
+     */
+    final public static function MARS()
+    {
+        return self::getInstance(6.4191e23, 3.3972e6);
+    }
+
+    /**
+     * The planet jupiter.
+     *
+     * @return PlanetEnum The planet jupiter.
+     */
+    final public static function JUPITER()
+    {
+        return self::getInstance(1.8987e27, 7.1492e7);
+    }
+
+    /**
+     * The planet saturn.
+     *
+     * @return PlanetEnum The planet saturn.
+     */
+    final public static function SATURN()
+    {
+        return self::getInstance(5.6851e26, 6.0268e7);
+    }
+
+    /**
+     * The planet uranus.
+     *
+     * @return PlanetEnum The planet uranus.
+     */
+    final public static function URANUS()
+    {
+        return self::getInstance(8.6849e25, 2.5559e7);
+    }
+
+    /**
+     * The planet neptune.
+     *
+     * @return PlanetEnum The planet neptune.
+     */
+    final public static function NEPTUNE()
+    {
+        return self::getInstance(1.0244e26, 2.4764e7);
     }
 
     // @codingStandardsIgnoreEnd
+
+    /**
+     * Constructs a new planet with the specified mass and the specified radius.
+     *
+     * The name of the constructor of a functional enumeration is `construct` by
+     * convention and must have the visibility `protected` or `private`.
+     *
+     * @param float $mass   The mass in kilograms.
+     * @param float $radius The radius in meters.
+     */
+    protected function construct($mass, $radius)
+    {
+        $this->mass = $mass;
+        $this->radius = $radius;
+    }
+
+    final public static function doSomething()
+    {
+    }
 
     /**
      * Calculates and returns the surface gravity of this planet.
@@ -91,7 +148,7 @@ final class PlanetEnum extends EnumAbstract
      */
     public function surfaceGravity()
     {
-        return self::G * $this->mass / ($this->radius ^ 2);
+        return ((self::G * $this->mass) / ($this->radius ^ 2));
     }
 
     /**
@@ -103,6 +160,6 @@ final class PlanetEnum extends EnumAbstract
      */
     public function surfaceWeight($otherMass)
     {
-        return $otherMass * $this->surfaceGravity();
+        return ($this->surfaceGravity() * $otherMass);
     }
 }

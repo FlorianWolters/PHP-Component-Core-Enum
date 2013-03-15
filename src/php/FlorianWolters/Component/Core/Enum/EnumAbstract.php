@@ -1,22 +1,30 @@
 <?php
 namespace FlorianWolters\Component\Core\Enum;
 
-use \BadMethodCallException;
 use \InvalidArgumentException;
+use \ReflectionClass;
+use \ReflectionException;
 use \ReflectionMethod;
+use \RuntimeException;
+use \UnexpectedValueException;
 
+use FlorianWolters\Component\Core\ClassCastException;
 use FlorianWolters\Component\Core\ComparableInterface;
 use FlorianWolters\Component\Core\DebugPrintInterface;
 use FlorianWolters\Component\Core\EqualityInterface;
 use FlorianWolters\Component\Core\EqualityTrait;
 use FlorianWolters\Component\Core\HashCodeInterface;
+use FlorianWolters\Component\Core\HashCodeTrait;
+use FlorianWolters\Component\Core\ImmutableInterface;
+use FlorianWolters\Component\Core\ImmutableTrait;
+use FlorianWolters\Component\Util\ReflectionUtils;
 use FlorianWolters\Component\Util\Singleton\MultitonTrait;
 
 /**
- * The abstract class {@link EnumAbstract} is the base class of all PHP language
- * type-safe enumerations.
+ * The abstract class {@see EnumAbstract} is the superclass for type-safe
+ * enumerations (enums) in {@link http://php.net PHP}.
  *
- * One feature of the C programming language lacking in PHP is enumerations.
+ * One feature of the C programming language lacking in PHP are enumerations.
  * Using an implementation based on integers is poor and open to abuse. This
  * class implements the *{@link
  * http://java.sun.com/developer/Books/shiftintojava/page1.html#replaceenums
@@ -27,103 +35,195 @@ use FlorianWolters\Component\Util\Singleton\MultitonTrait;
  * To use this class, it must be subclassed. For example:
  *
  * /---code php
- * final class ColorEnum
- *     extends FlorianWolters\Component\Core\Enum\EnumAbstract
+ * final class ColorEnum extends FlorianWolters\Component\Core\Enum\EnumAbstract
  * {
  *     /** @return ColorEnum {@*}
  *     final public static function RED() { return self::getInstance(); }
+ *
  *     /** @return ColorEnum {@*}
  *     final public static function GREEN() { return self::getInstance(); }
+ *
  *     /** @return ColorEnum {@*}
  *     final public static function BLUE() { return self::getInstance(); }
  * }
  * \---
  *
  * Each enumeration constant has a name and an ordinal. These can be accessed
- * using the {@link getName}, respectively the {@link getOrdinal} method.
+ * using the {@see getName}, respectively the {@see getOrdinal} method.
  *
- * The {@link valueOf} and {@link values} methods can be used to access the
+ * The {@see valueOf} and {@see values} methods can be used to access the
  * enumeration constants dynamically.
  *
  * **Subclassed enumerations**
  *
  * A hierarchy of enumeration classes can be built. In this case, the superclass
- * is unaffected by the addition of subclasses (as per normal PHP). The query
- * methods on the subclass will return all of the enumeration constants from the
- * superclass and the subclass.
+ * is unaffected by the addition of subclasses (as per normal PHP). The
+ * subclasses may add additional enumeration constants *of the type of the
+ * superclass*. The query methods on the subclass will return all of the
+ * enumeration constants from the superclass and the subclass.
  *
  * /---code php
  * // NOTE: The class ColorEnum declared above is final, change that to get this
  * // example to run.
  * final class ExtraColorEnum extends ColorEnum
  * {
- *     /** @return ExtraColorEnum {@*}
+ *     /** @return ColorEnum {@*}
  *     final public static function YELLOW() { return self::getInstance(); }
  * }
  * \---
  *
+ * This example will return RED, GREEN, BLUE, YELLOW from the {@see values}
+ * method in that order. The RED, GREEN and BLUE instances will be the identical
+ * (`===`) as those from the superclass `ColorEnum`. Note that YELLOW is an
+ * instance of `ColorEnum` and not an instance of `ExtraColorEnum`.
+ *
  * **Functional enumerations**
  *
- * The enumeration classes can have functionality:
+ * The enumeration classes can have functionality by defining subclasses and
+ * implementing the `initInstance` method:
  *
  * /---code php
- * final class AnimalEnum
- *     extends FlorianWolters\Component\Core\Enum\EnumAbstract
+ * final class PlanetEnum extends
+ *     FlorianWolters\Component\Core\Enum\EnumAbstract
  * {
- *     /** @var boolean {@*}
- *     private $mammal;
+ *     /**
+ *      * The universal gravitational constant.
+ *      *
+ *      * @var float
+ *     {@*}
+ *     const G = 6.67300E-11;
  *
- *     /** @return AnimalEnum {@*}
- *     final public static function ELEPHANT()
+ *     /**
+ *      * The mass of this planet in kilograms.
+ *      *
+ *      * @var float
+ *     {@*}
+ *     private $mass;
+ *
+ *     /**
+ *      * The radius of this planet in meters.
+ *      *
+ *      * @var float
+ *     {@*}
+ *     private $radius;
+ *
+ *     /**
+ *      * The planet mercury.
+ *      *
+ *      * @return PlanetEnum The planet mercury.
+ *     {@*}
+ *     final public static function MERCURY()
  *     {
- *         $self = self::getInstance();
- *         $self->mammal = true;
- *         return $self;
+ *         return self::getInstance(3.303e23, 2.4397e6);
  *     }
  *
- *     /** @return AnimalEnum {@*}
- *     final public static function GIRAFFE()
+ *     /**
+ *      * The planet venus.
+ *      *
+ *      * @return PlanetEnum The planet venus.
+ *     {@*}
+ *     final public static function VENUS()
  *     {
- *         $self = self::getInstance();
- *         $self->mammal = true;
- *         return $self;
+ *         return self::getInstance(4.869e24, 6.0518e6);
  *     }
  *
- *     /** @return AnimalEnum {@*}
- *     final public static function TURTLE()
+ *     /**
+ *      * The planet earth.
+ *      *
+ *      * @return PlanetEnum The planet earth.
+ *     {@*}
+ *     final public static function EARTH()
  *     {
- *         $self = self::getInstance();
- *         $self->mammal = false;
- *         return $self;
+ *         return self::getInstance(5.976e24, 6.37814e6);
  *     }
  *
- *     /** @return AnimalEnum {@*}
- *     final public static function SNAKE()
+ *     /**
+ *      * The planet mars.
+ *      *
+ *      * @return PlanetEnum The planet mars.
+ *     {@*}
+ *     final public static function MARS()
  *     {
- *         $self = self::getInstance();
- *         $self->mammal = false;
- *         return $self;
+ *         return self::getInstance(6.4191e23, 3.3972e6);
  *     }
  *
- *     /** @return AnimalEnum {@*}
- *     final public static function FROG()
+ *     /**
+ *      * The planet jupiter.
+ *      *
+ *      * @return PlanetEnum The planet jupiter.
+ *     {@*}
+ *     final public static function JUPITER()
  *     {
- *         $self = self::getInstance();
- *         $self->mammal = false;
- *         return $self;
+ *         return self::getInstance(1.8987e27, 7.1492e7);
  *     }
  *
- *     /** @return boolean {@*}
- *     public function isMammal()
+ *     /**
+ *      * The planet saturn.
+ *      *
+ *      * @return PlanetEnum The planet saturn.
+ *     {@*}
+ *     final public static function SATURN()
  *     {
- *         return $this->mammal;
+ *         return self::getInstance(5.6851e26, 6.0268e7);
  *     }
- * }
  *
- * /* @var $animal AnimalEnum {@*}
- * foreach (AnimalEnum::values() as $animal) {
- *     echo $animal->isMammal(), \PHP_EOL;
- * }
+ *     /**
+ *      * The planet uranus.
+ *      *
+ *      * @return PlanetEnum The planet uranus.
+ *     {@*}
+ *     final public static function URANUS()
+ *     {
+ *         return self::getInstance(8.6849e25, 2.5559e7);
+ *     }
+ *
+ *     /**
+ *      * The planet neptune.
+ *      *
+ *      * @return PlanetEnum The planet neptune.
+ *     {@*}
+ *     final public static function NEPTUNE()
+ *     {
+ *         return self::getInstance(1.0244e26, 2.4764e7);
+ *     }
+ *
+ *     /**
+ *      * Constructs a new planet with the specified mass and the specified
+ *      * radius.
+ *      *
+ *      * The name of the constructor of a functional enumeration is `construct`
+ *      * by convention and must have the visibility `protected` or `private`.
+ *      *
+ *      * @param float $mass   The mass in kilograms.
+ *      * @param float $radius The radius in meters.
+ *     {@*}
+ *     protected function construct($mass, $radius)
+ *     {
+ *         $this->mass = $mass;
+ *         $this->radius = $radius;
+ *     }
+ *
+ *     /**
+ *      * Calculates and returns the surface gravity of this planet.
+ *      *
+ *      * @return float The surface gravity.
+ *     {@*}
+ *     public function surfaceGravity()
+ *     {
+ *         return ((self::G  * $this->mass) / ($this->radius ^ 2));
+ *     }
+ *
+ *     /**
+ *      * Calculates and returns the surface weight of this planet.
+ *      *
+ *      * @param float $otherMass Another mass in kilograms.
+ *      *
+ *      * @return float The surface weight.
+ *     {@*}
+ *     public function surfaceWeight($otherMass)
+ *     {
+ *         return ($this->surfaceGravity() * $otherMass);
+ *     }
  * \---
  *
  * @author    Florian Wolters <wolters.fl@gmail.com>
@@ -133,16 +233,16 @@ use FlorianWolters\Component\Util\Singleton\MultitonTrait;
  * @since     Class available since Release 0.1.0
  */
 abstract class EnumAbstract implements
-    ComparableInterface,
-    DebugPrintInterface,
-    EqualityInterface,
-    HashCodeInterface
+     ComparableInterface,
+     DebugPrintInterface,
+     EqualityInterface,
+     HashCodeInterface,
+     ImmutableInterface
 {
-    use EqualityTrait;
-
     // @codingStandardsIgnoreStart
-    use MultitonTrait {
-        getInstance as protected traitGetInstance;
+    use EqualityTrait, HashCodeTrait, ImmutableTrait, MultitonTrait {
+        MultitonTrait::getInstance as private getMultitonInstance;
+        ImmutableTrait::__clone insteadof MultitonTrait;
         __wakeup as public;
     }
     // @codingStandardsIgnoreEnd
@@ -172,24 +272,13 @@ abstract class EnumAbstract implements
     /**
      * The string representation of this enumeration constant.
      *
-     * The string representation is set in the {@link __toString} method via the
+     * The string representation is set in the {@see __toString} method via the
      * *Lazy Initialization* implementation pattern.
      *
      * @var string
      * @see __toString
      */
     private $toString;
-
-    /**
-     * The hashcode representation of this enumeration constant.
-     *
-     * The hashcode is set in {@link __construct} and returned by the {@link
-     * hashCode} method.
-     *
-     * @var integer
-     * @see hashCode, __construct
-     */
-    private $hashCode;
 
     /**
      * Returns an array containing the names of the enumeration constants of
@@ -204,51 +293,69 @@ abstract class EnumAbstract implements
      * }
      * \---
      *
-     * @return array An array containing the names of the constants of this
-     *               enumeration type, in the order they are declared.
+     * @return string[] An array containing the names of the constants of this
+     *                  enumeration type, in the order they are declared.
      */
-    public static function names()
+    final public static function names()
     {
-        $enumType = \get_called_class();
-        $parentEnumType = \get_parent_class($enumType);
-        $parentMethods = [];
+        $result = [];
+        $classes = self::hierarchy(\get_called_class());
 
-        if ((false !== $parentEnumType) && (__CLASS__ !== $parentEnumType)) {
-            $parentMethods = $parentEnumType::names();
+        /* @var $class ReflectionClass */
+        foreach ($classes as $class) {
+            $result = \array_merge(self::namesFor($class->name), $result);
         }
 
-        $reflectedClass = new \ReflectionClass($enumType);
+        return $result;
+    }
 
-        // The argument $filter of the method getMethods uses a logical OR.
-        // Therefore we have to return all methods for each filter and calculate
-        // the intersect.
+    /**
+     * @param string $enumType
+     *
+     * @return ReflectionClass[]
+     */
+    private static function hierarchy($enumType)
+    {
+        $child = new ReflectionClass($enumType);
+        $result = ReflectionUtils::parentClassesForClass($enumType);
+        // Delete this abstract base class from the array of parent classes.
+        \array_pop($result);
+        \array_unshift($result, $child);
 
-        $finalMethods = $reflectedClass->getMethods(
-            ReflectionMethod::IS_FINAL
-        );
-        $staticMethods = $reflectedClass->getMethods(
-            ReflectionMethod::IS_STATIC
-        );
-        $publicMethods = $reflectedClass->getMethods(
-            ReflectionMethod::IS_PUBLIC
-        );
-        $reflectedMethods = \array_intersect(
-            $finalMethods,
-            $staticMethods,
-            $publicMethods
-        );
+        return $result;
+    }
 
-        $currentMethods = [];
+    /**
+     * Returns an array containing the names of the enumeration constants of
+     * the specified enumeration type.
+     *
+     * The returned array does **not** contain enumeration constant names from
+     * the subclasses of the specified enumeration type.
+     *
+     * @param string $enumType The enumeration type
+     *
+     * @return string[] An array containing the names of the constants of this
+     *                  enumeration type, in the order they are declared.
+     */
+    private static function namesFor($enumType)
+    {
+        $result = [];
+
+        $methods = ReflectionUtils::methodsForClassWithoutInheritedMethods(
+            $enumType,
+            [
+                ReflectionMethod::IS_FINAL,
+                ReflectionMethod::IS_STATIC,
+                ReflectionMethod::IS_PUBLIC
+            ]
+        );
 
         /* @var $method ReflectionMethod */
-        foreach ($reflectedMethods as $method) {
-            if ($method->class === $enumType) {
-                $currentMethods[] = $method->name;
+        foreach ($methods as $method) {
+            if ($method->name === \strtoupper($method->name)) {
+                $result[] = $method->name;
             }
         }
-
-        $mergedMethods = \array_merge($parentMethods, $currentMethods);
-        $result = \array_unique($mergedMethods);
 
         return $result;
     }
@@ -267,10 +374,11 @@ abstract class EnumAbstract implements
      * }
      * \---
      *
-     * @return array An array containing the enumeration constants of this
-     *               enumeration type, in the order they are declared.
+     * @return EnumAbstract[] An array containing the enumeration constants of
+     *                        this enumeration type, in the order they are
+     *                        declared.
      */
-    public static function values()
+    final public static function values()
     {
         $names = self::names();
         $result = [];
@@ -295,7 +403,7 @@ abstract class EnumAbstract implements
      * @return EnumAbstract|null The enumeration constant with the specified
      *                           name on success; `null` on failure.
      */
-    public static function valueOf($name)
+    final public static function valueOf($name)
     {
         $result = null;
 
@@ -344,17 +452,35 @@ abstract class EnumAbstract implements
     final protected static function getInstance()
     {
         $backtrace = \debug_backtrace(\DEBUG_BACKTRACE_IGNORE_ARGS);
-        $className = $backtrace[1]['class'];
+        $className = self::retrieveNameOfSuperclassFor(
+            $backtrace[1]['class']
+        );
         $constantName = $backtrace[1]['function'];
-
         $constantOrdinal = self::retrieveOrdinalFor($constantName);
-        $result = $className::traitGetInstance(
+        $constructorArguments = \func_get_args();
+
+        return $className::getMultitonInstance(
             $constantName,
             $constantOrdinal,
-            $className
+            $constructorArguments
         );
+    }
 
-        return $result;
+    /**
+     * Returns the superclass name for the specified classname.
+     *
+     * @param string $className The name of the class, which superclass name to
+     *                          return.
+     *
+     * @return string The name of the superclass.
+     */
+    private static function retrieveNameOfSuperclassFor($className)
+    {
+        $parents = self::hierarchy($className);
+
+        return (true === empty($parents))
+            ? $className
+            : $parents[count($parents) - 1]->name;
     }
 
     /**
@@ -391,63 +517,67 @@ abstract class EnumAbstract implements
      *                           position in the enumeration declaration, where
      *                           the initial enumeration constant is assigned an
      *                           ordinal of zero).
-     * @param string  $className The name of the enumeration class.
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    private function __construct($name, $ordinal, $className)
+    final private function __construct($name, $ordinal, array $arguments)
     {
         $this->name = $name;
         $this->ordinal = $ordinal;
-        $this->hashCode = \spl_object_hash($this);
         // The _toString field cannot be set within the constructor since the
         // subclass can overwrite the __toString() method.
+
+        $this->invokeConstructorIfDeclared($arguments);
     }
 
     /**
-     * Throws an {@link UnexpectedValueException}.
+     * Invokes the constructor of this enumeration constant with the specified
+     * arguments.
+     *
+     * @param mixed[] $arguments The constructor arguments.
+     *
+     * @return void
+     */
+    private function invokeConstructorIfDeclared(array $arguments)
+    {
+        $methodName = 'construct';
+
+        try {
+            $method = new ReflectionMethod($this, $methodName);
+
+            if (true === $method->isPublic()) {
+                throw new RuntimeException(
+                    'The constructor of an enumeration type may not be public.'
+                );
+            }
+
+            $method->setAccessible(true);
+            $method->invokeArgs($this, $arguments);
+        } catch (ReflectionException $ex) {
+            // empty block.
+        }
+    }
+
+    /**
+     * Throws an {@see UnexpectedValueException}.
      *
      * `__callStatic()` is triggered when invoking inaccessible methods in a
      * static context.
      *
-     * @param string $name The name of the enumeration constant, which is the
-     *                     identifier used to declare it.
-     * @param array  $args Not used.
+     * @param string  $name The name of the enumeration constant, which is the
+     *                      identifier used to declare it.
+     * @param mixed[] $args Not used.
      *
      * @return void
      *
-     * @throws \UnexpectedValueException If this method is called.
+     * @throws UnexpectedValueException If this method is called.
      * @link http://php.net/language.oop5.overloading#object.callstatic
      * @ignore
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     final public static function __callStatic($name, array $args = [])
     {
-        throw new \UnexpectedValueException(
+        throw new UnexpectedValueException(
             'The enumeration constant ' . $name
-            . ' does not exist in the enumeration type ' . \get_called_class()
-        );
-    }
-
-    /**
-     * Throws a {@link BadMethodCallException}.
-     *
-     * `__set()` is run when writing data to inaccessible properties.
-     *
-     * This method implements the *Immutable Object* pattern.
-     *
-     * @param string $name  The name of the property to set.
-     * @param mixed  $value The value to assign to the specified property.
-     *
-     * @return void
-     * @throws BadMethodCallException If this method is called.
-     * @link http://php.net/language.oop5.overloading#object.set
-     * @ignore
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
-     */
-    final public function __set($name, $value)
-    {
-        throw new BadMethodCallException(
-            'An enumeration constant is immutable'
+            . ' does not exist in the enumeration type.'
         );
     }
 
@@ -469,8 +599,8 @@ abstract class EnumAbstract implements
      * Returns the name of this enumeration constant, exactly as declared in its
      * enumeration declaration.
      *
-     * **Most programmers should use the {@link __toString} method in preference
-     * to this one, as the {@link __toString} method may return a more
+     * **Most programmers should use the {@see __toString} method in preference
+     * to this one, as the {@see __toString} method may return a more
      * user-friendly name.**
      *
      * This method is designed primarily for use in specialized situations where
@@ -511,26 +641,27 @@ abstract class EnumAbstract implements
      * @return integer A negative integer, zero, or a positive integer as this
      *                 enumeration constant is less than, equal to, or greater
      *                 than the specified enumeration constant.
+     * @throws ClassCastException If `$other` is not an enumeration type.
+     * @throws ClassCastException If `$other` is not an enumeration constant of
+     *                            the same enumeration type.
      */
-    public function compareTo(ComparableInterface $other)
+    final public function compareTo(ComparableInterface $other)
     {
-        // TODO Replace all calls to \get_called_class() with static field.
-        if (\get_called_class() instanceof $other) {
-            // TODO Replace with specific exception, e.g. ClassCastException.
-            throw new \RuntimeException;
+        if (false === ($other instanceof self)) {
+            throw new ClassCastException(
+                'The specified object\'s type is not an instance of '
+                . __CLASS__ . '.'
+            );
+        }
+
+        if (false === ($this instanceof $other)) {
+            throw new ClassCastException(
+                'The specified object\'s type is not an instance of '
+                . \get_class($this) . '.'
+            );
         }
 
         return ($this->ordinal - $other->ordinal);
-    }
-
-    /**
-     * Returns a hash code for this enumeration constant.
-     *
-     * @return string The hash code.
-     */
-    final public function hashCode()
-    {
-        return $this->hashCode;
     }
 
     /**
