@@ -1,8 +1,10 @@
 <?php
 namespace FlorianWolters\Component\Core\Enum;
 
+use \InvalidArgumentException;
+
 /**
- * The static class {@link EnumUtils} is an utility class for accessing and
+ * The static class {@see EnumUtils} is an utility class for accessing and
  * manipulating enumerations.
  *
  * @author     Florian Wolters <wolters.fl@gmail.com>
@@ -16,9 +18,13 @@ class EnumUtils
     // @codeCoverageIgnoreStart
 
     /**
-     * Private default constructor.
+     * {@see EnumUtils} instances can **NOT** be constructed in standard
+     * programming.
      *
-     * This guarantees that this "static" class is never instantiated.
+     * Instead, the class should be used as:
+     * /---code php
+     * EnumUtils::values('Vendor\Package\ConcreteEnum');
+     * \---
      */
     private function __construct()
     {
@@ -45,11 +51,11 @@ class EnumUtils
      * @param string $enumType The class name of the enumeration type from which
      *                         to return the names of the enumeration constants.
      *
-     * @return array An array containing the names of the enumeration constants
-     *               of the specified enumeration type, in the order they are
-     *               declared.
-     * @throws \InvalidArgumentException If the specified class name does not
-     *                                   represent an enumeration type.
+     * @return string[] An array containing the names of the enumeration
+     *                  constants of the specified enumeration type, in the
+     *                  order they are declared.
+     * @throws InvalidArgumentException If the specified class name does not
+     *                                  represent an enumeration type.
      */
     public static function names($enumType = null)
     {
@@ -78,10 +84,11 @@ class EnumUtils
      * @param string $enumType The class name of the enumeration type from which
      *                         to return the enumeration constants.
      *
-     * @return array An array containing the enumeration constants of the
-     *               specified enumeration type, in the order they are declared.
-     * @throws \InvalidArgumentException If the specified class name does not
-     *                                   represent an enumeration type.
+     * @return EnumAbstract[] An array containing the enumeration constants of
+     *                        the specified enumeration type, in the order they
+     *                        are declared.
+     * @throws InvalidArgumentException If the specified class name does not
+     *                                  represent an enumeration type.
      */
     public static function values($enumType)
     {
@@ -91,20 +98,20 @@ class EnumUtils
     }
 
     /**
-     * Throws an {@link \InvalidArgumentException} if the specified class name
+     * Throws an {@see InvalidArgumentException} if the specified class name
      * does not represent an enumeration type.
      *
      * @param string $className The class name of the class to check.
      *
      * @return void
-     * @throws \InvalidArgumentException If the specified class name does not
-     *                                   represent an enumeration type.
+     * @throws InvalidArgumentException If the specified class name does not
+     *                                  represent an enumeration type.
      */
     private static function throwInvalidArgumentExceptionIfIsNotEnumType(
         $className
     ) {
         if (false === self::isEnumType($className)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 'The class ' . $className
                 . ' does not represent an enumeration type'
             );
@@ -136,15 +143,15 @@ class EnumUtils
      *                         to return an enumeration constant.
      * @param string $name     The name of the enumeration constant to return.
      *
-     * @return static|null The enumeration constant of the specified enumeration
-     *                     type with the specified name on success; `null` on
-     *                     failure.
+     * @return EnumAbstract|null The enumeration constant of the specified
+     *                           enumeration type with the specified name on
+     *                           success; `null` on failure.
      *
-     * @throws \InvalidArgumentException If the specified enumeration type has
-     *                                   no enumeration constant with the
-     *                                   specified name, or the specified class
-     *                                   name does not represent an enumeration
-     *                                   type.
+     * @throws InvalidArgumentException If the specified enumeration type has
+     *                                  no enumeration constant with the
+     *                                  specified name, or the specified class
+     *                                  name does not represent an enumeration
+     *                                  type.
      */
     public static function valueOf($enumType, $name)
     {
