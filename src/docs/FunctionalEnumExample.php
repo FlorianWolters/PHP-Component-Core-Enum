@@ -6,7 +6,8 @@ use FlorianWolters\Mock\PlanetEnum;
 require __DIR__ . '/../../vendor/autoload.php';
 
 /**
- * A simple command line application to demonstrate functional enumerations with
+ * The class {@see FunctionalEnumExample} implements a simple command line
+ * application to demonstrate functional enumerations with the component
  * **FlorianWolters\Component\Core\Enum**.
  *
  * @author    Florian Wolters <wolters.fl@gmail.com>
@@ -15,18 +16,20 @@ require __DIR__ . '/../../vendor/autoload.php';
  * @link      http://github.com/FlorianWolters/PHP-Component-Core-Enum
  * @since     Class available since Release 0.4.0
  */
-final class EnumExample
+final class FunctionalEnumExample
 {
     /**
-     * @param integer $argc
-     * @param array   $argv
+     * Runs the {@see FunctionalEnumExample}.
      *
-     * @return integer
+     * @param integer $argc The number of arguments.
+     * @param array   $argv The arguments.
+     *
+     * @return integer Always `0`.
      */
     public static function main($argc, array $argv = [])
     {
         if (2 !== $argc) {
-            echo "Usage: php EnumExample <earth_weight>" . \PHP_EOL;
+            echo "Usage: php FunctionalEnumExample <earth_weight>" . \PHP_EOL;
             return -1;
         }
 
@@ -43,4 +46,4 @@ final class EnumExample
     }
 }
 
-exit(EnumExample::main($argc, $argv));
+exit(FunctionalEnumExample::main($argc, $argv));
