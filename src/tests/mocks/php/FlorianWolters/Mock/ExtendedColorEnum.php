@@ -2,10 +2,10 @@
 namespace FlorianWolters\Mock;
 
 /**
- * The {@link ExtendedColorEnum} enumeration demonstrates the following usage of
- * **FlorianWolters\Component\Core\Enum**:
+ * The enumeration class {@see ExtendedColorEnum} demonstrates the following
+ * usage of **FlorianWolters\Component\Core\Enum**:
  *
- * * Subclassed enumeration *with* performance mode enabled.
+ * * Subclassed enumeration.
  *
  * @author    Florian Wolters <wolters.fl@gmail.com>
  * @copyright 2011-2013 Florian Wolters
@@ -20,7 +20,7 @@ class ExtendedColorEnum extends ColorEnum
     /**
      * The color cyan.
      *
-     * @return ExtendedColorEnum The color cyan.
+     * @return ColorEnum The color cyan.
      */
     final public static function CYAN()
     {
@@ -30,7 +30,7 @@ class ExtendedColorEnum extends ColorEnum
     /**
      * The color magenta.
      *
-     * @return ExtendedColorEnum The color magenta.
+     * @return ColorEnum The color magenta.
      */
     final public static function MAGENTA()
     {
@@ -40,7 +40,7 @@ class ExtendedColorEnum extends ColorEnum
     /**
      * The color yellow.
      *
-     * @return ExtendedColorEnum The color yellow.
+     * @return ColorEnum The color yellow.
      */
     final public static function YELLOW()
     {

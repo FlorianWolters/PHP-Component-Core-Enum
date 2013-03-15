@@ -4,8 +4,8 @@ namespace FlorianWolters\Mock;
 use FlorianWolters\Component\Core\Enum\EnumAbstract;
 
 /**
- * The {@link SingletonEnum} enumeration demonstrates the following usage of
- * **FlorianWolters\Component\Core\Enum**:
+ * The enumeration class {@see SingletonEnum} demonstrates the following usage
+ * of **FlorianWolters\Component\Core\Enum**:
  *
  * * Singleton enumeration.
  *
@@ -29,6 +29,8 @@ final class SingletonEnum extends EnumAbstract
         return self::getInstance();
     }
 
+    // @codingStandardsIgnoreEnd
+
     /**
      * Returns the string representation of this instance.
      *
@@ -40,6 +42,4 @@ final class SingletonEnum extends EnumAbstract
     {
         return __CLASS__;
     }
-
-    // @codingStandardsIgnoreEnd
 }

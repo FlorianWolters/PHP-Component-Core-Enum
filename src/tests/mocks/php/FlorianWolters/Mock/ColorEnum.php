@@ -4,10 +4,10 @@ namespace FlorianWolters\Mock;
 use FlorianWolters\Component\Core\Enum\EnumAbstract;
 
 /**
- * The {@link ColorEnum} enumeration demonstrates the following usage of
+ * The enumeration class {@see ColorEnum} demonstrates the following usage of
  * **FlorianWolters\Component\Core\Enum**:
  *
- * * Simple enumeration *with* performance mode enabled.
+ * * Simple enumeration.
  *
  * @author    Florian Wolters <wolters.fl@gmail.com>
  * @copyright 2011-2013 Florian Wolters
@@ -26,7 +26,7 @@ class ColorEnum extends EnumAbstract
      */
     final public static function RED()
     {
-        return self::getInstance(__CLASS__, __FUNCTION__);
+        return self::getInstance();
     }
 
     /**
@@ -36,7 +36,7 @@ class ColorEnum extends EnumAbstract
      */
     final public static function GREEN()
     {
-        return self::getInstance(__CLASS__, __FUNCTION__);
+        return self::getInstance();
     }
 
     /**
@@ -46,7 +46,7 @@ class ColorEnum extends EnumAbstract
      */
     final public static function BLUE()
     {
-        return self::getInstance(__CLASS__, __FUNCTION__);
+        return self::getInstance();
     }
 
     // @codingStandardsIgnoreEnd
