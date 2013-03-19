@@ -2,9 +2,23 @@
 
 [![Build Status](https://secure.travis-ci.org/FlorianWolters/PHP-Component-Core-Enum.png?branch=master)](http://travis-ci.org/FlorianWolters/PHP-Component-Core-Enum)
 
-**FlorianWolters\Component\Core\Enum** is a simple-to-use [PHP][17] component that provides type-safe enumerations in the [PHP][17] scripting language.
+**FlorianWolters\Component\Core\Enum** is a simple-to-use [PHP][17] component that provides the *Typesafe Enum* pattern.
 
-The current version is *0.3.1-stable*, which means the API may change until version *1.0.0-stable*.
+## Table of Contents
+
+* [Introduction](#introduction)
+* [Motivation](#motivation)
+* [Features](#features)
+* [Requirements](#requirements)
+* [Usage](#usage)
+* [Installation](#installation)
+  * [Local Installation](#local-installation)
+  * [System-Wide Installation](#system-wide-installation)
+* [As A Dependency On Your Component](as-a-dependency-on-your-component)
+  * [Composer](#composer)
+  * [PEAR](#pear)
+* [Development Environment](#development-environment)
+* [License](#license)
 
 ## Introduction
 
@@ -12,7 +26,7 @@ The [PHP][17] scripting language is missing one important data type: **The enume
 
 Today, with version 5.4 of the [PHP][17] scripting language, there is still no linguistic support for enumerated types. It only exists a Request For Comments (RFC) from [2010-05-21][33]) that suggests adding a enum language structure.
 
-Many programming languages, e.g. Pascal, Modula-2, Modula-3, Ada, Haskell, C, C++ und C# have an enumerated type. Java, for example, implements the enumeration type via objects (see [Java Tutorial][23] and [Java API documentation][22]).
+Many programming languages, e.g. Pascal, Modula-2, Modula-3, Ada, Haskell, C, C++ und C# have an enumerated type. Java, for example, implements the enumeration type via objects (see [Java Tutorial][23] and [Java API documentation][41]).
 
 One can use the *`int` Enum* pattern to represent an enumerated type in [PHP][17]:
 
@@ -34,55 +48,81 @@ public const SEASON_FALL = 3;
 > It is possible to get around these problems by using the *Typesafe Enum* pattern (see [Effective Java][25] Item 21).
 > This pattern has its own problems: It is quite verbose, hence error prone, and its enum constants cannot be used in `switch` statements.
 
-(cf. [Oracle. Enums][21])
+(cf. [Oracle. Enums][40])
 
 ## Motivation
 
-Since there is no *enumerated type* in [PHP][17], I decided to create my own implementation (see **Comparison** below for reasons why I don't use an already existing implementation).
+Since there is no *enumerated type* in [PHP][17], I decided to create my own implementation.
 
-My solution implements the *[Typesafe Enum][24]* pattern. The pattern has been adapted and abstracted for [PHP][17]. Because of that my implementation doesn't have the problems of the original *Typesafe Enum* pattern (see **Introduction** above):
+My solution implements the *[Typesafe Enum][24]* pattern. The pattern has been adapted and abstracted for [PHP][17]. Because of that, my implementation doesn't have the problems of the original *Typesafe Enum* pattern (see **[Introduction](#introduction)** above):
 
 * The enumeration constants can be used in `switch` statements (this is not possible in Java 1.5).
-* It is not as verbose as the original implementation (see **Usage** below), hence less error prone.
+* It is not as verbose as the original implementation (see **[Usage](#usage)** below), hence less error prone.
 
 ## Features
 
 * The abstract enumeration base class implements the *Typesafe Enum* (see [Effective Java][5] Item 21) pattern.
-* An enumeration class can be placed in a [namespace][27], hence naming collisions can be avoided.
+* Supports autocompletion within an Integrated Development Environment (IDE).
+* Supports functional enumerations. This means that one can use operations (method calls) on enumeration constants.
 * An enumeration class can [extend][30] another enumeration class, hence an enumeration hierarchy can be built.
-* Functional enumerations are supported. This means that one can use operations (method calls) on enumeration constants.
-* The enumeration constants can be used in `switch` statement.
-* Th enumeration constants can be serialized/unserialized via the functions [`serialize()`][31] and [`unserialize()`][32].
-* Each enumeration constant is an object which is both a *Singleton* (see Design Patterns. Elements of Reusable Object-Oriented Software Item 3) and a [*ValueObject*][26]. This means that each enumeration constant is represented by only one instance and the comparison is based on the value of the enumeration constant.
-* The enumeration constants cannot be instantiated via the [`new`][28] keyword.
-* The enumeration constants cannot be cloned via the magic [`__clone`][29] method.
+* The enumeration constants can be serialized/unserialized via the functions [`serialize()`][31] and [`unserialize()`][32].
+* An enumeration class can be placed in a [namespace][27], hence naming collisions can be avoided.
+* Each enumeration constant is an object which is
+  * a *Singleton*, more precisely a *Multiton* (see Design Patterns. Elements of Reusable Object-Oriented Software Item 3)
+  * and an *Immutable [ValueObject][26]*.
+  This means that each enumeration constant is represented by only one instance and the comparison is based on the name of the enumeration constant.
+* An enumeration constant cannot be instantiated via the [`new`][28] keyword.
+* An enumeration constant cannot be cloned via the magic [`__clone`][29] method.
 * Artifacts tested with both static and dynamic test procedures:
-  * Component tests (unit tests) implemented with [PHPUnit][19].
-  * Static code analysis with the style checker [PHP_CodeSniffer][14] and the source code analyzer [PHP Mess Detector (PHPMD)][18], [phpcpd][4] and [phpdcd][5].
-* Provides support for the dependency manager [Composer][3].
-* Provides a [PEAR package][13] which can be installed using the [PEAR installer][11]. Click [here][9] for the [PEAR channel][12].
-* Provides a complete Application Programming Interface (API) documentation generated with the documentation generator [ApiGen][2]. Click [here][1] for the online API documentation.
+  * Dynamic component tests (unit tests) implemented using [PHPUnit][19].
+  * Static code analysis performed using the following tools:
+      * [PHP_CodeSniffer][14]: Style Checker
+      * [PHP Mess Detector (PHPMD)][18]: Code Analyzer
+      * [phpcpd][4]: Copy/Paste Detector (CPD)
+      * [phpdcd][5]: Dead Code Detector (DCD)
+* Installable via [Composer][3] or [PEAR installer][11]:
+  * Provides a [Packagist][22] package which can be installed using the dependency manager [Composer][3].
+      * Click [here][21] for the package on [Packagist][22].
+  * Provides a [PEAR package][13] which can be installed using the package manager [PEAR installer][11].
+      * Click [here][9] for the [PEAR channel][12].
+* Provides a complete Application Programming Interface (API) documentation generated with the documentation generator [ApiGen][2].
+  * Click [here][1] for the current API documentation.
 * Follows the [PSR-0][6] requirements for autoloader interoperability.
 * Follows the [PSR-1][7] basic coding style guide.
 * Follows the [PSR-2][8] coding style guide.
-* Follows the [Semantic Versioning][20] requirements for versioning (`<Major version>.<Minor version>.<Patch level>`).
+* Follows the [Semantic Versioning][20] Specification (SemVer) 2.0.0-rc.1.
 
-The implementation **does not** (and **will not**) feature the following:
+**FlorianWolters\Component\Core\Enum** ***does not*** (and ***will not***) feature the following:
 
 * Generation of enumeration classes.
-* Support for [PHP][17] versions before 5.4.0.
-
-## Roadmap/Notes
-
-* Version *1.0.0-stable* will have a stable API.
-* All `@todo` and `TODO` comments will be removed until version *1.0.0-stable*.
-* Refactoring (DRY) of the unit tests.
-* Improving the documentation (README.md and wiki).
-* **FlorianWolters\Component\Core\Enum** is developed with the help of [Phix][16]. **This may change in the future.**
+* Support for [PHP][17] versions <= 5.4.
 
 ## Requirements
 
-* [PHP][17] 5.4.0 (or later)
+* [PHP][17] >= 5.4
+* [florianwolters/component-core-comparable][34]
+* [florianwolters/component-core-debugprint][35]
+* [florianwolters/component-core-equality][36]
+* [florianwolters/component-core-immutable][37]
+* [florianwolters/component-util-reflection][38]
+* [florianwolters/component-util-singleton][39]
+
+## Usage
+
+The most important usage rule:
+
+> Always declare the method to retrieve the enumeration constant as `final public static` and write the name of the method in uppercase characters.
+
+One should follow these *best practices* when using **FlorianWolters\Component\Core\Enum**:
+
+* Always declare an enumeration class as `final`, except the enumeration class should be extended by another enumeration class.
+* Always add a DocBlock tag `@return` with the name of the enumeration class to each method that retrieves an enumeration constant. This enables Autocompletion in the Integrated Development Environment (IDE).
+* Always add the suffix `Enum` to the name of a class which represents an enumeration type. This is analogical to the naming conventions for interfaces and abstract classes as described in [PSR-2][8].
+
+The following resources contain additional information:
+
+* [Click here][0] for the Wiki of **FlorianWolters\Component\Core\Enum**. The section **[Usage][40]** of the Wiki contains several documented source code examples.
+* [Click here][1] for the API documentation of **FlorianWolters\Component\Core\Enum**.
 
 ## Installation
 
@@ -107,6 +147,20 @@ The implementation **does not** (and **will not**) feature the following:
 
 ## As A Dependency On Your Component
 
+### Composer
+
+If you are creating a component that relies on **FlorianWolters\Component\Core\Enum**, please make sure that you add **FlorianWolters\Component\Core\Enum** to your component's `composer.json` file:
+
+```json
+{
+    "require": {
+        "florianwolters/component-core-enum": "0.4.*"
+    }
+}
+```
+
+### PEAR
+
 If you are creating a component that relies on **FlorianWolters\Component\Core\Enum**, please make sure that you add **FlorianWolters\Component\Core\Enum** to your component's `package.xml` file:
 
 ```xml
@@ -115,47 +169,11 @@ If you are creating a component that relies on **FlorianWolters\Component\Core\E
     <package>
       <name>Enum</name>
       <channel>http://pear.florianwolters.de</channel>
-      <min>0.3.1</min>
-      <max>0.3.99</max>
+      <min>0.4.0</min>
+      <max>0.4.99</max>
     </package>
   </required>
 </dependencies>
-```
-
-## Usage
-
-The best documentation for **FlorianWolters\Component\Core\Enum** are the unit tests, which are shipped in the package. You will find them installed into your [PEAR][10] repository, which on Linux systems is normally `/usr/share/php/test`.
-
-* [Click here][1] for the API documentation of **FlorianWolters\Component\Core\Enum**.
-* [Click here][0] for the Wiki of **FlorianWolters\Component\Core\Enum**.
-
-The most important usage rule:
-
-> Always declare the method to retrieve the enumeration constant as `final public static`.
-
-### Best Practices
-
-* Always declare an enumeration class as `final`, except the enumeration class should be extended by another enumeration class.
-* Always add a DocBlock tag `@return` with the name of the enumeration class to each method that retrieves an enumeration constant. This enables Autocompletion in the Integrated Development Environment (IDE).
-
-### Examples
-
-```php
-<?php
-// Example 01: Standard enumeration type.
-final class GenderEnum extends FlorianWolters\Component\Core\Enum\EnumAbstract {
-    /** @return GenderEnum */
-    final public static function FEMALE() { return self::getInstance(); }
-    /** @return GenderEnum */
-    final public static function MALE() { return self::getInstance(); }
-}
-
-// Example 02: Subclassed enumeration types.
-// NOTE: The class GenderEnum declared above is final, change that to get this example to run.
-final class ExtendedGenderEnum extends GenderEnum {
-    /** @return ExtendedGenderEnum */
-    final public static function HYBRID() { return self::getInstance(); }
-}
 ```
 
 ## Development Environment
@@ -188,8 +206,8 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 You should have received a copy of the GNU Lesser General Public License along with this program. If not, see <http://gnu.org/licenses/lgpl.txt>.
 
-[0]: http://github.com/FlorianWolters/PHP-Component-Core-Enum/wiki
-     "FlorianWolters\Component\Core\Enum | Wiki"
+[0]: /wiki
+     "Home · FlorianWolters/PHP-Component-Core-Enum Wiki"
 [1]: http://blog.florianwolters.de/PHP-Component-Core-Enum
      "FlorianWolters\Component\Core\Enum | Application Programming Interface (API) documentation"
 [2]: http://apigen.org
@@ -230,14 +248,19 @@ You should have received a copy of the GNU Lesser General Public License along w
       "sebastianbergmann/phpunit · GitHub"
 [20]: http://semver.org
       "Semantic Versioning"
-[21]: http://docs.oracle.com/javase/1.5.0/docs/guide/language/enums.html
-      "Oracle. Enums. 2004, 2010."
-[22]: http://docs.oracle.com/javase/7/docs/api/java/lang/Enum.html
-      "Oracle. Java Platform SE 7: Enum. 1993, 2011."
+[21]: http://packagist.org/packages/florianwolters/component-core-enum
+      "florianwolters/component-core-enum - Packagist"
+[22]: http://packagist.org
+      "Packagist"
+[40]: http://docs.oracle.com/javase/7/docs/technotes/guides/language/enums.html
+      "Oracle. Enums. 1993, 2013."
+[41]: http://docs.oracle.com/javase/7/docs/api/java/lang/Enum.html
+      "Oracle. Java Platform SE 7: Enum. 1993, 2013."
 [23]: http://docs.oracle.com/javase/tutorial/java/javaOO/enum.html
-      "Oracle. The Java Tutorials: Enum Types. 1995, 2012."
-[24]: http://java.sun.com/developer/Books/shiftintojava/page1.html#replaceenums
-[25]: http://java.sun.com/docs/books/effective
+      "Oracle. The Java Tutorials: Enum Types. 1995, 2013."
+[24]: http://jcp.org/aboutJava/communityprocess/jsr/tiger/enum.html
+      "Sun Microsystems, Inc.. A Typesafe Enum Facility for the Java Programming Language. 2012."
+[25]: http://oracle.com/technetwork/java/effectivejava-136174.html
       "J. Bloch. Effective Java, 2nd Edition. Boston: Addison-Wesley, 2008."
 [26]: http://martinfowler.com/bliki/ValueObject.html
       "M. Fowler. Value Object."
@@ -255,3 +278,17 @@ You should have received a copy of the GNU Lesser General Public License along w
       "The PHP Group. PHP: unserialize. 2001-2013."
 [33]: http://wiki.php.net/rfc/enum
       "The PHP Group. PHP: rfc:enum [PHP Wiki]. 2001-2013."
+[34]: https://github.com/FlorianWolters/PHP-Component-Core-Comparable
+      "FlorianWolters/PHP-Component-Core-Comparable · GitHub"
+[35]: https://github.com/FlorianWolters/PHP-Component-Core-DebugPrint
+      "FlorianWolters/PHP-Component-Core-DebugPrint · GitHub"
+[36]: https://github.com/FlorianWolters/PHP-Component-Core-Equality
+      "FlorianWolters/PHP-Component-Core-Equality · GitHub"
+[37]: https://github.com/FlorianWolters/PHP-Component-Core-Immutable
+      "FlorianWolters/PHP-Component-Core-Immutable · GitHub"
+[38]: https://github.com/FlorianWolters/PHP-Component-Util-Reflection
+      "FlorianWolters/PHP-Component-Util-Reflection · GitHub"
+[39]: https://github.com/FlorianWolters/PHP-Component-Util-Singleton
+      "FlorianWolters/PHP-Component-Util-Singleton · GitHub"
+[40]: /wiki/Usage
+     "Usage · FlorianWolters/PHP-Component-Core-Enum Wiki"
