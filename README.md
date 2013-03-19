@@ -14,7 +14,7 @@
 * [Installation](#installation)
   * [Local Installation](#local-installation)
   * [System-Wide Installation](#system-wide-installation)
-* [As A Dependency On Your Component](as-a-dependency-on-your-component)
+* [As A Dependency On Your Component](#as-a-dependency-on-your-component)
   * [Composer](#composer)
   * [PEAR](#pear)
 * [Development Environment](#development-environment)
@@ -206,7 +206,7 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 You should have received a copy of the GNU Lesser General Public License along with this program. If not, see <http://gnu.org/licenses/lgpl.txt>.
 
-[0]: /wiki
+[0]: http://github.com/FlorianWolters/PHP-Component-Core-Enum/wiki
      "Home · FlorianWolters/PHP-Component-Core-Enum Wiki"
 [1]: http://blog.florianwolters.de/PHP-Component-Core-Enum
      "FlorianWolters\Component\Core\Enum | Application Programming Interface (API) documentation"
@@ -290,5 +290,5 @@ You should have received a copy of the GNU Lesser General Public License along w
       "FlorianWolters/PHP-Component-Util-Reflection · GitHub"
 [39]: https://github.com/FlorianWolters/PHP-Component-Util-Singleton
       "FlorianWolters/PHP-Component-Util-Singleton · GitHub"
-[40]: /wiki/Usage
+[40]: http://github.com/FlorianWolters/PHP-Component-Core-Enum/wiki/Usage
      "Usage · FlorianWolters/PHP-Component-Core-Enum Wiki"
