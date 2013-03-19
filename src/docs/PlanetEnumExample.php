@@ -6,7 +6,7 @@ use FlorianWolters\Mock\PlanetEnum;
 require __DIR__ . '/../../vendor/autoload.php';
 
 /**
- * The class {@see FunctionalEnumExample} implements a simple command line
+ * The class {@see PlanetEnumExample} implements a simple command line
  * application to demonstrate functional enumerations with the component
  * **FlorianWolters\Component\Core\Enum**.
  *
@@ -16,13 +16,13 @@ require __DIR__ . '/../../vendor/autoload.php';
  * @link      http://github.com/FlorianWolters/PHP-Component-Core-Enum
  * @since     Class available since Release 0.4.0
  */
-final class FunctionalEnumExample
+final class PlanetEnumExample
 {
     /**
-     * Runs the {@see FunctionalEnumExample}.
+     * Runs this {@see PlanetEnumExample}.
      *
-     * @param integer $argc The number of arguments.
-     * @param array   $argv The arguments.
+     * @param integer  $argc The number of arguments.
+     * @param string[] $argv The arguments.
      *
      * @return integer Always `0`.
      */
@@ -34,9 +34,11 @@ final class FunctionalEnumExample
         }
 
         $earthWeight = (float) $argv[1];
-        $mass = $earthWeight / PlanetEnum::EARTH()->surfaceGravity();
+        $mass = ($earthWeight / PlanetEnum::EARTH()->surfaceGravity());
 
-        $format = "Your weight on %s is %f" . \PHP_EOL;
+        $format = "Your weight on %s is %f\n";
+
+        /* @var $planet PlanetEnum */
         foreach (PlanetEnum::values() as $planet) {
             $surfaceWeight = $planet->surfaceWeight($mass);
             \printf($format, $planet, $surfaceWeight);
@@ -46,4 +48,4 @@ final class FunctionalEnumExample
     }
 }
 
-exit(FunctionalEnumExample::main($argc, $argv));
+exit(PlanetEnumExample::main($argc, $argv));
