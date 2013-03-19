@@ -637,9 +637,9 @@ class EnumAbstractTest extends \PHPUnit_Framework_TestCase
     {
         $earth = PlanetEnum::EARTH();
         $gravity = $earth->surfaceGravity();
-        $weigth = $earth->surfaceWeight(1000.0);
+        $weigth = $earth->surfaceWeight(175);
 
-        $this->assertEquals(62522671.963089, $gravity, null, .0000001);
-        $this->assertEquals(62522671963.089, $weigth, null, .001);
+        $this->assertEquals(9.8026527433371, $gravity);
+        $this->assertEquals(1715.464230084, $weigth);
     }
 }
