@@ -16,8 +16,8 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=5.4",
-        "florianwolters/component-core-debugprint": "dev-master",
         "florianwolters/component-core-comparable": "dev-master",
+        "florianwolters/component-core-debugprint": "dev-master",
         "florianwolters/component-core-equality": "dev-master",
         "florianwolters/component-core-immutable": "dev-master",
         "florianwolters/component-util-reflection": "dev-master",
