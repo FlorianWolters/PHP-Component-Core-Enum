@@ -1,18 +1,18 @@
 {
-    "hash": "dc6277dd1370ac30ada95a5bfefd4bbe",
+    "hash": "6ee102a26839865270c9ce192c2ff284",
     "packages": [
         {
             "name": "florianwolters/component-core-cloneable",
-            "version": "dev-master",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FlorianWolters/PHP-Component-Core-Cloneable.git",
-                "reference": "aa980402c4f21efccc87e19f96be72866497e769"
+                "reference": "v0.2.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FlorianWolters/PHP-Component-Core-Cloneable/zipball/aa980402c4f21efccc87e19f96be72866497e769",
-                "reference": "aa980402c4f21efccc87e19f96be72866497e769",
+                "url": "https://api.github.com/repos/FlorianWolters/PHP-Component-Core-Cloneable/zipball/v0.2.0",
+                "reference": "v0.2.0",
                 "shasum": ""
             },
             "require": {
@@ -47,20 +47,20 @@
                 "cloning",
                 "creation"
             ],
-            "time": "2013-03-13 14:43:10"
+            "time": "2013-03-19 16:49:12"
         },
         {
             "name": "florianwolters/component-core-comparable",
-            "version": "dev-master",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FlorianWolters/PHP-Component-Core-Comparable.git",
-                "reference": "be8e11bc00956ce44507b021173d9071b489d088"
+                "reference": "v0.2.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FlorianWolters/PHP-Component-Core-Comparable/zipball/be8e11bc00956ce44507b021173d9071b489d088",
-                "reference": "be8e11bc00956ce44507b021173d9071b489d088",
+                "url": "https://api.github.com/repos/FlorianWolters/PHP-Component-Core-Comparable/zipball/v0.2.0",
+                "reference": "v0.2.0",
                 "shasum": ""
             },
             "require": {
@@ -95,20 +95,20 @@
                 "comparison",
                 "core"
             ],
-            "time": "2013-03-15 18:37:54"
+            "time": "2013-03-19 16:36:50"
         },
         {
             "name": "florianwolters/component-core-debugprint",
-            "version": "dev-master",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FlorianWolters/PHP-Component-Core-DebugPrint.git",
-                "reference": "63163e6db56a70f4afd54dfd277af03fd7c62d51"
+                "reference": "v0.2.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FlorianWolters/PHP-Component-Core-DebugPrint/zipball/63163e6db56a70f4afd54dfd277af03fd7c62d51",
-                "reference": "63163e6db56a70f4afd54dfd277af03fd7c62d51",
+                "url": "https://api.github.com/repos/FlorianWolters/PHP-Component-Core-DebugPrint/zipball/v0.2.0",
+                "reference": "v0.2.0",
                 "shasum": ""
             },
             "require": {
@@ -145,20 +145,20 @@
                 "pattern",
                 "tostring"
             ],
-            "time": "2013-03-01 14:29:21"
+            "time": "2013-02-27 11:10:11"
         },
         {
             "name": "florianwolters/component-core-equality",
-            "version": "dev-master",
+            "version": "v0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FlorianWolters/PHP-Component-Core-Equality.git",
-                "reference": "0337a65304bef882ffec29a08ee2810f582aeabb"
+                "reference": "v0.1.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FlorianWolters/PHP-Component-Core-Equality/zipball/0337a65304bef882ffec29a08ee2810f582aeabb",
-                "reference": "0337a65304bef882ffec29a08ee2810f582aeabb",
+                "url": "https://api.github.com/repos/FlorianWolters/PHP-Component-Core-Equality/zipball/v0.1.1",
+                "reference": "v0.1.1",
                 "shasum": ""
             },
             "require": {
@@ -194,7 +194,7 @@
                 "equality",
                 "equals"
             ],
-            "time": "2013-03-01 14:29:30"
+            "time": "2013-03-01 12:44:10"
         },
         {
             "name": "florianwolters/component-core-hashcode",
@@ -245,20 +245,20 @@
         },
         {
             "name": "florianwolters/component-core-immutable",
-            "version": "dev-master",
+            "version": "v0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FlorianWolters/PHP-Component-Core-Immutable.git",
-                "reference": "0ad7d924207175e4221cbc347bf082c84b7a009e"
+                "reference": "v0.1.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FlorianWolters/PHP-Component-Core-Immutable/zipball/0ad7d924207175e4221cbc347bf082c84b7a009e",
-                "reference": "0ad7d924207175e4221cbc347bf082c84b7a009e",
+                "url": "https://api.github.com/repos/FlorianWolters/PHP-Component-Core-Immutable/zipball/v0.1.0",
+                "reference": "v0.1.0",
                 "shasum": ""
             },
             "require": {
-                "florianwolters/component-core-cloneable": "dev-master",
+                "florianwolters/component-core-cloneable": "0.2.*",
                 "php": ">=5.4"
             },
             "type": "library",
@@ -290,20 +290,20 @@
                 "immutable class",
                 "immutable object"
             ],
-            "time": "2013-03-15 09:35:16"
+            "time": "2013-03-19 16:50:12"
         },
         {
             "name": "florianwolters/component-core-stringutils",
-            "version": "dev-master",
+            "version": "v0.2.0-beta",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FlorianWolters/PHP-Component-Core-StringUtils.git",
-                "reference": "ae1d8c097ae4e57bee03fbff113954dd40502150"
+                "reference": "v0.2.0-beta"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FlorianWolters/PHP-Component-Core-StringUtils/zipball/ae1d8c097ae4e57bee03fbff113954dd40502150",
-                "reference": "ae1d8c097ae4e57bee03fbff113954dd40502150",
+                "url": "https://api.github.com/repos/FlorianWolters/PHP-Component-Core-StringUtils/zipball/v0.2.0-beta",
+                "reference": "v0.2.0-beta",
                 "shasum": ""
             },
             "require": {
@@ -327,7 +327,7 @@
                     "role": "Developer"
                 }
             ],
-            "description": "Offers operations on the data type string as a PHP component.",
+            "description": "Offers operations on the data type string.",
             "homepage": "http://github.com/FlorianWolters/PHP-Component-Core-StringUtils",
             "keywords": [
                 "helper",
@@ -335,20 +335,20 @@
                 "string",
                 "wrapper"
             ],
-            "time": "2013-03-01 14:16:25"
+            "time": "2013-02-18 12:59:12"
         },
         {
             "name": "florianwolters/component-util-reflection",
-            "version": "dev-master",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FlorianWolters/PHP-Component-Util-Reflection.git",
-                "reference": "9a4b7a7b958014c20ec6fb823440ea5d1a1b9aff"
+                "reference": "v0.2.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FlorianWolters/PHP-Component-Util-Reflection/zipball/9a4b7a7b958014c20ec6fb823440ea5d1a1b9aff",
-                "reference": "9a4b7a7b958014c20ec6fb823440ea5d1a1b9aff",
+                "url": "https://api.github.com/repos/FlorianWolters/PHP-Component-Util-Reflection/zipball/v0.2.0",
+                "reference": "v0.2.0",
                 "shasum": ""
             },
             "require": {
@@ -379,25 +379,23 @@
                 "reflection",
                 "utility"
             ],
-            "time": "2013-03-15 17:33:02"
+            "time": "2013-03-19 16:42:41"
         },
         {
             "name": "florianwolters/component-util-singleton",
-            "version": "dev-master",
+            "version": "v0.3.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/FlorianWolters/PHP-Component-Util-Singleton.git",
-                "reference": "ef94f28242ac47ad95cf3768b3f19d507a3c0ae6"
+                "url": "https://github.com/FlorianWolters/PHP-Component-Util-Singleton",
+                "reference": "v0.3.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FlorianWolters/PHP-Component-Util-Singleton/zipball/ef94f28242ac47ad95cf3768b3f19d507a3c0ae6",
-                "reference": "ef94f28242ac47ad95cf3768b3f19d507a3c0ae6",
+                "url": "https://github.com/FlorianWolters/PHP-Component-Util-Singleton/archive/v0.3.0.zip",
+                "reference": "v0.3.0",
                 "shasum": ""
             },
             "require": {
-                "florianwolters/component-core-stringutils": ">=0.2-beta",
-                "florianwolters/component-util-reflection": ">=0.1",
                 "php": ">=5.4"
             },
             "type": "library",
@@ -422,7 +420,7 @@
                     "role": "Developer"
                 }
             ],
-            "description": "The Singleton (and Registry of Singletons a.k.a. Multiton) design pattern as a PHP component.",
+            "description": "The Singleton (and Registry of Singletons a.k.a. Multiton) design pattern as a simple-to-use component.",
             "homepage": "http://github.com/FlorianWolters/PHP-Component-Util-Singleton",
             "keywords": [
                 "creation",
@@ -430,7 +428,7 @@
                 "singleton",
                 "utility"
             ],
-            "time": "2013-03-06 12:55:03"
+            "time": "2012-12-13 10:51:32"
         }
     ],
     "packages-dev": [
@@ -439,14 +437,9 @@
     "aliases": [
 
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "stability-flags": {
-        "florianwolters/component-core-debugprint": 20,
-        "florianwolters/component-core-comparable": 20,
-        "florianwolters/component-core-equality": 20,
-        "florianwolters/component-core-immutable": 20,
-        "florianwolters/component-util-reflection": 20,
-        "florianwolters/component-util-singleton": 20
+        "florianwolters/component-core-stringutils": 10
     },
     "platform": {
         "php": ">=5.4"

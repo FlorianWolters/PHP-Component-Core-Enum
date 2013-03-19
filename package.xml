@@ -77,6 +77,48 @@ ${contents}</dir>
                 <min>1.9.4</min>
             </pearinstaller>
 
+           <package>
+                <name>Comparable</name>
+                <channel>pear.florianwolters.de</channel>
+                <min>0.2.0</min>
+                <max>0.2.99</max>
+            </package>
+
+           <package>
+                <name>DebugPrint</name>
+                <channel>pear.florianwolters.de</channel>
+                <min>0.2.0</min>
+                <max>0.2.99</max>
+            </package>
+
+           <package>
+                <name>Equality</name>
+                <channel>pear.florianwolters.de</channel>
+                <min>0.1.1</min>
+                <max>0.1.99</max>
+            </package>
+
+            <package>
+                <name>Immutable</name>
+                <channel>pear.florianwolters.de</channel>
+                <min>0.1.0</min>
+                <max>0.1.99</max>
+            </package>
+
+            <package>
+                <name>Reflection</name>
+                <channel>pear.florianwolters.de</channel>
+                <min>0.2.0</min>
+                <max>0.2.99</max>
+            </package>
+
+            <package>
+                <name>Singleton</name>
+                <channel>pear.florianwolters.de</channel>
+                <min>0.3.1</min>
+                <max>0.3.99</max>
+            </package>
+
         </required>
     </dependencies>
 
@@ -92,7 +134,7 @@ ${contents}</dir>
                 <release>stable</release>
                 <api>beta</api>
             </stability>
-            <date>2013-03-15</date>
+            <date>2013-03-19</date>
             <license uri="http://gnu.org/licenses/lgpl.txt">LGPL-3.0+</license>
             <notes>- Overhaul of the enumeration implementation.
 - Modified the declaration of functional enumerations.
