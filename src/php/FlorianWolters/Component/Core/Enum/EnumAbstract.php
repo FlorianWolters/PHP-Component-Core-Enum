@@ -12,7 +12,7 @@ use FlorianWolters\Component\Core\ClassCastException;
 use FlorianWolters\Component\Core\ComparableInterface;
 use FlorianWolters\Component\Core\DebugPrintInterface;
 use FlorianWolters\Component\Core\EqualityInterface;
-use FlorianWolters\Component\Core\EqualityTrait;
+use FlorianWolters\Component\Core\ReferenceEqualityTrait;
 use FlorianWolters\Component\Core\HashCodeInterface;
 use FlorianWolters\Component\Core\HashCodeTrait;
 use FlorianWolters\Component\Core\ImmutableInterface;
@@ -240,7 +240,7 @@ abstract class EnumAbstract implements
      ImmutableInterface
 {
     // @codingStandardsIgnoreStart
-    use EqualityTrait, HashCodeTrait, ImmutableTrait, MultitonTrait {
+    use ReferenceEqualityTrait, HashCodeTrait, ImmutableTrait, MultitonTrait {
         MultitonTrait::getInstance as private getMultitonInstance;
         ImmutableTrait::__clone insteadof MultitonTrait;
         __wakeup as public;
