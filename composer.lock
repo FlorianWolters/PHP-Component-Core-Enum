@@ -1,5 +1,5 @@
 {
-    "hash": "6ee102a26839865270c9ce192c2ff284",
+    "hash": "61a7753fa1c0148bd31147ba29d63819",
     "packages": [
         {
             "name": "florianwolters/component-core-cloneable",
@@ -149,16 +149,16 @@
         },
         {
             "name": "florianwolters/component-core-equality",
-            "version": "v0.1.1",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FlorianWolters/PHP-Component-Core-Equality.git",
-                "reference": "v0.1.1"
+                "reference": "v0.2.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FlorianWolters/PHP-Component-Core-Equality/zipball/v0.1.1",
-                "reference": "v0.1.1",
+                "url": "https://api.github.com/repos/FlorianWolters/PHP-Component-Core-Equality/zipball/v0.2.0",
+                "reference": "v0.2.0",
                 "shasum": ""
             },
             "require": {
@@ -186,15 +186,17 @@
                     "role": "Developer"
                 }
             ],
-            "description": "Implements an equivalence relation on non-null object references as a PHP component.",
+            "description": "Implements equivalence relations on non-null object references as a PHP component.",
             "homepage": "http://github.com/FlorianWolters/PHP-Component-Core-Equality",
             "keywords": [
                 "comparison",
                 "core",
                 "equality",
-                "equals"
+                "equals",
+                "reference equality",
+                "value equality"
             ],
-            "time": "2013-03-01 12:44:10"
+            "time": "2013-03-22 12:31:35"
         },
         {
             "name": "florianwolters/component-core-hashcode",
@@ -294,16 +296,16 @@
         },
         {
             "name": "florianwolters/component-core-stringutils",
-            "version": "v0.2.0-beta",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FlorianWolters/PHP-Component-Core-StringUtils.git",
-                "reference": "v0.2.0-beta"
+                "reference": "ae1d8c097ae4e57bee03fbff113954dd40502150"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FlorianWolters/PHP-Component-Core-StringUtils/zipball/v0.2.0-beta",
-                "reference": "v0.2.0-beta",
+                "url": "https://api.github.com/repos/FlorianWolters/PHP-Component-Core-StringUtils/zipball/ae1d8c097ae4e57bee03fbff113954dd40502150",
+                "reference": "ae1d8c097ae4e57bee03fbff113954dd40502150",
                 "shasum": ""
             },
             "require": {
@@ -327,7 +329,7 @@
                     "role": "Developer"
                 }
             ],
-            "description": "Offers operations on the data type string.",
+            "description": "Offers operations on the data type string as a PHP component.",
             "homepage": "http://github.com/FlorianWolters/PHP-Component-Core-StringUtils",
             "keywords": [
                 "helper",
@@ -335,7 +337,7 @@
                 "string",
                 "wrapper"
             ],
-            "time": "2013-02-18 12:59:12"
+            "time": "2013-03-01 14:16:25"
         },
         {
             "name": "florianwolters/component-util-reflection",
@@ -439,7 +441,7 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "florianwolters/component-core-stringutils": 10
+        "florianwolters/component-core-stringutils": 20
     },
     "platform": {
         "php": ">=5.4"
