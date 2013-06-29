@@ -21,7 +21,7 @@
         "florianwolters/component-core-immutable": "0.1.*",
         "florianwolters/component-util-reflection": "0.2.*",
         "florianwolters/component-util-singleton": "0.3.*",
-        "florianwolters/component-core-stringutils": "@dev"
+        "florianwolters/component-core-stringutils": "0.3.*"
     },
     "autoload": {
         "psr-0": {
